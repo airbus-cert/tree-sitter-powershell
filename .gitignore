@@ -6,3 +6,5 @@ build
 *.lib
 *.wasm
 package-lock.json
+Cargo.lock
+target
