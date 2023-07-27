@@ -1,0 +1,83 @@
+===
+Obfuscated command with eval and format
+===
+
+${vjOj`Q`gX} = $(&("{0}{1}{2}"-f'w','h','oami'))
+
+---
+
+(program
+  (pipeline_statement
+    (assignment_statement
+      (variable_expression
+        (braced_variable))
+      (pipeline_statement
+        (subexpression
+          (pipeline_statement
+            (cmdlet_statement
+              (eval_expression
+                (subpipeline
+                  (pipeline_statement
+                    (format_expression
+                      (string_expr)
+                      (tuple_expression
+                        (string_expr)
+                        (string_expr)
+                        (string_expr)))))))))))))
+
+===
+Obfuscated decoded using base64 native method
+===
+
+Invoke-Expression ([System.Text.Encoding]::Unicode.GetString(([convert]::FromBase64String('VwByAGkAdABlAC0ATwB1AHQAcAB1AHQAIAAiAFQAcgB5ACAASABhAHIAZABlAHIAIgA='))))
+
+---
+
+(program
+  (pipeline_statement
+    (cmdlet_statement
+      (bareword_string)
+      (cmdlet_token
+        (subpipeline
+          (pipeline_statement
+            (call_expr
+              (properties_expression
+                (properties_expression
+                  (type_expression
+                    (typename
+                      (bareword_string)
+                      (bareword_string)
+                      (bareword_string)))
+                  (bareword_string))
+                (bareword_string))
+              (tuple_expression
+                (subpipeline
+                  (pipeline_statement
+                    (call_expr
+                      (properties_expression
+                        (type_expression
+                          (typename
+                            (bareword_string)))
+                        (bareword_string))
+                      (tuple_expression
+                        (string_expr)))))))))))))
+
+
+===
+Obfuscated command
+===
+
+&(Get-Command i????e-rest*)
+
+---
+
+(program
+  (pipeline_statement
+    (cmdlet_statement
+      (eval_expression
+        (subpipeline
+          (pipeline_statement
+            (cmdlet_statement
+              (bareword_string)
+              (cmdlet_token
+                (bareword_string)))))))))

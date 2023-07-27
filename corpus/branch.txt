@@ -1,0 +1,430 @@
+===
+If branch 1
+===
+
+if ($a -gt 2) {
+    Write-Host "The value $a is greater than 2."
+}
+
+---
+
+(program
+  (if_statement
+    (pipeline
+      (logical_expression
+        (bitwise_expression
+          (comparison_expression
+            (additive_expression
+              (multiplicative_expression
+                (format_expression
+                  (range_expression
+                    (array_literal_expression
+                      (unary_expression
+                        (variable)))))))
+            (comparison_operator)
+            (additive_expression
+              (multiplicative_expression
+                (format_expression
+                  (range_expression
+                    (array_literal_expression
+                      (unary_expression
+                        (integer_literal
+                          (decimal_integer_literal))))))))))))
+    (statement_block
+      (pipeline
+        (command 
+          (command_name)
+          (string_literal
+            (variable)))))))
+===
+If else
+===
+
+if ($a -gt 2) {
+    Write-Host "The value $a is greater than 2."
+}
+else {
+    Write-Host ("The value $a is less than or equal to 2," +
+        " is not created or is not initialized.")
+}
+
+---
+
+(program
+  (if_statement
+    (pipeline
+      (logical_expression
+        (bitwise_expression
+          (comparison_expression
+            (additive_expression
+              (multiplicative_expression
+                (format_expression
+                  (range_expression
+                    (array_literal_expression
+                      (unary_expression
+                        (variable)))))))
+            (comparison_operator)
+            (additive_expression
+              (multiplicative_expression
+                (format_expression
+                  (range_expression
+                    (array_literal_expression
+                      (unary_expression
+                        (integer_literal
+                          (decimal_integer_literal))))))))))))
+    (statement_block
+      (pipeline
+        (command
+          (command_name)
+          (string_literal
+            (variable)))))
+    (else_clause
+      (statement_block
+        (pipeline
+          (command
+            (command_name)
+            (parenthesized_expression
+              (pipeline
+                (logical_expression
+                  (bitwise_expression
+                    (comparison_expression
+                      (additive_expression
+                        (multiplicative_expression
+                          (format_expression
+                            (range_expression
+                              (array_literal_expression
+                                (unary_expression
+                                  (string_literal
+                                    (variable)))))))
+                        (multiplicative_expression
+                          (format_expression
+                            (range_expression
+                              (array_literal_expression
+                                (unary_expression
+                                  (string_literal))))))))))))))))))
+
+===
+If elseif else
+===
+
+if ($a -gt 2) {
+    Write-Host "The value $a is greater than 2."
+}
+elseif ($a -eq 2) {
+    Write-Host "The value $a is equal to 2."
+}
+else {
+    Write-Host ("The value $a is less than 2 or" +
+        " was not created or initialized.")
+}
+
+---
+
+(program
+  (if_statement
+    (pipeline
+      (logical_expression
+        (bitwise_expression
+          (comparison_expression
+            (additive_expression
+              (multiplicative_expression
+                (format_expression
+                  (range_expression
+                    (array_literal_expression
+                      (unary_expression
+                        (variable)))))))
+            (comparison_operator)
+            (additive_expression
+              (multiplicative_expression
+                (format_expression
+                  (range_expression
+                    (array_literal_expression
+                      (unary_expression
+                        (integer_literal
+                          (decimal_integer_literal))))))))))))
+    (statement_block
+      (pipeline
+        (command
+          (command_name)
+          (string_literal
+            (variable)))))
+    (elseif_clauses
+      (elseif_clause
+        (pipeline
+          (logical_expression
+            (bitwise_expression
+              (comparison_expression
+                (additive_expression
+                  (multiplicative_expression
+                    (format_expression
+                      (range_expression
+                        (array_literal_expression
+                          (unary_expression
+                            (variable)))))))
+                (comparison_operator)
+                (additive_expression
+                  (multiplicative_expression
+                    (format_expression
+                      (range_expression
+                        (array_literal_expression
+                          (unary_expression
+                            (integer_literal
+                              (decimal_integer_literal))))))))))))
+        (statement_block
+          (pipeline
+            (command
+              (command_name)
+              (string_literal
+                (variable)))))))
+    (else_clause
+      (statement_block
+        (pipeline
+          (command
+            (command_name)
+            (parenthesized_expression
+              (pipeline
+                (logical_expression
+                  (bitwise_expression
+                    (comparison_expression
+                      (additive_expression
+                        (multiplicative_expression
+                          (format_expression
+                            (range_expression
+                              (array_literal_expression
+                                (unary_expression
+                                  (string_literal
+                                    (variable)))))))
+                        (multiplicative_expression
+                          (format_expression
+                            (range_expression
+                              (array_literal_expression
+                                (unary_expression
+                                  (string_literal))))))))))))))))))
+
+===
+Switch Test 1
+===
+
+switch (3)
+{
+    1 {"It is one."}
+    2 {"It is two."}
+    3 {"It is three."}
+    4 {"It is four."}
+}
+
+---
+
+(program
+  (switch_statement
+    (switch_condition
+      (pipeline
+        (logical_expression
+          (bitwise_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (integer_literal
+                            (decimal_integer_literal)))))))))))))
+    (switch_body
+      (switch_clauses
+        (switch_clause
+          (switch_clause_condition
+            (integer_literal
+              (decimal_integer_literal)))
+          (statement_block
+            (pipeline
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (string_literal)))))))))))))
+        (switch_clause
+          (switch_clause_condition
+            (integer_literal
+              (decimal_integer_literal)))
+          (statement_block
+            (pipeline
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (string_literal)))))))))))))
+        (switch_clause
+          (switch_clause_condition
+            (integer_literal
+              (decimal_integer_literal)))
+          (statement_block
+            (pipeline
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (string_literal)))))))))))))
+        (switch_clause
+          (switch_clause_condition
+            (integer_literal
+              (decimal_integer_literal)))
+          (statement_block
+            (pipeline
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (string_literal)))))))))))))))))
+
+===
+Switch Test 2
+===
+
+switch (4, 2)
+{
+    1 {"It is one."; Break}
+    2 {"It is two." ; Break }
+    3 {"It is three." ; Break }
+    4 {"It is four." ; Break }
+    3 {"Three again."}
+}
+
+---
+
+(program
+  (switch_statement
+    (switch_condition
+      (pipeline
+        (logical_expression
+          (bitwise_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (integer_literal
+                            (decimal_integer_literal)))
+                        (unary_expression
+                          (integer_literal
+                            (decimal_integer_literal)))))))))))))
+    (switch_body
+      (switch_clauses
+        (switch_clause
+          (switch_clause_condition
+            (integer_literal
+              (decimal_integer_literal)))
+          (statement_block
+            (pipeline
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (string_literal)))))))))))
+            (empty_statement)
+            (pipeline
+              (command
+                (command_name)))))
+        (switch_clause
+          (switch_clause_condition
+            (integer_literal
+              (decimal_integer_literal)))
+          (statement_block
+            (pipeline
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (string_literal)))))))))))
+            (empty_statement)
+            (pipeline
+              (command
+                (command_name)))))
+        (switch_clause
+          (switch_clause_condition
+            (integer_literal
+              (decimal_integer_literal)))
+          (statement_block
+            (pipeline
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (string_literal)))))))))))
+            (empty_statement)
+            (pipeline
+              (command
+                (command_name)))))
+        (switch_clause
+          (switch_clause_condition
+            (integer_literal
+              (decimal_integer_literal)))
+          (statement_block
+            (pipeline
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (string_literal)))))))))))
+            (empty_statement)
+            (pipeline
+              (command
+                (command_name)))))
+        (switch_clause
+          (switch_clause_condition
+            (integer_literal
+              (decimal_integer_literal)))
+          (statement_block
+            (pipeline
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (string_literal)))))))))))))))))

@@ -1,0 +1,292 @@
+===
+Strings : expandable
+===
+
+"foo"
+
+---
+
+(program
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (string_literal))))))))))))
+
+===
+Strings : empty expandable
+===
+
+""
+
+---
+
+(program
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (string_literal))))))))))))
+
+===
+Strings : expandle with braced variable
+===
+
+"foo ${toto}"
+
+---
+
+(program
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (string_literal
+                        (variable
+                          (braced_variable))))))))))))))
+
+===
+Strings : expandle with subexpression
+===
+
+"foo $(iex)"
+
+---
+
+(program
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (string_literal
+                        (sub_expression
+                          (pipeline
+                            (command
+                              (command_name))))))))))))))))
+
+===
+Strings : verbatim
+===
+
+'foo'
+
+---
+
+(program
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (string_literal))))))))))))
+
+===
+Strings : verbatim empty
+===
+
+''
+
+---
+
+(program
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (string_literal))))))))))))
+
+===
+Strings : verbatim here string
+===
+
+@'
+toto
+'@
+
+---
+
+(program
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (string_literal))))))))))))
+
+===
+Strings : verbatim here string empty
+===
+
+@'
+
+'@
+
+---
+
+(program
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (string_literal))))))))))))
+
+===
+Strings : expandle here string
+===
+
+@"
+`$toto
+"@
+
+---
+
+(program
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (string_literal))))))))))))
+
+===
+Strings : expandle here string with var
+===
+
+@"
+$toto
+"@
+
+---
+
+(program
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (string_literal
+                        (variable)))))))))))))
+
+===
+Strings : expandle here string empty
+===
+
+@"
+
+"@
+
+---
+
+(program
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (string_literal))))))))))))
+
+
+===
+Strings : escape variable and print dollar
+===
+
+"`$w$ is valid"
+
+---
+
+(program
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (string_literal))))))))))))
+
+
+===
+Strings : concat var content and dollar
+===
+
+"$w$ is valid"
+
+---
+
+(program
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (string_literal
+                        (variable)))))))))))))

@@ -1,1 +1,7 @@
 node_modules
+build
+.vscode
+*.exp
+*.obj
+*.lib
+*.wasm

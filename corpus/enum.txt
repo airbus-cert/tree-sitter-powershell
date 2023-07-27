@@ -1,0 +1,38 @@
+===
+Simple enum
+===
+
+enum MyEnum
+{
+    One
+}
+
+---
+
+(program
+  (enum_statement
+    (bareword_string)))
+
+===
+More complex enum
+===
+
+enum Enum2
+{
+    Part1; Two
+
+    Three
+
+
+
+    Four
+}
+
+---
+
+(program
+  (enum_statement
+    (bareword_string)
+    (bareword_string)
+    (bareword_string)
+    (bareword_string)))
