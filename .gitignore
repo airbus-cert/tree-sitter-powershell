@@ -6,6 +6,3 @@ build
 *.lib
 *.wasm
 package-lock.json
-src/grammar.json
-src/node-types.json
-src/parser.c
