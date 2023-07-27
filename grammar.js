@@ -592,6 +592,7 @@ module.exports = grammar({
     ),
 
     // Class
+
     class_attribute : $ => choice("hidden", "static"),
 
     class_property_definition: $ => seq(
@@ -631,19 +632,26 @@ module.exports = grammar({
       "{",
       repeat(
         choice(
-          seq($.class_property_definition, $._statement_terminator),
+          seq($.class_property_definition, $._statement_terminator, repeat(";")),
           $.class_method_definition
         )
       ),
       "}"
     ),
 
+    // Enums
+
     enum_statement: $ => seq(
       "enum", $.simple_name, "{",
       repeat(
-        seq($.simple_name, optional(seq("=", $.integer_literal)))
+        seq($.enum_member, $._statement_terminator, repeat(";"))
       ),
       "}"
+    ),
+
+    enum_member: $ => seq(
+      $.simple_name,
+      optional(seq("=", $.integer_literal))
     ),
 
     // Expressions

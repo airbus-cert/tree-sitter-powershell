@@ -351,3 +351,164 @@ $words += 10
                         (unary_expression
                           (integer_literal
                             (decimal_integer_literal)))))))))))))))
+
+===
+Variable : Simple variable
+===
+
+$aSimpleVariable001
+
+$91
+
+$__Z
+
+$env:PROGRAM_LOCATION
+
+---
+
+(program
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (variable)))))))))))
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (variable)))))))))))
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (variable)))))))))))
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (variable))))))))))))
+
+===
+Variable : Special variables
+===
+
+$$
+
+$^
+
+$?
+
+---
+
+(program
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (variable)))))))))))
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (variable)))))))))))
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (variable))))))))))))
+
+===
+Variable : Brace variable
+===
+
+${Simple}
+
+${More-interestin'}
+
+${
+    Really &&
+    quite ^
+    unusual???
+}
+
+---
+
+(program
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (variable
+                        (braced_variable))))))))))))
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (variable
+                        (braced_variable))))))))))))
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (variable
+                        (braced_variable)))))))))))))

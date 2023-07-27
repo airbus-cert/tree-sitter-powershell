@@ -290,3 +290,132 @@ Strings : concat var content and dollar
                     (unary_expression
                       (string_literal
                         (variable)))))))))))))
+
+===
+Strings : Single-quoted string
+===
+
+'Hello, &!@#(&)!I_@U!JJ!EN@!'
+
+---
+
+(program
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (string_literal))))))))))))
+
+===
+Strings : Double-quoted string
+===
+
+"Hello friend! !@!_(@FK@L!:D<!LQ!W(EK!_#(KQ!(%*(@!)"
+
+---
+
+(program
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (string_literal))))))))))))
+
+===
+Strings : Variable substituted string
+===
+
+"Hi $person"
+
+---
+
+(program
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (string_literal
+                        (variable)))))))))))))
+
+===
+Strings : Brace-variable substituted string
+===
+
+"He was ${adjective}able"
+
+---
+
+(program
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (string_literal
+                        (variable
+                          (braced_variable))))))))))))))
+
+===
+Strings : Escaped variable in double quoted string
+===
+
+"In the `$money"
+
+---
+
+(program
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (string_literal))))))))))))
+
+===
+Strings : Escaped brace variable in double quoted string
+===
+
+"In the `${money}"
+
+---
+
+(program
+  (pipeline
+    (logical_expression
+      (bitwise_expression
+        (comparison_expression
+          (additive_expression
+            (multiplicative_expression
+              (format_expression
+                (range_expression
+                  (array_literal_expression
+                    (unary_expression
+                      (string_literal))))))))))))

@@ -1,5 +1,5 @@
 ===
-Simple enum
+Enum : Simple enum
 ===
 
 enum MyEnum
@@ -11,7 +11,11 @@ enum MyEnum
 
 (program
   (enum_statement
-    (bareword_string)))
+    (simple_name)
+    (enum_member
+      (simple_name))))
+
+
 
 ===
 More complex enum
@@ -32,7 +36,38 @@ enum Enum2
 
 (program
   (enum_statement
-    (bareword_string)
-    (bareword_string)
-    (bareword_string)
-    (bareword_string)))
+    (simple_name)
+    (enum_member
+      (simple_name))
+    (enum_member
+      (simple_name))
+    (enum_member
+      (simple_name))
+    (enum_member
+      (simple_name))))
+
+===
+Enum : Complex enum
+===
+
+enum MyEnum
+{
+    One
+    Two = 2; Three = 3
+}
+
+---
+
+(program
+  (enum_statement
+    (simple_name)
+    (enum_member
+      (simple_name))
+    (enum_member
+      (simple_name)
+      (integer_literal
+        (decimal_integer_literal)))
+    (enum_member
+      (simple_name)
+      (integer_literal
+        (decimal_integer_literal)))))
