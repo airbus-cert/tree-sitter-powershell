@@ -1,0 +1,23 @@
+{
+  "name": "tree-sitter-powershell",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bindings/node",
+  "scripts": {
+    "generate": "tree-sitter generate",
+    "build-node": "tree-sitter generate && node-gyp build",
+    "test": "tree-sitter test",
+    "parse": "tree-sitter parse",
+    "parse-debug": "tree-sitter parse -d",
+    "build-wasm":  "tree-sitter build-wasm"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "nan": "^2.17.0"
+  },
+  "devDependencies": {
+    "node-gyp": "^9.4.0",
+    "tree-sitter-cli": "^0.20.8"
+  }
+}
