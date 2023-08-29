@@ -47,16 +47,20 @@ ${vjOj`Q`gX} = $(&("{0}{1}{2}"-f'w','h','oami'))
                                                   (range_expression
                                                     (array_literal_expression
                                                       (unary_expression
-                                                        (string_literal))))
+                                                        (string_literal
+                                                          (expandable_string_literal)))))
                                                   (format_operator)
                                                   (range_expression
                                                     (array_literal_expression
                                                       (unary_expression
-                                                        (string_literal))
+                                                        (string_literal
+                                                          (verbatim_string_characters)))
                                                       (unary_expression
-                                                        (string_literal))
+                                                        (string_literal
+                                                          (verbatim_string_characters)))
                                                       (unary_expression
-                                                        (string_literal)))))))))))))))))))))))))))))
+                                                        (string_literal
+                                                          (verbatim_string_characters))))))))))))))))))))))))))))))
 
 ===
 Obfuscated decoded using base64 native method
@@ -135,7 +139,8 @@ Invoke-Expression ([System.Text.Encoding]::Unicode.GetString(([convert]::FromBas
                                                                                             (format_argument_expression
                                                                                               (range_argument_expression
                                                                                                 (unary_expression
-                                                                                                  (string_literal))))))))))))))))))))))))))))))))))))))))))))))))))
+                                                                                                  (string_literal
+                                                                                                    (verbatim_string_characters)))))))))))))))))))))))))))))))))))))))))))))))))))
 
 
 ===

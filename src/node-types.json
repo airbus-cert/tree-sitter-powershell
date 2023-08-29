@@ -1121,6 +1121,44 @@
     }
   },
   {
+    "type": "expandable_here_string_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "sub_expression",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "expandable_string_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "sub_expression",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "expression_with_unary_operator",
     "named": true,
     "fields": {},
@@ -2868,15 +2906,23 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
-      "required": false,
+      "multiple": false,
+      "required": true,
       "types": [
         {
-          "type": "sub_expression",
+          "type": "expandable_here_string_literal",
           "named": true
         },
         {
-          "type": "variable",
+          "type": "expandable_string_literal",
+          "named": true
+        },
+        {
+          "type": "verbatim_here_string_characters",
+          "named": true
+        },
+        {
+          "type": "verbatim_string_characters",
           "named": true
         }
       ]
@@ -4165,6 +4211,14 @@
   {
     "type": "until",
     "named": false
+  },
+  {
+    "type": "verbatim_here_string_characters",
+    "named": true
+  },
+  {
+    "type": "verbatim_string_characters",
+    "named": true
   },
   {
     "type": "while",

@@ -10,7 +10,8 @@ Write-Host "CERT"
   (pipeline
     (command
       (command_name)
-      (string_literal))))
+      (string_literal
+        (expandable_string_literal)))))
 
 ===
 Cmdlet that start with a number
@@ -96,9 +97,11 @@ New-DynamicParam -Name Plugins -type string[] -ValidateSet $(((gci .\plugins\*.p
                       (range_expression
                         (array_literal_expression
                           (unary_expression
-                            (string_literal))
+                            (string_literal
+                              (expandable_string_literal)))
                           (unary_expression
-                            (string_literal))))))))))))
+                            (string_literal
+                              (expandable_string_literal)))))))))))))
       (command_parameter)
       (variable))))
 
@@ -115,7 +118,8 @@ i''ex "pwd"
   (pipeline
     (command
       (command_name)
-      (string_literal))))
+      (string_literal
+        (expandable_string_literal)))))
 
 ===
 Double Quoted CmdLet
@@ -129,7 +133,8 @@ i""ex "pwd"
   (pipeline
     (command
       (command_name)
-      (string_literal))))
+      (string_literal
+        (expandable_string_literal)))))
 
 ===
 Obfuscated cmdlet and string
@@ -143,7 +148,8 @@ ie""x'' "p`"`"w''d`"`""
   (pipeline
     (command
       (command_name)
-      (string_literal))))
+      (string_literal
+        (expandable_string_literal)))))
 
 ===
 Native command

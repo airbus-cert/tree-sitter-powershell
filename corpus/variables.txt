@@ -63,7 +63,8 @@ $Path = "C:\Windows\System32"
                     (range_expression
                       (array_literal_expression
                         (unary_expression
-                          (string_literal))))))))))))))
+                          (string_literal
+                            (expandable_string_literal)))))))))))))))
 
 ===
 Variable : Command results
@@ -224,7 +225,8 @@ $i,$j = 10, "red", $true
                           (integer_literal
                             (decimal_integer_literal)))
                         (unary_expression
-                          (string_literal))
+                          (string_literal
+                            (expandable_string_literal)))
                         (unary_expression
                           (variable)))))))))))))
   (pipeline
@@ -255,7 +257,8 @@ $i,$j = 10, "red", $true
                           (integer_literal
                             (decimal_integer_literal)))
                         (unary_expression
-                          (string_literal))
+                          (string_literal
+                            (expandable_string_literal)))
                         (unary_expression
                           (variable))))))))))))))
 
@@ -300,7 +303,8 @@ $words += 10
                     (range_expression
                       (array_literal_expression
                         (unary_expression
-                          (string_literal)))))))))))))
+                          (string_literal
+                            (expandable_string_literal))))))))))))))
   (pipeline
     (assignment_expression
       (logical_expression

@@ -122,8 +122,9 @@ for (($i = 0), ($j = 0); $i -lt 10; $i++)
                       (array_literal_expression
                         (unary_expression
                           (string_literal
-                            (variable)
-                            (variable))))))))))))
+                            (expandable_string_literal
+                              (variable)
+                              (variable)))))))))))))
       (pipeline
         (logical_expression
           (bitwise_expression
@@ -135,8 +136,9 @@ for (($i = 0), ($j = 0); $i -lt 10; $i++)
                       (array_literal_expression
                         (unary_expression
                           (string_literal
-                            (variable)
-                            (variable)))))))))))))))
+                            (expandable_string_literal
+                              (variable)
+                              (variable))))))))))))))))
 
 ===
 For loop : Sub-expression using the semicolon to separate statements
@@ -261,7 +263,8 @@ for ($($i = 0;$j = 0); $i -lt 10; $i++)
                       (array_literal_expression
                         (unary_expression
                           (string_literal
-                            (variable))))))))))))
+                            (expandable_string_literal
+                              (variable)))))))))))))
       (pipeline
         (logical_expression
           (bitwise_expression
@@ -273,7 +276,8 @@ for ($($i = 0;$j = 0); $i -lt 10; $i++)
                       (array_literal_expression
                         (unary_expression
                           (string_literal
-                            (variable)))))))))))))))
+                            (expandable_string_literal
+                              (variable))))))))))))))))
 
 ===
 For loop : Minimum

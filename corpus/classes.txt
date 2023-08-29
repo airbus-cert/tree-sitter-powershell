@@ -83,7 +83,8 @@ class MyClass
           (pipeline
             (command
               (command_name)
-              (string_literal))))))))
+              (string_literal
+                (expandable_string_literal)))))))))
 
 ===
 Class : method declaration with parameters
@@ -121,8 +122,9 @@ class MyClass
             (command
               (command_name)
               (string_literal
-                (variable)
-                (variable)))))))))
+                (expandable_string_literal
+                  (variable)
+                  (variable))))))))))
 
 
 ===
@@ -174,7 +176,8 @@ class MyClass
           (pipeline
             (command
               (command_name)
-              (string_literal))))))
+              (string_literal
+                (expandable_string_literal)))))))
     (class_property_definition
       (type_literal
         (type_spec
@@ -198,7 +201,8 @@ class MyClass
             (command
               (command_name)
               (string_literal
-                (variable)
-                (variable)))))))
+                (expandable_string_literal
+                  (variable)
+                  (variable))))))))
     (class_method_definition
       (simple_name))))

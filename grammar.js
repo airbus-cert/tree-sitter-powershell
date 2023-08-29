@@ -88,13 +88,13 @@ module.exports = grammar({
     // String literal
 
     string_literal: $ => choice(
-      $._expandable_string_literal,
-      $._verbatim_string_characters,
-      $._expandable_here_string_literal,
-      $._verbatim_here_string_characters
+      $.expandable_string_literal,
+      $.verbatim_string_characters,
+      $.expandable_here_string_literal,
+      $.verbatim_here_string_characters
     ),
 
-    _expandable_string_literal: $ => seq(
+    expandable_string_literal: $ => seq(
       /\"\s*#*/,  // this is a trick to avoid tree-sitter allowing comment between tokens, as string should be tokenize but powershell allow subexpression inside it...
       repeat(
         choice(
@@ -110,7 +110,7 @@ module.exports = grammar({
       token.immediate("\"")
     ),
 
-    _expandable_here_string_literal: $ => seq(
+    expandable_here_string_literal: $ => seq(
       /@\" *\n/,
       repeat(
         choice(
@@ -126,7 +126,7 @@ module.exports = grammar({
       token.immediate(/\n+\"@/)
     ),
 
-    _verbatim_string_characters: $ => token(seq(
+    verbatim_string_characters: $ => token(seq(
       "'",
       repeat(
         choice(
@@ -137,7 +137,7 @@ module.exports = grammar({
       "'"
     )),
 
-    _verbatim_here_string_characters: $ => token(
+    verbatim_here_string_characters: $ => token(
       seq(
         /@\'\s*\n/,
         repeat(
@@ -529,6 +529,7 @@ module.exports = grammar({
 
     // This rule is ignored as it does not appear as a rule
     //command_module: $ => $.primary_expression,
+
     _expandable_string_literal_immediate: $ => seq(
       repeat(
         choice(

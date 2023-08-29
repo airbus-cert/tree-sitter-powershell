@@ -90,7 +90,8 @@ function Test
                           (range_expression
                             (array_literal_expression
                               (unary_expression
-                                (string_literal)))))))))))))))))
+                                (string_literal
+                                  (expandable_string_literal))))))))))))))))))
 
 ===
 Basic parameter with output type
