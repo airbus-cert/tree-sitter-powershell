@@ -257,7 +257,7 @@
           "named": true
         },
         {
-          "type": "logical_expression",
+          "type": "left_assignment_expression",
           "named": true
         },
         {
@@ -1704,7 +1704,7 @@
           "named": true
         },
         {
-          "type": "hexadecimel_integer_literal",
+          "type": "hexadecimal_integer_literal",
           "named": true
         }
       ]
@@ -1897,6 +1897,21 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "left_assignment_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "logical_expression",
           "named": true
         }
       ]
@@ -4133,7 +4148,7 @@
     "named": false
   },
   {
-    "type": "hexadecimel_integer_literal",
+    "type": "hexadecimal_integer_literal",
     "named": true
   },
   {

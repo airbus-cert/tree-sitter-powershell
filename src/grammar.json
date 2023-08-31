@@ -93,7 +93,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "hexadecimel_integer_literal"
+          "name": "hexadecimal_integer_literal"
         }
       ]
     },
@@ -163,7 +163,7 @@
         ]
       }
     },
-    "hexadecimel_integer_literal": {
+    "hexadecimal_integer_literal": {
       "type": "TOKEN",
       "content": {
         "type": "SEQ",
@@ -2853,12 +2853,16 @@
         }
       ]
     },
+    "left_assignment_expression": {
+      "type": "SYMBOL",
+      "name": "_expression"
+    },
     "assignment_expression": {
       "type": "SEQ",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_expression"
+          "name": "left_assignment_expression"
         },
         {
           "type": "SYMBOL",

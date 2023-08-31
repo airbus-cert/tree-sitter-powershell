@@ -9,17 +9,18 @@ ${vjOj`Q`gX} = $(&("{0}{1}{2}"-f'w','h','oami'))
 (program
   (pipeline
     (assignment_expression
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (variable
-                          (braced_variable)))))))))))
+      (left_assignment_expression
+        (logical_expression
+          (bitwise_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (variable
+                            (braced_variable))))))))))))
       (assignement_operator)
       (pipeline
         (logical_expression

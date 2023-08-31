@@ -66,14 +66,14 @@ module.exports = grammar({
 
     integer_literal: $ => choice(
       $.decimal_integer_literal,
-      $.hexadecimel_integer_literal
+      $.hexadecimal_integer_literal
     ),
 
     decimal_integer_literal: $ => token(seq(
       /[0-9]+/, optional(choice("l", "d")), optional(choice("kb", "mb", "gb", "tb", "pb"))
     )),
 
-    hexadecimel_integer_literal: $ => token(seq(
+    hexadecimal_integer_literal: $ => token(seq(
       "0x", /[0-9a-fA-F]+/, optional("l"), optional(choice("kb", "mb", "gb", "tb", "pb"))
     )),
 
@@ -509,8 +509,11 @@ module.exports = grammar({
       seq($.command, optional($.verbatim_command_argument), optional($._pipeline_tail))
     ),
 
+    // Distinct a normal expression to a left assignement expession
+    left_assignment_expression: $ => $._expression,
+
     assignment_expression: $ => seq(
-      $._expression, $.assignement_operator, $._statement
+      $.left_assignment_expression, $.assignement_operator, $._statement
     ),
 
     _pipeline_tail: $ => repeat1(
