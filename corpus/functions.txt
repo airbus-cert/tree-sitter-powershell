@@ -270,41 +270,43 @@ function Test
                                           (script_block_body
                                             (pipeline
                                               (logical_expression
-                                                (bitwise_expression
-                                                  (comparison_expression
-                                                    (additive_expression
-                                                      (multiplicative_expression
-                                                        (format_expression
-                                                          (range_expression
-                                                            (array_literal_expression
-                                                              (unary_expression
-                                                                (parenthesized_expression
-                                                                  (pipeline
-                                                                    (logical_expression
-                                                                      (bitwise_expression
-                                                                        (comparison_expression
-                                                                          (additive_expression
-                                                                            (multiplicative_expression
-                                                                              (format_expression
-                                                                                (range_expression
-                                                                                  (array_literal_expression
-                                                                                    (unary_expression
-                                                                                      (variable)))))))
-                                                                          (comparison_operator)
-                                                                          (additive_expression
-                                                                            (multiplicative_expression
-                                                                              (format_expression
-                                                                                (range_expression
-                                                                                  (array_literal_expression
-                                                                                    (unary_expression
-                                                                                      (type_literal
-                                                                                        (type_spec
-                                                                                          (type_name
+                                                (logical_expression
+                                                  (bitwise_expression
+                                                    (comparison_expression
+                                                      (additive_expression
+                                                        (multiplicative_expression
+                                                          (format_expression
+                                                            (range_expression
+                                                              (array_literal_expression
+                                                                (unary_expression
+                                                                  (parenthesized_expression
+                                                                    (pipeline
+                                                                      (logical_expression
+                                                                        (bitwise_expression
+                                                                          (comparison_expression
+                                                                            (comparison_expression
+                                                                              (additive_expression
+                                                                                (multiplicative_expression
+                                                                                  (format_expression
+                                                                                    (range_expression
+                                                                                      (array_literal_expression
+                                                                                        (unary_expression
+                                                                                          (variable))))))))
+                                                                            (comparison_operator)
+                                                                            (additive_expression
+                                                                              (multiplicative_expression
+                                                                                (format_expression
+                                                                                  (range_expression
+                                                                                    (array_literal_expression
+                                                                                      (unary_expression
+                                                                                        (type_literal
+                                                                                          (type_spec
                                                                                             (type_name
                                                                                               (type_name
+                                                                                                (type_name
+                                                                                                  (type_identifier))
                                                                                                 (type_identifier))
-                                                                                              (type_identifier))
-                                                                                            (type_identifier)))))))))))))))))))))))
+                                                                                              (type_identifier))))))))))))))))))))))))
                                                 (bitwise_expression
                                                   (comparison_expression
                                                     (additive_expression
@@ -318,13 +320,14 @@ function Test
                                                                     (logical_expression
                                                                       (bitwise_expression
                                                                         (comparison_expression
-                                                                          (additive_expression
-                                                                            (multiplicative_expression
-                                                                              (format_expression
-                                                                                (range_expression
-                                                                                  (array_literal_expression
-                                                                                    (unary_expression
-                                                                                      (variable)))))))
+                                                                          (comparison_expression
+                                                                            (additive_expression
+                                                                              (multiplicative_expression
+                                                                                (format_expression
+                                                                                  (range_expression
+                                                                                    (array_literal_expression
+                                                                                      (unary_expression
+                                                                                        (variable))))))))
                                                                           (comparison_operator)
                                                                           (additive_expression
                                                                             (multiplicative_expression

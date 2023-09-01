@@ -23,6 +23,10 @@
       "required": true,
       "types": [
         {
+          "type": "additive_expression",
+          "named": true
+        },
+        {
           "type": "multiplicative_expression",
           "named": true
         }
@@ -169,6 +173,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "array_literal_expression",
+          "named": true
+        },
         {
           "type": "unary_expression",
           "named": true
@@ -401,6 +409,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "bitwise_expression",
+          "named": true
+        },
         {
           "type": "comparison_expression",
           "named": true
@@ -832,6 +844,10 @@
       "types": [
         {
           "type": "additive_expression",
+          "named": true
+        },
+        {
+          "type": "comparison_expression",
           "named": true
         },
         {
@@ -1355,6 +1371,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "format_expression",
+          "named": true
+        },
         {
           "type": "format_operator",
           "named": true
@@ -1956,6 +1976,10 @@
         {
           "type": "bitwise_expression",
           "named": true
+        },
+        {
+          "type": "logical_expression",
+          "named": true
         }
       ]
     }
@@ -2124,6 +2148,10 @@
       "types": [
         {
           "type": "format_expression",
+          "named": true
+        },
+        {
+          "type": "multiplicative_expression",
           "named": true
         }
       ]
@@ -2546,6 +2574,10 @@
       "types": [
         {
           "type": "array_literal_expression",
+          "named": true
+        },
+        {
+          "type": "range_expression",
           "named": true
         }
       ]

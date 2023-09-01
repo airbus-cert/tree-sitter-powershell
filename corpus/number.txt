@@ -125,20 +125,22 @@ Integer operation
       (bitwise_expression
         (comparison_expression
           (additive_expression
-            (multiplicative_expression
-              (format_expression
-                (range_expression
-                  (array_literal_expression
-                    (unary_expression
-                      (integer_literal
-                        (decimal_integer_literal)))))))
-            (multiplicative_expression
-              (format_expression
-                (range_expression
-                  (array_literal_expression
-                    (unary_expression
-                      (integer_literal
-                        (decimal_integer_literal)))))))
+            (additive_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (integer_literal
+                            (decimal_integer_literal))))))))
+              (multiplicative_expression
+                (format_expression
+                  (range_expression
+                    (array_literal_expression
+                      (unary_expression
+                        (integer_literal
+                          (decimal_integer_literal))))))))
             (multiplicative_expression
               (format_expression
                 (range_expression
@@ -161,20 +163,22 @@ Integer operation with negative
       (bitwise_expression
         (comparison_expression
           (additive_expression
-            (multiplicative_expression
-              (format_expression
-                (range_expression
-                  (array_literal_expression
-                    (unary_expression
-                      (integer_literal
-                        (decimal_integer_literal)))))))
-            (multiplicative_expression
-              (format_expression
-                (range_expression
-                  (array_literal_expression
-                    (unary_expression
-                      (integer_literal
-                        (decimal_integer_literal)))))))
+            (additive_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (integer_literal
+                            (decimal_integer_literal))))))))
+              (multiplicative_expression
+                (format_expression
+                  (range_expression
+                    (array_literal_expression
+                      (unary_expression
+                        (integer_literal
+                          (decimal_integer_literal))))))))
             (multiplicative_expression
               (format_expression
                 (range_expression
@@ -199,20 +203,21 @@ Cast with composed expression
       (bitwise_expression
         (comparison_expression
           (additive_expression
-            (multiplicative_expression
-              (format_expression
-                (range_expression
-                  (array_literal_expression
-                    (unary_expression
-                      (expression_with_unary_operator
-                        (cast_expression
-                          (type_literal
-                            (type_spec
-                              (type_name
-                                (type_identifier))))
-                          (unary_expression
-                            (integer_literal
-                              (decimal_integer_literal))))))))))
+            (additive_expression
+              (multiplicative_expression
+                (format_expression
+                  (range_expression
+                    (array_literal_expression
+                      (unary_expression
+                        (expression_with_unary_operator
+                          (cast_expression
+                            (type_literal
+                              (type_spec
+                                (type_name
+                                  (type_identifier))))
+                            (unary_expression
+                              (integer_literal
+                                (decimal_integer_literal)))))))))))
             (multiplicative_expression
               (format_expression
                 (range_expression

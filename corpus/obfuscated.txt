@@ -45,20 +45,23 @@ ${vjOj`Q`gX} = $(&("{0}{1}{2}"-f'w','h','oami'))
                                             (additive_expression
                                               (multiplicative_expression
                                                 (format_expression
-                                                  (range_expression
-                                                    (array_literal_expression
-                                                      (unary_expression
-                                                        (string_literal
-                                                          (expandable_string_literal)))))
+                                                  (format_expression
+                                                    (range_expression
+                                                      (array_literal_expression
+                                                        (unary_expression
+                                                          (string_literal
+                                                            (expandable_string_literal))))))
                                                   (format_operator)
                                                   (range_expression
                                                     (array_literal_expression
-                                                      (unary_expression
-                                                        (string_literal
-                                                          (verbatim_string_characters)))
-                                                      (unary_expression
-                                                        (string_literal
-                                                          (verbatim_string_characters)))
+                                                      (array_literal_expression
+                                                        (array_literal_expression
+                                                          (unary_expression
+                                                            (string_literal
+                                                              (verbatim_string_characters))))
+                                                        (unary_expression
+                                                          (string_literal
+                                                            (verbatim_string_characters))))
                                                       (unary_expression
                                                         (string_literal
                                                           (verbatim_string_characters))))))))))))))))))))))))))))))

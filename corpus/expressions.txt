@@ -300,11 +300,12 @@ Format expression
           (additive_expression
             (multiplicative_expression
               (format_expression
-                (range_expression
-                  (array_literal_expression
-                    (unary_expression
-                      (string_literal
-                        (expandable_string_literal)))))
+                (format_expression
+                  (range_expression
+                    (array_literal_expression
+                      (unary_expression
+                        (string_literal
+                          (expandable_string_literal))))))
                 (format_operator)
                 (range_expression
                   (array_literal_expression
@@ -419,33 +420,37 @@ $FP8DpgPcK0IovuDHPZ4p2 = $FP8DpgPcK0IovuDHPZ4p + "P"  + "S"  + " "  + (Get-Locat
           (bitwise_expression
             (comparison_expression
               (additive_expression
-                (multiplicative_expression
-                  (format_expression
-                    (range_expression
-                      (array_literal_expression
-                        (unary_expression
-                          (variable))))))
-                (multiplicative_expression
-                  (format_expression
-                    (range_expression
-                      (array_literal_expression
-                        (unary_expression
-                          (string_literal
-                            (expandable_string_literal)))))))
-                (multiplicative_expression
-                  (format_expression
-                    (range_expression
-                      (array_literal_expression
-                        (unary_expression
-                          (string_literal
-                            (expandable_string_literal)))))))
-                (multiplicative_expression
-                  (format_expression
-                    (range_expression
-                      (array_literal_expression
-                        (unary_expression
-                          (string_literal
-                            (expandable_string_literal)))))))
+                (additive_expression
+                  (additive_expression
+                    (additive_expression
+                      (additive_expression
+                        (multiplicative_expression
+                          (format_expression
+                            (range_expression
+                              (array_literal_expression
+                                (unary_expression
+                                  (variable)))))))
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (string_literal
+                                  (expandable_string_literal))))))))
+                    (multiplicative_expression
+                      (format_expression
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (string_literal
+                                (expandable_string_literal))))))))
+                  (multiplicative_expression
+                    (format_expression
+                      (range_expression
+                        (array_literal_expression
+                          (unary_expression
+                            (string_literal
+                              (expandable_string_literal))))))))
                 (multiplicative_expression
                   (format_expression
                     (range_expression
@@ -503,26 +508,27 @@ $upgrade += [char]($title[3] -bxor $update[$i])
                                   (pipeline
                                     (logical_expression
                                       (bitwise_expression
-                                        (comparison_expression
-                                          (additive_expression
-                                            (multiplicative_expression
-                                              (format_expression
-                                                (range_expression
-                                                  (array_literal_expression
-                                                    (unary_expression
-                                                      (element_access
-                                                        (variable)
-                                                        (logical_expression
-                                                          (bitwise_expression
-                                                            (comparison_expression
-                                                              (additive_expression
-                                                                (multiplicative_expression
-                                                                  (format_expression
-                                                                    (range_expression
-                                                                      (array_literal_expression
-                                                                        (unary_expression
-                                                                          (integer_literal
-                                                                            (decimal_integer_literal)))))))))))))))))))
+                                        (bitwise_expression
+                                          (comparison_expression
+                                            (additive_expression
+                                              (multiplicative_expression
+                                                (format_expression
+                                                  (range_expression
+                                                    (array_literal_expression
+                                                      (unary_expression
+                                                        (element_access
+                                                          (variable)
+                                                          (logical_expression
+                                                            (bitwise_expression
+                                                              (comparison_expression
+                                                                (additive_expression
+                                                                  (multiplicative_expression
+                                                                    (format_expression
+                                                                      (range_expression
+                                                                        (array_literal_expression
+                                                                          (unary_expression
+                                                                            (integer_literal
+                                                                              (decimal_integer_literal))))))))))))))))))))
                                         (comparison_expression
                                           (additive_expression
                                             (multiplicative_expression
@@ -572,12 +578,13 @@ $foo[-1..-$foo.Length]
                                 (multiplicative_expression
                                   (format_expression
                                     (range_expression
-                                      (array_literal_expression
-                                        (unary_expression
-                                          (expression_with_unary_operator
-                                            (unary_expression
-                                              (integer_literal
-                                                (decimal_integer_literal))))))
+                                      (range_expression
+                                        (array_literal_expression
+                                          (unary_expression
+                                            (expression_with_unary_operator
+                                              (unary_expression
+                                                (integer_literal
+                                                  (decimal_integer_literal)))))))
                                       (array_literal_expression
                                         (unary_expression
                                           (expression_with_unary_operator

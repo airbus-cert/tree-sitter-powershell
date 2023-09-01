@@ -14,13 +14,14 @@ if ($a -gt 2) {
       (logical_expression
         (bitwise_expression
           (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (variable)))))))
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (variable))))))))
             (comparison_operator)
             (additive_expression
               (multiplicative_expression
@@ -57,13 +58,14 @@ else {
       (logical_expression
         (bitwise_expression
           (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (variable)))))))
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (variable))))))))
             (comparison_operator)
             (additive_expression
               (multiplicative_expression
@@ -91,14 +93,15 @@ else {
                   (bitwise_expression
                     (comparison_expression
                       (additive_expression
-                        (multiplicative_expression
-                          (format_expression
-                            (range_expression
-                              (array_literal_expression
-                                (unary_expression
-                                  (string_literal
-                                    (expandable_string_literal
-                                      (variable))))))))
+                        (additive_expression
+                          (multiplicative_expression
+                            (format_expression
+                              (range_expression
+                                (array_literal_expression
+                                  (unary_expression
+                                    (string_literal
+                                      (expandable_string_literal
+                                        (variable)))))))))
                         (multiplicative_expression
                           (format_expression
                             (range_expression
@@ -130,13 +133,14 @@ else {
       (logical_expression
         (bitwise_expression
           (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (variable)))))))
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (variable))))))))
             (comparison_operator)
             (additive_expression
               (multiplicative_expression
@@ -159,13 +163,14 @@ else {
           (logical_expression
             (bitwise_expression
               (comparison_expression
-                (additive_expression
-                  (multiplicative_expression
-                    (format_expression
-                      (range_expression
-                        (array_literal_expression
-                          (unary_expression
-                            (variable)))))))
+                (comparison_expression
+                  (additive_expression
+                    (multiplicative_expression
+                      (format_expression
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (variable))))))))
                 (comparison_operator)
                 (additive_expression
                   (multiplicative_expression
@@ -193,14 +198,15 @@ else {
                   (bitwise_expression
                     (comparison_expression
                       (additive_expression
-                        (multiplicative_expression
-                          (format_expression
-                            (range_expression
-                              (array_literal_expression
-                                (unary_expression
-                                  (string_literal
-                                    (expandable_string_literal
-                                      (variable))))))))
+                        (additive_expression
+                          (multiplicative_expression
+                            (format_expression
+                              (range_expression
+                                (array_literal_expression
+                                  (unary_expression
+                                    (string_literal
+                                      (expandable_string_literal
+                                        (variable)))))))))
                         (multiplicative_expression
                           (format_expression
                             (range_expression
@@ -336,9 +342,10 @@ switch (4, 2)
                   (format_expression
                     (range_expression
                       (array_literal_expression
-                        (unary_expression
-                          (integer_literal
-                            (decimal_integer_literal)))
+                        (array_literal_expression
+                          (unary_expression
+                            (integer_literal
+                              (decimal_integer_literal))))
                         (unary_expression
                           (integer_literal
                             (decimal_integer_literal)))))))))))))

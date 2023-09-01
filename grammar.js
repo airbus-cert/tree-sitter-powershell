@@ -662,59 +662,67 @@ module.exports = grammar({
     
     _expression: $ => $.logical_expression,
 
-    logical_expression: $ => seq(
+    logical_expression: $ => prec.left(choice(
       $.bitwise_expression,
-      repeat(
-        seq(choice("-and", "-or", "-xor"), $.bitwise_expression)
+      seq (
+        $.logical_expression,
+        choice("-and", "-or", "-xor"), $.bitwise_expression
       )
-    ),
+    )),
 
-    bitwise_expression: $ => seq(
+    bitwise_expression: $ => prec.left(choice(
       $.comparison_expression,
-      repeat(
-        seq(choice("-band", "-bor", "-bxor"), $.comparison_expression)
+      seq (
+        $.bitwise_expression,
+        choice("-band", "-bor", "-bxor"), $.comparison_expression
       )
-    ),
+    )),
 
-    comparison_expression: $ => prec.left(seq(
+    comparison_expression: $ => prec.left(choice(
       $.additive_expression,
-      repeat(
-        seq($.comparison_operator, $.additive_expression)
+      seq (
+        $.comparison_expression,
+        $.comparison_operator, $.additive_expression
       )
     )),
 
-    additive_expression: $ => prec.left(seq(
+    additive_expression: $ => prec.left(choice(
       $.multiplicative_expression,
-      repeat(
-        seq(choice("+", "-"), $.multiplicative_expression)
+      seq (
+        $.additive_expression,
+        choice("+", "-"), $.multiplicative_expression
       )
     )),
 
-    multiplicative_expression: $ => prec.left(seq(
+    multiplicative_expression: $ => prec.left(choice(
       $.format_expression,
-      repeat(
-        seq(choice("/", "\\", "%", "*"), $.format_expression)
+      seq (
+        $.multiplicative_expression,
+        choice("/", "\\", "%", "*"), $.format_expression
       )
     )),
 
-    format_expression: $ => prec.left(seq(
+    format_expression: $ => prec.left(choice(
       $.range_expression,
-      repeat(
-        seq($.format_operator, $.range_expression)
+      seq (
+        $.format_expression,
+        $.format_operator, $.range_expression
       )
     )),
 
-    range_expression: $ => seq(
+    range_expression: $ => prec.left(choice(
       $.array_literal_expression,
-      repeat(
-        seq("..", $.array_literal_expression)
+      seq (
+        $.range_expression,
+        "..", $.array_literal_expression
       )
-    ),
+    )),
 
-    array_literal_expression: $ => prec.left(seq(
+    array_literal_expression: $ => prec.left(choice(
       $.unary_expression,
-      repeat(
-        seq(",", $.unary_expression)
+      seq (
+        $.array_literal_expression,
+        ",", $.unary_expression
       )
     )),
 

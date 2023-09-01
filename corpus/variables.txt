@@ -32,12 +32,14 @@ $Path = "C:\Windows\System32"
                   (format_expression
                     (range_expression
                       (array_literal_expression
-                        (unary_expression
-                          (integer_literal
-                            (decimal_integer_literal)))
-                        (unary_expression
-                          (integer_literal
-                            (decimal_integer_literal)))
+                        (array_literal_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (integer_literal
+                                (decimal_integer_literal))))
+                          (unary_expression
+                            (integer_literal
+                              (decimal_integer_literal))))
                         (unary_expression
                           (integer_literal
                             (decimal_integer_literal))))))))))))))
@@ -213,10 +215,12 @@ $i,$j = 10, "red", $true
                   (format_expression
                     (range_expression
                       (array_literal_expression
-                        (unary_expression
-                          (variable))
-                        (unary_expression
-                          (variable))
+                        (array_literal_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (variable)))
+                          (unary_expression
+                            (variable)))
                         (unary_expression
                           (variable)))))))))))
       (assignement_operator)
@@ -229,12 +233,14 @@ $i,$j = 10, "red", $true
                   (format_expression
                     (range_expression
                       (array_literal_expression
-                        (unary_expression
-                          (integer_literal
-                            (decimal_integer_literal)))
-                        (unary_expression
-                          (string_literal
-                            (expandable_string_literal)))
+                        (array_literal_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (integer_literal
+                                (decimal_integer_literal))))
+                          (unary_expression
+                            (string_literal
+                              (expandable_string_literal))))
                         (unary_expression
                           (variable)))))))))))))
   (pipeline
@@ -248,8 +254,9 @@ $i,$j = 10, "red", $true
                   (format_expression
                     (range_expression
                       (array_literal_expression
-                        (unary_expression
-                          (variable))
+                        (array_literal_expression
+                          (unary_expression
+                            (variable)))
                         (unary_expression
                           (variable)))))))))))
       (assignement_operator)
@@ -262,12 +269,14 @@ $i,$j = 10, "red", $true
                   (format_expression
                     (range_expression
                       (array_literal_expression
-                        (unary_expression
-                          (integer_literal
-                            (decimal_integer_literal)))
-                        (unary_expression
-                          (string_literal
-                            (expandable_string_literal)))
+                        (array_literal_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (integer_literal
+                                (decimal_integer_literal))))
+                          (unary_expression
+                            (string_literal
+                              (expandable_string_literal))))
                         (unary_expression
                           (variable))))))))))))))
 
