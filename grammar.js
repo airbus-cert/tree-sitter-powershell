@@ -318,7 +318,7 @@ module.exports = grammar({
     empty_statement: $ => prec(PREC.EMPTY, ";"),
 
     if_statement: $ => prec.left(seq(
-      "if", "(", $.pipeline, ")", $.statement_block, optional($.elseif_clauses), optional($.else_clause)
+      "if", "(", $.pipeline, ")", $.statement_block, field("elseif_clauses", optional($.elseif_clauses)), field("else_clause", optional($.else_clause))
     )),
 
     elseif_clauses: $ => prec.left(repeat1($.elseif_clause)),

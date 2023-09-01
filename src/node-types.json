@@ -1652,19 +1652,32 @@
   {
     "type": "if_statement",
     "named": true,
-    "fields": {},
+    "fields": {
+      "else_clause": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "else_clause",
+            "named": true
+          }
+        ]
+      },
+      "elseif_clauses": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "elseif_clauses",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "else_clause",
-          "named": true
-        },
-        {
-          "type": "elseif_clauses",
-          "named": true
-        },
         {
           "type": "pipeline",
           "named": true
