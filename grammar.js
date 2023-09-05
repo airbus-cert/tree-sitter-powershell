@@ -775,7 +775,7 @@ module.exports = grammar({
 
     parenthesized_expression: $ => seq("(", $.pipeline, ")"),
 
-    sub_expression: $ => seq("$(", optional($._statement_list), ")"),
+    sub_expression: $ => seq("$(", field("statements", optional($._statement_list)), ")"),
 
     array_expression: $ => seq("@(", optional($._statement_list), ")"),
 
@@ -834,54 +834,61 @@ module.exports = grammar({
 
     argument_expression: $ => $.logical_argument_expression,
 
-    logical_argument_expression: $ => seq(
+    logical_argument_expression: $ => prec.left(choice(
       $.bitwise_argument_expression,
-      repeat(
-        seq(choice("-and", "-or", "-xor"), $.bitwise_argument_expression)
+      seq (
+        $.logical_argument_expression,
+        choice("-and", "-or", "-xor"), $.bitwise_argument_expression
       )
-    ),
-
-    bitwise_argument_expression: $ => seq(
+    )),
+    
+    bitwise_argument_expression: $ => prec.left(choice(
       $.comparison_argument_expression,
-      repeat(
-        seq(choice("-band", "-bor", "-bxor"), $.comparison_argument_expression)
+      seq (
+        $.bitwise_argument_expression,
+        choice("-and", "-or", "-xor"), $.comparison_argument_expression
       )
-    ),
+    )),
 
-    comparison_argument_expression: $ => prec.left(seq(
+    comparison_argument_expression: $ => prec.left(choice(
       $.additive_argument_expression,
-      repeat(
-        seq($.comparison_operator, $.additive_argument_expression)
+      seq (
+        $.comparison_argument_expression,
+        $.comparison_operator, $.additive_argument_expression
       )
     )),
 
-    additive_argument_expression: $ => prec.left(seq(
+    additive_argument_expression: $ => prec.left(choice(
       $.multiplicative_argument_expression,
-      repeat(
-        seq(choice("+", "-"), $.multiplicative_argument_expression)
+      seq (
+        $.additive_argument_expression,
+        choice("+", "-"), $.multiplicative_argument_expression
       )
     )),
 
-    multiplicative_argument_expression: $ => prec.left(seq(
+    multiplicative_argument_expression: $ => prec.left(choice(
       $.format_argument_expression,
-      repeat(
-        seq(choice("/", "\\", "%", "*"), $.format_argument_expression)
+      seq (
+        $.multiplicative_argument_expression,
+        choice("/", "\\", "%", "*"), $.format_argument_expression
       )
     )),
 
-    format_argument_expression: $ => seq(
+    format_argument_expression: $ => prec.left(choice(
       $.range_argument_expression,
-      repeat(
-        seq($.format_operator, $.range_argument_expression)
+      seq (
+        $.format_argument_expression,
+        $.format_operator, $.range_argument_expression
       )
-    ),
+    )),
 
-    range_argument_expression: $ => seq(
+    range_argument_expression: $ => prec.left(choice(
       $.unary_expression,
-      repeat(
-        seq("..", $.unary_expression)
+      seq (
+        $.range_argument_expression,
+        "..", $.unary_expression
       )
-    ),
+    )),
 
     type_literal: $ => seq("[", $.type_spec, "]"),
 
