@@ -78,73 +78,74 @@ Invoke-Expression ([System.Text.Encoding]::Unicode.GetString(([convert]::FromBas
   (pipeline
     (command
       (command_name)
-      (parenthesized_expression
-        (pipeline
-          (logical_expression
-            (bitwise_expression
-              (comparison_expression
-                (additive_expression
-                  (multiplicative_expression
-                    (format_expression
-                      (range_expression
-                        (array_literal_expression
-                          (unary_expression
-                            (invokation_expression
-                              (member_access
-                                (type_literal
-                                  (type_spec
-                                    (type_name
+      (command_elements
+        (parenthesized_expression
+          (pipeline
+            (logical_expression
+              (bitwise_expression
+                (comparison_expression
+                  (additive_expression
+                    (multiplicative_expression
+                      (format_expression
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (invokation_expression
+                                (member_access
+                                  (type_literal
+                                    (type_spec
                                       (type_name
                                         (type_name
+                                          (type_name
+                                            (type_identifier))
                                           (type_identifier))
-                                        (type_identifier))
-                                      (type_identifier))))
+                                        (type_identifier))))
+                                  (member_name
+                                    (simple_name)))
                                 (member_name
-                                  (simple_name)))
-                              (member_name
-                                (simple_name))
-                              (argument_list
-                                (argument_expression_list
-                                  (argument_expression
-                                    (logical_argument_expression
-                                      (bitwise_argument_expression
-                                        (comparison_argument_expression
-                                          (additive_argument_expression
-                                            (multiplicative_argument_expression
-                                              (format_argument_expression
-                                                (range_argument_expression
-                                                  (unary_expression
-                                                    (parenthesized_expression
-                                                      (pipeline
-                                                        (logical_expression
-                                                          (bitwise_expression
-                                                            (comparison_expression
-                                                              (additive_expression
-                                                                (multiplicative_expression
-                                                                  (format_expression
-                                                                    (range_expression
-                                                                      (array_literal_expression
-                                                                        (unary_expression
-                                                                          (invokation_expression
-                                                                            (type_literal
-                                                                              (type_spec
-                                                                                (type_name
-                                                                                  (type_identifier))))
-                                                                            (member_name
-                                                                              (simple_name))
-                                                                            (argument_list
-                                                                              (argument_expression_list
-                                                                                (argument_expression
-                                                                                  (logical_argument_expression
-                                                                                    (bitwise_argument_expression
-                                                                                      (comparison_argument_expression
-                                                                                        (additive_argument_expression
-                                                                                          (multiplicative_argument_expression
-                                                                                            (format_argument_expression
-                                                                                              (range_argument_expression
-                                                                                                (unary_expression
-                                                                                                  (string_literal
-                                                                                                    (verbatim_string_characters)))))))))))))))))))))))))))))))))))))))))))))))))))
+                                  (simple_name))
+                                (argument_list
+                                  (argument_expression_list
+                                    (argument_expression
+                                      (logical_argument_expression
+                                        (bitwise_argument_expression
+                                          (comparison_argument_expression
+                                            (additive_argument_expression
+                                              (multiplicative_argument_expression
+                                                (format_argument_expression
+                                                  (range_argument_expression
+                                                    (unary_expression
+                                                      (parenthesized_expression
+                                                        (pipeline
+                                                          (logical_expression
+                                                            (bitwise_expression
+                                                              (comparison_expression
+                                                                (additive_expression
+                                                                  (multiplicative_expression
+                                                                    (format_expression
+                                                                      (range_expression
+                                                                        (array_literal_expression
+                                                                          (unary_expression
+                                                                            (invokation_expression
+                                                                              (type_literal
+                                                                                (type_spec
+                                                                                  (type_name
+                                                                                    (type_identifier))))
+                                                                              (member_name
+                                                                                (simple_name))
+                                                                              (argument_list
+                                                                                (argument_expression_list
+                                                                                  (argument_expression
+                                                                                    (logical_argument_expression
+                                                                                      (bitwise_argument_expression
+                                                                                        (comparison_argument_expression
+                                                                                          (additive_argument_expression
+                                                                                            (multiplicative_argument_expression
+                                                                                              (format_argument_expression
+                                                                                                (range_argument_expression
+                                                                                                  (unary_expression
+                                                                                                    (string_literal
+                                                                                                      (verbatim_string_characters))))))))))))))))))))))))))))))))))))))))))))))))))))
 
 
 ===
@@ -164,4 +165,5 @@ Obfuscated command
           (pipeline
             (command
               (command_name)
-              (generic_token))))))))
+              (command_elements
+                (generic_token)))))))))

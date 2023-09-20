@@ -192,7 +192,8 @@ $(Get-ChildItem . | Measure-Object)
                         (pipeline
                           (command
                             (command_name)
-                            (generic_token))
+                            (command_elements
+                              (generic_token)))
                           (command
                             (command_name)))))))))))))))
 
@@ -246,7 +247,8 @@ $(Get-ChildItem . | Measure-Object).count
                           (pipeline
                             (command
                               (command_name)
-                              (generic_token))
+                              (command_elements
+                                (generic_token)))
                             (command
                               (command_name))))
                         (member_name
@@ -265,23 +267,27 @@ Get-ChildItem (Join-Path $PSScriptRoot *.ps1) | ForEach-Object { . $_.FullName}
   (pipeline
     (command
       (command_name)
-      (parenthesized_expression
-        (pipeline
-          (command
-            (command_name)
-            (variable)
-            (generic_token)))))
+      (command_elements
+        (parenthesized_expression
+          (pipeline
+            (command
+              (command_name)
+              (command_elements
+                (variable)
+                (generic_token)))))))
     (command
       (command_name)
-      (script_block_expression
-        (script_block
-          (script_block_body
-            (pipeline
-              (command
-                (command_invokation_operator)
-                (command_name_expr
-                  (variable))
-                (generic_token)))))))))
+      (command_elements
+        (script_block_expression
+          (script_block
+            (script_block_body
+              (pipeline
+                (command
+                  (command_invokation_operator)
+                  (command_name_expr
+                    (variable))
+                  (command_elements
+                    (generic_token)))))))))))
 
 
 ===

@@ -330,7 +330,8 @@ for (;;)
       (pipeline
         (command
           (command_name)
-          (variable))))))
+          (command_elements
+            (variable)))))))
 
 ===
 For loop : Increment
@@ -389,7 +390,8 @@ for (;;$i++)
       (pipeline
         (command
           (command_name)
-          (variable))))))
+          (command_elements
+            (variable)))))))
 
 ===
 For loop : Increment and condition
@@ -470,7 +472,8 @@ for(;$i -le 10;$i++)
       (pipeline
         (command
           (command_name)
-          (variable))))))
+          (command_elements
+            (variable)))))))
 
 ===
 For loop : all
@@ -548,7 +551,8 @@ for($i=1; $i -le 10; $i++){Write-Host $i}
       (pipeline
         (command
           (command_name)
-          (variable))))))
+          (command_elements
+            (variable)))))))
 
 ===
 For loop : all without ; as statement terminator

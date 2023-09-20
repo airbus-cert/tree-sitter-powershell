@@ -251,7 +251,7 @@ module.exports = grammar({
     // Statements
 
     script_block: $ => choice(
-      $.script_block_body,
+      field("script_block_body", $.script_block_body),
       seq(seq($.param_block, $._statement_terminator, repeat(";")), optional($.script_block_body))
     ),
 
@@ -521,8 +521,8 @@ module.exports = grammar({
     ),
 
     command: $ => prec.left(choice(
-      seq($.command_name, optional($._command_elements)),
-      seq($.command_invokation_operator, /*optional($.command_module),*/ $.command_name_expr, optional($._command_elements))
+      seq(field("command_name", $.command_name), field("command_elements", optional($.command_elements))),
+      seq($.command_invokation_operator, /*optional($.command_module),*/ field("command_name", $.command_name_expr), field("command_elements", optional($.command_elements)))
     )),
 
     command_invokation_operator: $ => choice(
@@ -565,7 +565,7 @@ module.exports = grammar({
       $._primary_expression
     ),
 
-    _command_elements: $ => repeat1($._command_element),
+    command_elements: $ => repeat1($._command_element),
 
     _command_element: $ => choice(
       $.command_parameter,
@@ -823,7 +823,7 @@ module.exports = grammar({
     // adding this rule to handle .foreach synthax
     invokation_foreach_expression: $ => seq($._primary_expression, token.immediate(".foreach"), $.script_block_expression),
 
-    argument_list: $ => seq("(", optional($.argument_expression_list), ")"),
+    argument_list: $ => seq("(", field("argument_expression_list", optional($.argument_expression_list)), ")"),
 
     argument_expression_list: $ => prec.left(seq(
       $.argument_expression,

@@ -41,7 +41,8 @@ Get-ChildItem .
   (pipeline
     (command
       (command_name)
-      (generic_token))))
+      (command_elements
+        (generic_token)))))
 
 
 ===
@@ -87,7 +88,8 @@ Get-ChildItem .
   (pipeline
     (command
       (command_name)
-      (generic_token))))
+      (command_elements
+        (generic_token)))))
 
 ===
 Multi-line block comment
@@ -140,7 +142,8 @@ Get-ChildItem .
   (pipeline
     (command
       (command_name)
-      (generic_token))))
+      (command_elements
+        (generic_token)))))
 
 ===
 Pathological block comment #1

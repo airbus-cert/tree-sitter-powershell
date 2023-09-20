@@ -70,16 +70,17 @@
   {
     "type": "argument_list",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "argument_expression_list",
-          "named": true
-        }
-      ]
+    "fields": {
+      "argument_expression_list": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "argument_expression_list",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -632,6 +633,46 @@
   {
     "type": "command",
     "named": true,
+    "fields": {
+      "command_elements": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "command_elements",
+            "named": true
+          }
+        ]
+      },
+      "command_name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "command_name",
+            "named": true
+          },
+          {
+            "type": "command_name_expr",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "command_invokation_operator",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "command_elements",
+    "named": true,
     "fields": {},
     "children": {
       "multiple": true,
@@ -639,18 +680,6 @@
       "types": [
         {
           "type": "array_expression",
-          "named": true
-        },
-        {
-          "type": "command_invokation_operator",
-          "named": true
-        },
-        {
-          "type": "command_name",
-          "named": true
-        },
-        {
-          "type": "command_name_expr",
           "named": true
         },
         {
@@ -2727,10 +2756,21 @@
   {
     "type": "script_block",
     "named": true,
-    "fields": {},
+    "fields": {
+      "script_block_body": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "script_block_body",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "param_block",
