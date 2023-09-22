@@ -33,7 +33,7 @@ module.exports = grammar({
 
     program: $ => seq(
       optional($.param_block),
-      $._statement_list
+      $.statement_list
     ),
 
     // Comments
@@ -274,7 +274,7 @@ module.exports = grammar({
 
     script_block_body: $ => choice(
       $.named_block_list,
-      $._statement_list
+      $.statement_list
     ),
     
     named_block_list: $ => repeat1(
@@ -293,10 +293,10 @@ module.exports = grammar({
     ),
 
     statement_block: $ => seq(
-      "{", optional($._statement_list), "}"
+      "{", field("statement_list", optional($.statement_list)), "}"
     ),
 
-    _statement_list: $ => repeat1($._statement),
+    statement_list: $ => repeat1($._statement),
 
     _statement: $ => prec.right(choice(
       $.if_statement,
@@ -383,11 +383,11 @@ module.exports = grammar({
     for_statement: $ => seq(
       "for", "(",
         optional(
-          seq(optional(seq($.for_initializer, $._statement_terminator)), 
+          seq(optional(seq(field("for_initializer", $.for_initializer), $._statement_terminator)), 
             optional(
-              seq(choice(";", "\n"), optional(seq($.for_condition, $._statement_terminator)),
+              seq(choice(";", "\n"), optional(seq(field("for_condition", $.for_condition), $._statement_terminator)),
                 optional(
-                  seq(choice(";", "\n"), optional(seq($.for_iterator, $._statement_terminator)))
+                  seq(choice(";", "\n"), optional(seq(field("for_iterator", $.for_iterator), $._statement_terminator)))
                 )
               )
             )
@@ -775,9 +775,9 @@ module.exports = grammar({
 
     parenthesized_expression: $ => seq("(", $.pipeline, ")"),
 
-    sub_expression: $ => seq("$(", field("statements", optional($._statement_list)), ")"),
+    sub_expression: $ => seq("$(", field("statements", optional($.statement_list)), ")"),
 
-    array_expression: $ => seq("@(", optional($._statement_list), ")"),
+    array_expression: $ => seq("@(", optional($.statement_list), ")"),
 
     script_block_expression: $ => seq("{", $.script_block, "}"),
 

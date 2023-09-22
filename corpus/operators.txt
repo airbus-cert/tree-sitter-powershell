@@ -7,26 +7,27 @@ $a -eq $a
 ---
 
 (program
-  (pipeline
-    (logical_expression
-      (bitwise_expression
-        (comparison_expression
+  (statement_list
+    (pipeline
+      (logical_expression
+        (bitwise_expression
           (comparison_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (variable))))))))
+            (comparison_operator)
             (additive_expression
               (multiplicative_expression
                 (format_expression
                   (range_expression
                     (array_literal_expression
                       (unary_expression
-                        (variable))))))))
-          (comparison_operator)
-          (additive_expression
-            (multiplicative_expression
-              (format_expression
-                (range_expression
-                  (array_literal_expression
-                    (unary_expression
-                      (variable))))))))))))
+                        (variable)))))))))))))
 
 ===
 Simple binary operator 2
@@ -37,26 +38,27 @@ $a -ne $a
 ---
 
 (program
-  (pipeline
-    (logical_expression
-      (bitwise_expression
-        (comparison_expression
+  (statement_list
+    (pipeline
+      (logical_expression
+        (bitwise_expression
           (comparison_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (variable))))))))
+            (comparison_operator)
             (additive_expression
               (multiplicative_expression
                 (format_expression
                   (range_expression
                     (array_literal_expression
                       (unary_expression
-                        (variable))))))))
-          (comparison_operator)
-          (additive_expression
-            (multiplicative_expression
-              (format_expression
-                (range_expression
-                  (array_literal_expression
-                    (unary_expression
-                      (variable))))))))))))
+                        (variable)))))))))))))
 
 ===
 Simple binary operator 3
@@ -67,26 +69,27 @@ $a -ge $a
 ---
 
 (program
-  (pipeline
-    (logical_expression
-      (bitwise_expression
-        (comparison_expression
+  (statement_list
+    (pipeline
+      (logical_expression
+        (bitwise_expression
           (comparison_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (variable))))))))
+            (comparison_operator)
             (additive_expression
               (multiplicative_expression
                 (format_expression
                   (range_expression
                     (array_literal_expression
                       (unary_expression
-                        (variable))))))))
-          (comparison_operator)
-          (additive_expression
-            (multiplicative_expression
-              (format_expression
-                (range_expression
-                  (array_literal_expression
-                    (unary_expression
-                      (variable))))))))))))
+                        (variable)))))))))))))
 
 
 ===
@@ -98,26 +101,27 @@ $a -gt $a
 ---
 
 (program
-  (pipeline
-    (logical_expression
-      (bitwise_expression
-        (comparison_expression
+  (statement_list
+    (pipeline
+      (logical_expression
+        (bitwise_expression
           (comparison_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (variable))))))))
+            (comparison_operator)
             (additive_expression
               (multiplicative_expression
                 (format_expression
                   (range_expression
                     (array_literal_expression
                       (unary_expression
-                        (variable))))))))
-          (comparison_operator)
-          (additive_expression
-            (multiplicative_expression
-              (format_expression
-                (range_expression
-                  (array_literal_expression
-                    (unary_expression
-                      (variable))))))))))))
+                        (variable)))))))))))))
 
 
 ===
@@ -129,26 +133,27 @@ $a -lt $a
 ---
 
 (program
-  (pipeline
-    (logical_expression
-      (bitwise_expression
-        (comparison_expression
+  (statement_list
+    (pipeline
+      (logical_expression
+        (bitwise_expression
           (comparison_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (variable))))))))
+            (comparison_operator)
             (additive_expression
               (multiplicative_expression
                 (format_expression
                   (range_expression
                     (array_literal_expression
                       (unary_expression
-                        (variable))))))))
-          (comparison_operator)
-          (additive_expression
-            (multiplicative_expression
-              (format_expression
-                (range_expression
-                  (array_literal_expression
-                    (unary_expression
-                      (variable))))))))))))
+                        (variable)))))))))))))
 
 
 ===
@@ -160,26 +165,27 @@ $a -le $a
 ---
 
 (program
-  (pipeline
-    (logical_expression
-      (bitwise_expression
-        (comparison_expression
+  (statement_list
+    (pipeline
+      (logical_expression
+        (bitwise_expression
           (comparison_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (variable))))))))
+            (comparison_operator)
             (additive_expression
               (multiplicative_expression
                 (format_expression
                   (range_expression
                     (array_literal_expression
                       (unary_expression
-                        (variable))))))))
-          (comparison_operator)
-          (additive_expression
-            (multiplicative_expression
-              (format_expression
-                (range_expression
-                  (array_literal_expression
-                    (unary_expression
-                      (variable))))))))))))
+                        (variable)))))))))))))
 
 
 ===
@@ -191,26 +197,27 @@ $a -like $a
 ---
 
 (program
-  (pipeline
-    (logical_expression
-      (bitwise_expression
-        (comparison_expression
+  (statement_list
+    (pipeline
+      (logical_expression
+        (bitwise_expression
           (comparison_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (variable))))))))
+            (comparison_operator)
             (additive_expression
               (multiplicative_expression
                 (format_expression
                   (range_expression
                     (array_literal_expression
                       (unary_expression
-                        (variable))))))))
-          (comparison_operator)
-          (additive_expression
-            (multiplicative_expression
-              (format_expression
-                (range_expression
-                  (array_literal_expression
-                    (unary_expression
-                      (variable))))))))))))
+                        (variable)))))))))))))
 
 
 ===
@@ -222,26 +229,27 @@ $a -notlike $a
 ---
 
 (program
-  (pipeline
-    (logical_expression
-      (bitwise_expression
-        (comparison_expression
+  (statement_list
+    (pipeline
+      (logical_expression
+        (bitwise_expression
           (comparison_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (variable))))))))
+            (comparison_operator)
             (additive_expression
               (multiplicative_expression
                 (format_expression
                   (range_expression
                     (array_literal_expression
                       (unary_expression
-                        (variable))))))))
-          (comparison_operator)
-          (additive_expression
-            (multiplicative_expression
-              (format_expression
-                (range_expression
-                  (array_literal_expression
-                    (unary_expression
-                      (variable))))))))))))
+                        (variable)))))))))))))
 
 
 ===
@@ -253,26 +261,27 @@ $a -match $a
 ---
 
 (program
-  (pipeline
-    (logical_expression
-      (bitwise_expression
-        (comparison_expression
+  (statement_list
+    (pipeline
+      (logical_expression
+        (bitwise_expression
           (comparison_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (variable))))))))
+            (comparison_operator)
             (additive_expression
               (multiplicative_expression
                 (format_expression
                   (range_expression
                     (array_literal_expression
                       (unary_expression
-                        (variable))))))))
-          (comparison_operator)
-          (additive_expression
-            (multiplicative_expression
-              (format_expression
-                (range_expression
-                  (array_literal_expression
-                    (unary_expression
-                      (variable))))))))))))
+                        (variable)))))))))))))
 
 
 ===
@@ -284,26 +293,27 @@ $a -notmatch $a
 ---
 
 (program
-  (pipeline
-    (logical_expression
-      (bitwise_expression
-        (comparison_expression
+  (statement_list
+    (pipeline
+      (logical_expression
+        (bitwise_expression
           (comparison_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (variable))))))))
+            (comparison_operator)
             (additive_expression
               (multiplicative_expression
                 (format_expression
                   (range_expression
                     (array_literal_expression
                       (unary_expression
-                        (variable))))))))
-          (comparison_operator)
-          (additive_expression
-            (multiplicative_expression
-              (format_expression
-                (range_expression
-                  (array_literal_expression
-                    (unary_expression
-                      (variable))))))))))))
+                        (variable)))))))))))))
 
 
 ===
@@ -315,26 +325,27 @@ $a -replace $a
 ---
 
 (program
-  (pipeline
-    (logical_expression
-      (bitwise_expression
-        (comparison_expression
+  (statement_list
+    (pipeline
+      (logical_expression
+        (bitwise_expression
           (comparison_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (variable))))))))
+            (comparison_operator)
             (additive_expression
               (multiplicative_expression
                 (format_expression
                   (range_expression
                     (array_literal_expression
                       (unary_expression
-                        (variable))))))))
-          (comparison_operator)
-          (additive_expression
-            (multiplicative_expression
-              (format_expression
-                (range_expression
-                  (array_literal_expression
-                    (unary_expression
-                      (variable))))))))))))
+                        (variable)))))))))))))
 
 
 ===
@@ -346,26 +357,27 @@ $a -contains $a
 ---
 
 (program
-  (pipeline
-    (logical_expression
-      (bitwise_expression
-        (comparison_expression
+  (statement_list
+    (pipeline
+      (logical_expression
+        (bitwise_expression
           (comparison_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (variable))))))))
+            (comparison_operator)
             (additive_expression
               (multiplicative_expression
                 (format_expression
                   (range_expression
                     (array_literal_expression
                       (unary_expression
-                        (variable))))))))
-          (comparison_operator)
-          (additive_expression
-            (multiplicative_expression
-              (format_expression
-                (range_expression
-                  (array_literal_expression
-                    (unary_expression
-                      (variable))))))))))))
+                        (variable)))))))))))))
 
 
 ===
@@ -377,26 +389,27 @@ $a -notcontains $a
 ---
 
 (program
-  (pipeline
-    (logical_expression
-      (bitwise_expression
-        (comparison_expression
+  (statement_list
+    (pipeline
+      (logical_expression
+        (bitwise_expression
           (comparison_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (variable))))))))
+            (comparison_operator)
             (additive_expression
               (multiplicative_expression
                 (format_expression
                   (range_expression
                     (array_literal_expression
                       (unary_expression
-                        (variable))))))))
-          (comparison_operator)
-          (additive_expression
-            (multiplicative_expression
-              (format_expression
-                (range_expression
-                  (array_literal_expression
-                    (unary_expression
-                      (variable))))))))))))
+                        (variable)))))))))))))
 
 
 ===
@@ -408,26 +421,27 @@ $a -in $a
 ---
 
 (program
-  (pipeline
-    (logical_expression
-      (bitwise_expression
-        (comparison_expression
+  (statement_list
+    (pipeline
+      (logical_expression
+        (bitwise_expression
           (comparison_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (variable))))))))
+            (comparison_operator)
             (additive_expression
               (multiplicative_expression
                 (format_expression
                   (range_expression
                     (array_literal_expression
                       (unary_expression
-                        (variable))))))))
-          (comparison_operator)
-          (additive_expression
-            (multiplicative_expression
-              (format_expression
-                (range_expression
-                  (array_literal_expression
-                    (unary_expression
-                      (variable))))))))))))
+                        (variable)))))))))))))
 
 
 ===
@@ -439,26 +453,27 @@ $a -notin $a
 ---
 
 (program
-  (pipeline
-    (logical_expression
-      (bitwise_expression
-        (comparison_expression
+  (statement_list
+    (pipeline
+      (logical_expression
+        (bitwise_expression
           (comparison_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (variable))))))))
+            (comparison_operator)
             (additive_expression
               (multiplicative_expression
                 (format_expression
                   (range_expression
                     (array_literal_expression
                       (unary_expression
-                        (variable))))))))
-          (comparison_operator)
-          (additive_expression
-            (multiplicative_expression
-              (format_expression
-                (range_expression
-                  (array_literal_expression
-                    (unary_expression
-                      (variable))))))))))))
+                        (variable)))))))))))))
 
 
 ===
@@ -470,26 +485,27 @@ $a -split $a
 ---
 
 (program
-  (pipeline
-    (logical_expression
-      (bitwise_expression
-        (comparison_expression
+  (statement_list
+    (pipeline
+      (logical_expression
+        (bitwise_expression
           (comparison_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (variable))))))))
+            (comparison_operator)
             (additive_expression
               (multiplicative_expression
                 (format_expression
                   (range_expression
                     (array_literal_expression
                       (unary_expression
-                        (variable))))))))
-          (comparison_operator)
-          (additive_expression
-            (multiplicative_expression
-              (format_expression
-                (range_expression
-                  (array_literal_expression
-                    (unary_expression
-                      (variable))))))))))))
+                        (variable)))))))))))))
 
 
 ===
@@ -501,26 +517,27 @@ $a -join $a
 ---
 
 (program
-  (pipeline
-    (logical_expression
-      (bitwise_expression
-        (comparison_expression
+  (statement_list
+    (pipeline
+      (logical_expression
+        (bitwise_expression
           (comparison_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (variable))))))))
+            (comparison_operator)
             (additive_expression
               (multiplicative_expression
                 (format_expression
                   (range_expression
                     (array_literal_expression
                       (unary_expression
-                        (variable))))))))
-          (comparison_operator)
-          (additive_expression
-            (multiplicative_expression
-              (format_expression
-                (range_expression
-                  (array_literal_expression
-                    (unary_expression
-                      (variable))))))))))))
+                        (variable)))))))))))))
 
 
 ===
@@ -532,26 +549,27 @@ $a -is $a
 ---
 
 (program
-  (pipeline
-    (logical_expression
-      (bitwise_expression
-        (comparison_expression
+  (statement_list
+    (pipeline
+      (logical_expression
+        (bitwise_expression
           (comparison_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (variable))))))))
+            (comparison_operator)
             (additive_expression
               (multiplicative_expression
                 (format_expression
                   (range_expression
                     (array_literal_expression
                       (unary_expression
-                        (variable))))))))
-          (comparison_operator)
-          (additive_expression
-            (multiplicative_expression
-              (format_expression
-                (range_expression
-                  (array_literal_expression
-                    (unary_expression
-                      (variable))))))))))))
+                        (variable)))))))))))))
 
 
 ===
@@ -563,26 +581,27 @@ $a -isnot $a
 ---
 
 (program
-  (pipeline
-    (logical_expression
-      (bitwise_expression
-        (comparison_expression
+  (statement_list
+    (pipeline
+      (logical_expression
+        (bitwise_expression
           (comparison_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (variable))))))))
+            (comparison_operator)
             (additive_expression
               (multiplicative_expression
                 (format_expression
                   (range_expression
                     (array_literal_expression
                       (unary_expression
-                        (variable))))))))
-          (comparison_operator)
-          (additive_expression
-            (multiplicative_expression
-              (format_expression
-                (range_expression
-                  (array_literal_expression
-                    (unary_expression
-                      (variable))))))))))))
+                        (variable)))))))))))))
 
 
 ===
@@ -594,23 +613,24 @@ $a -as $a
 ---
 
 (program
-  (pipeline
-    (logical_expression
-      (bitwise_expression
-        (comparison_expression
+  (statement_list
+    (pipeline
+      (logical_expression
+        (bitwise_expression
           (comparison_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (variable))))))))
+            (comparison_operator)
             (additive_expression
               (multiplicative_expression
                 (format_expression
                   (range_expression
                     (array_literal_expression
                       (unary_expression
-                        (variable))))))))
-          (comparison_operator)
-          (additive_expression
-            (multiplicative_expression
-              (format_expression
-                (range_expression
-                  (array_literal_expression
-                    (unary_expression
-                      (variable))))))))))))
+                        (variable)))))))))))))

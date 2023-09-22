@@ -88,83 +88,11 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "types": [
         {
-          "type": "class_statement",
-          "named": true
-        },
-        {
-          "type": "data_statement",
-          "named": true
-        },
-        {
-          "type": "do_statement",
-          "named": true
-        },
-        {
-          "type": "empty_statement",
-          "named": true
-        },
-        {
-          "type": "enum_statement",
-          "named": true
-        },
-        {
-          "type": "flow_control_statement",
-          "named": true
-        },
-        {
-          "type": "for_statement",
-          "named": true
-        },
-        {
-          "type": "foreach_statement",
-          "named": true
-        },
-        {
-          "type": "function_statement",
-          "named": true
-        },
-        {
-          "type": "if_statement",
-          "named": true
-        },
-        {
-          "type": "inlinescript_statement",
-          "named": true
-        },
-        {
-          "type": "label",
-          "named": true
-        },
-        {
-          "type": "parallel_statement",
-          "named": true
-        },
-        {
-          "type": "pipeline",
-          "named": true
-        },
-        {
-          "type": "sequence_statement",
-          "named": true
-        },
-        {
-          "type": "switch_statement",
-          "named": true
-        },
-        {
-          "type": "trap_statement",
-          "named": true
-        },
-        {
-          "type": "try_statement",
-          "named": true
-        },
-        {
-          "type": "while_statement",
+          "type": "statement_list",
           "named": true
         }
       ]
@@ -1329,23 +1257,42 @@
   {
     "type": "for_statement",
     "named": true,
-    "fields": {},
+    "fields": {
+      "for_condition": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "for_condition",
+            "named": true
+          }
+        ]
+      },
+      "for_initializer": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "for_initializer",
+            "named": true
+          }
+        ]
+      },
+      "for_iterator": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "for_iterator",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "for_condition",
-          "named": true
-        },
-        {
-          "type": "for_initializer",
-          "named": true
-        },
-        {
-          "type": "for_iterator",
-          "named": true
-        },
         {
           "type": "statement_block",
           "named": true
@@ -2517,86 +2464,14 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
-        {
-          "type": "class_statement",
-          "named": true
-        },
-        {
-          "type": "data_statement",
-          "named": true
-        },
-        {
-          "type": "do_statement",
-          "named": true
-        },
-        {
-          "type": "empty_statement",
-          "named": true
-        },
-        {
-          "type": "enum_statement",
-          "named": true
-        },
-        {
-          "type": "flow_control_statement",
-          "named": true
-        },
-        {
-          "type": "for_statement",
-          "named": true
-        },
-        {
-          "type": "foreach_statement",
-          "named": true
-        },
-        {
-          "type": "function_statement",
-          "named": true
-        },
-        {
-          "type": "if_statement",
-          "named": true
-        },
-        {
-          "type": "inlinescript_statement",
-          "named": true
-        },
-        {
-          "type": "label",
-          "named": true
-        },
-        {
-          "type": "parallel_statement",
-          "named": true
-        },
         {
           "type": "param_block",
           "named": true
         },
         {
-          "type": "pipeline",
-          "named": true
-        },
-        {
-          "type": "sequence_statement",
-          "named": true
-        },
-        {
-          "type": "switch_statement",
-          "named": true
-        },
-        {
-          "type": "trap_statement",
-          "named": true
-        },
-        {
-          "type": "try_statement",
-          "named": true
-        },
-        {
-          "type": "while_statement",
+          "type": "statement_list",
           "named": true
         }
       ]
@@ -2788,87 +2663,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
-      "required": false,
+      "multiple": false,
+      "required": true,
       "types": [
-        {
-          "type": "class_statement",
-          "named": true
-        },
-        {
-          "type": "data_statement",
-          "named": true
-        },
-        {
-          "type": "do_statement",
-          "named": true
-        },
-        {
-          "type": "empty_statement",
-          "named": true
-        },
-        {
-          "type": "enum_statement",
-          "named": true
-        },
-        {
-          "type": "flow_control_statement",
-          "named": true
-        },
-        {
-          "type": "for_statement",
-          "named": true
-        },
-        {
-          "type": "foreach_statement",
-          "named": true
-        },
-        {
-          "type": "function_statement",
-          "named": true
-        },
-        {
-          "type": "if_statement",
-          "named": true
-        },
-        {
-          "type": "inlinescript_statement",
-          "named": true
-        },
-        {
-          "type": "label",
-          "named": true
-        },
         {
           "type": "named_block_list",
           "named": true
         },
         {
-          "type": "parallel_statement",
-          "named": true
-        },
-        {
-          "type": "pipeline",
-          "named": true
-        },
-        {
-          "type": "sequence_statement",
-          "named": true
-        },
-        {
-          "type": "switch_statement",
-          "named": true
-        },
-        {
-          "type": "trap_statement",
-          "named": true
-        },
-        {
-          "type": "try_statement",
-          "named": true
-        },
-        {
-          "type": "while_statement",
+          "type": "statement_list",
           "named": true
         }
       ]
@@ -2945,10 +2748,26 @@
   {
     "type": "statement_block",
     "named": true,
+    "fields": {
+      "statement_list": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "statement_list",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "statement_list",
+    "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "class_statement",
@@ -3061,83 +2880,11 @@
     "named": true,
     "fields": {
       "statements": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "class_statement",
-            "named": true
-          },
-          {
-            "type": "data_statement",
-            "named": true
-          },
-          {
-            "type": "do_statement",
-            "named": true
-          },
-          {
-            "type": "empty_statement",
-            "named": true
-          },
-          {
-            "type": "enum_statement",
-            "named": true
-          },
-          {
-            "type": "flow_control_statement",
-            "named": true
-          },
-          {
-            "type": "for_statement",
-            "named": true
-          },
-          {
-            "type": "foreach_statement",
-            "named": true
-          },
-          {
-            "type": "function_statement",
-            "named": true
-          },
-          {
-            "type": "if_statement",
-            "named": true
-          },
-          {
-            "type": "inlinescript_statement",
-            "named": true
-          },
-          {
-            "type": "label",
-            "named": true
-          },
-          {
-            "type": "parallel_statement",
-            "named": true
-          },
-          {
-            "type": "pipeline",
-            "named": true
-          },
-          {
-            "type": "sequence_statement",
-            "named": true
-          },
-          {
-            "type": "switch_statement",
-            "named": true
-          },
-          {
-            "type": "trap_statement",
-            "named": true
-          },
-          {
-            "type": "try_statement",
-            "named": true
-          },
-          {
-            "type": "while_statement",
+            "type": "statement_list",
             "named": true
           }
         ]

@@ -10,10 +10,11 @@ enum MyEnum
 ---
 
 (program
-  (enum_statement
-    (simple_name)
-    (enum_member
-      (simple_name))))
+  (statement_list
+    (enum_statement
+      (simple_name)
+      (enum_member
+        (simple_name)))))
 
 
 
@@ -35,16 +36,17 @@ enum Enum2
 ---
 
 (program
-  (enum_statement
-    (simple_name)
-    (enum_member
-      (simple_name))
-    (enum_member
-      (simple_name))
-    (enum_member
-      (simple_name))
-    (enum_member
-      (simple_name))))
+  (statement_list
+    (enum_statement
+      (simple_name)
+      (enum_member
+        (simple_name))
+      (enum_member
+        (simple_name))
+      (enum_member
+        (simple_name))
+      (enum_member
+        (simple_name)))))
 
 ===
 Enum : Complex enum
@@ -59,15 +61,16 @@ enum MyEnum
 ---
 
 (program
-  (enum_statement
-    (simple_name)
-    (enum_member
-      (simple_name))
-    (enum_member
+  (statement_list
+    (enum_statement
       (simple_name)
-      (integer_literal
-        (decimal_integer_literal)))
-    (enum_member
-      (simple_name)
-      (integer_literal
-        (decimal_integer_literal)))))
+      (enum_member
+        (simple_name))
+      (enum_member
+        (simple_name)
+        (integer_literal
+          (decimal_integer_literal)))
+      (enum_member
+        (simple_name)
+        (integer_literal
+          (decimal_integer_literal))))))

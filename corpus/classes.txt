@@ -7,8 +7,9 @@ class MyClass {}
 ---
 
 (program
-  (class_statement
-    (simple_name)))
+  (statement_list
+    (class_statement
+      (simple_name))))
 
 ===
 Class : string property
@@ -22,14 +23,15 @@ class MyClass
 ---
 
 (program
-  (class_statement
-    (simple_name)
-    (class_property_definition
-      (type_literal
-        (type_spec
-          (type_name
-            (type_identifier))))
-      (variable))))
+  (statement_list
+    (class_statement
+      (simple_name)
+      (class_property_definition
+        (type_literal
+          (type_spec
+            (type_name
+              (type_identifier))))
+        (variable)))))
 
 
 ===
@@ -44,16 +46,17 @@ class MyClass
 ---
 
 (program
-  (class_statement
-    (simple_name)
-    (class_property_definition
-      (class_attribute)
-      (class_attribute)
-      (type_literal
-        (type_spec
-          (type_name
-            (type_identifier))))
-      (variable))))
+  (statement_list
+    (class_statement
+      (simple_name)
+      (class_property_definition
+        (class_attribute)
+        (class_attribute)
+        (type_literal
+          (type_spec
+            (type_name
+              (type_identifier))))
+        (variable)))))
 
 ===
 Class : method declaration
@@ -70,22 +73,24 @@ class MyClass
 ---
 
 (program
-  (class_statement
-    (simple_name)
-    (class_method_definition
-      (type_literal
-        (type_spec
-          (type_name
-            (type_identifier))))
+  (statement_list
+    (class_statement
       (simple_name)
-      (script_block
-        (script_block_body
-          (pipeline
-            (command
-              (command_name)
-              (command_elements
-                (string_literal
-                  (expandable_string_literal))))))))))
+      (class_method_definition
+        (type_literal
+          (type_spec
+            (type_name
+              (type_identifier))))
+        (simple_name)
+        (script_block
+          (script_block_body
+            (statement_list
+              (pipeline
+                (command
+                  (command_name)
+                  (command_elements
+                    (string_literal
+                      (expandable_string_literal))))))))))))
 
 ===
 Class : method declaration with parameters
@@ -102,31 +107,33 @@ class MyClass
 ---
 
 (program
-  (class_statement
-    (simple_name)
-    (class_method_definition
-      (class_attribute)
-      (class_attribute)
-      (type_literal
-        (type_spec
-          (type_name
-            (type_identifier))))
+  (statement_list
+    (class_statement
       (simple_name)
-      (class_method_parameter_list
-        (class_method_parameter
-          (variable))
-        (class_method_parameter
-          (variable)))
-      (script_block
-        (script_block_body
-          (pipeline
-            (command
-              (command_name)
-              (command_elements
-                (string_literal
-                  (expandable_string_literal
-                    (variable)
-                    (variable)))))))))))
+      (class_method_definition
+        (class_attribute)
+        (class_attribute)
+        (type_literal
+          (type_spec
+            (type_name
+              (type_identifier))))
+        (simple_name)
+        (class_method_parameter_list
+          (class_method_parameter
+            (variable))
+          (class_method_parameter
+            (variable)))
+        (script_block
+          (script_block_body
+            (statement_list
+              (pipeline
+                (command
+                  (command_name)
+                  (command_elements
+                    (string_literal
+                      (expandable_string_literal
+                        (variable)
+                        (variable)))))))))))))
 
 
 ===
@@ -157,56 +164,59 @@ class MyClass
 ---
 
 (program
-  (class_statement
-    (simple_name)
-    (class_property_definition
-      (class_attribute)
-      (type_literal
-        (type_spec
-          (type_name
-            (type_identifier))))
-      (variable))
-    (class_method_definition
-      (class_attribute)
-      (type_literal
-        (type_spec
-          (type_name
-            (type_identifier))))
+  (statement_list
+    (class_statement
       (simple_name)
-      (script_block
-        (script_block_body
-          (pipeline
-            (command
-              (command_name)
-              (command_elements
-                (string_literal
-                  (expandable_string_literal))))))))
-    (class_property_definition
-      (type_literal
-        (type_spec
-          (type_name
-            (type_identifier))))
-      (variable))
-    (class_method_definition
-      (type_literal
-        (type_spec
-          (type_name
-            (type_identifier))))
-      (simple_name)
-      (class_method_parameter_list
-        (class_method_parameter
-          (variable))
-        (class_method_parameter
-          (variable)))
-      (script_block
-        (script_block_body
-          (pipeline
-            (command
-              (command_name)
-              (command_elements
-                (string_literal
-                  (expandable_string_literal
-                    (variable)
-                    (variable)))))))))
-    (class_method_definition
-      (simple_name))))
+      (class_property_definition
+        (class_attribute)
+        (type_literal
+          (type_spec
+            (type_name
+              (type_identifier))))
+        (variable))
+      (class_method_definition
+        (class_attribute)
+        (type_literal
+          (type_spec
+            (type_name
+              (type_identifier))))
+        (simple_name)
+        (script_block
+          (script_block_body
+            (statement_list
+              (pipeline
+                (command
+                  (command_name)
+                  (command_elements
+                    (string_literal
+                      (expandable_string_literal)))))))))
+      (class_property_definition
+        (type_literal
+          (type_spec
+            (type_name
+              (type_identifier))))
+        (variable))
+      (class_method_definition
+        (type_literal
+          (type_spec
+            (type_name
+              (type_identifier))))
+        (simple_name)
+        (class_method_parameter_list
+          (class_method_parameter
+            (variable))
+          (class_method_parameter
+            (variable)))
+        (script_block
+          (script_block_body
+            (statement_list
+              (pipeline
+                (command
+                  (command_name)
+                  (command_elements
+                    (string_literal
+                      (expandable_string_literal
+                        (variable)
+                        (variable))))))))))
+      (class_method_definition
+        (simple_name)))))
