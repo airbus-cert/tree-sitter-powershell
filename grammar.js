@@ -252,7 +252,7 @@ module.exports = grammar({
 
     script_block: $ => choice(
       field("script_block_body", $.script_block_body),
-      seq(seq($.param_block, $._statement_terminator, repeat(";")), optional($.script_block_body))
+      seq(seq($.param_block, $._statement_terminator, repeat(";")), field("script_block_body", optional($.script_block_body)))
     ),
 
     param_block: $ => seq(
@@ -273,8 +273,8 @@ module.exports = grammar({
     ),
 
     script_block_body: $ => choice(
-      $.named_block_list,
-      $.statement_list
+      field("named_block_list", $.named_block_list),
+      field("statement_list", $.statement_list)
     ),
     
     named_block_list: $ => repeat1(
@@ -777,7 +777,7 @@ module.exports = grammar({
 
     sub_expression: $ => seq("$(", field("statements", optional($.statement_list)), ")"),
 
-    array_expression: $ => seq("@(", optional($.statement_list), ")"),
+    array_expression: $ => seq("@(", field("statements", optional($.statement_list)), ")"),
 
     script_block_expression: $ => seq("{", $.script_block, "}"),
 

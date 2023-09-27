@@ -86,16 +86,17 @@
   {
     "type": "array_expression",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "statement_list",
-          "named": true
-        }
-      ]
+    "fields": {
+      "statements": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "statement_list",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -2644,15 +2645,11 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "types": [
         {
           "type": "param_block",
-          "named": true
-        },
-        {
-          "type": "script_block_body",
           "named": true
         }
       ]
@@ -2661,20 +2658,27 @@
   {
     "type": "script_block_body",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "named_block_list",
-          "named": true
-        },
-        {
-          "type": "statement_list",
-          "named": true
-        }
-      ]
+    "fields": {
+      "named_block_list": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "named_block_list",
+            "named": true
+          }
+        ]
+      },
+      "statement_list": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "statement_list",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
