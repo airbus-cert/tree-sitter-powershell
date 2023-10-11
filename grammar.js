@@ -318,13 +318,13 @@ module.exports = grammar({
     empty_statement: $ => prec(PREC.EMPTY, ";"),
 
     if_statement: $ => prec.left(seq(
-      "if", "(", $.pipeline, ")", $.statement_block, field("elseif_clauses", optional($.elseif_clauses)), field("else_clause", optional($.else_clause))
+      "if", "(", field("condition", $.pipeline), ")", $.statement_block, field("elseif_clauses", optional($.elseif_clauses)), field("else_clause", optional($.else_clause))
     )),
 
     elseif_clauses: $ => prec.left(repeat1($.elseif_clause)),
 
     elseif_clause: $ => seq(
-      "elseif", "(", $.pipeline, ")", $.statement_block
+      "elseif", "(", field("condition", $.pipeline), ")", $.statement_block
     ),
 
     else_clause: $ => seq("else", $.statement_block),
@@ -403,13 +403,13 @@ module.exports = grammar({
     for_iterator: $ => $.pipeline,
 
     while_statement: $ => seq(
-      "while", "(", $.while_condition, ")", $.statement_block
+      "while", "(", field("condition", $.while_condition), ")", $.statement_block
     ),
 
     while_condition: $=> $.pipeline,
 
     do_statement: $ => seq(
-      "do", $.statement_block, choice("while", "until"), "(", $.while_condition, ")"
+      "do", $.statement_block, choice("while", "until"), "(", field("condition", $.while_condition), ")"
     ),
 
     function_statement: $ => seq(

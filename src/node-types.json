@@ -923,17 +923,24 @@
   {
     "type": "do_statement",
     "named": true,
-    "fields": {},
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "while_condition",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
           "type": "statement_block",
-          "named": true
-        },
-        {
-          "type": "while_condition",
           "named": true
         }
       ]
@@ -1032,15 +1039,22 @@
   {
     "type": "elseif_clause",
     "named": true,
-    "fields": {},
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "pipeline",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "pipeline",
-          "named": true
-        },
         {
           "type": "statement_block",
           "named": true
@@ -1666,6 +1680,16 @@
     "type": "if_statement",
     "named": true,
     "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "pipeline",
+            "named": true
+          }
+        ]
+      },
       "else_clause": {
         "multiple": false,
         "required": false,
@@ -1688,13 +1712,9 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "pipeline",
-          "named": true
-        },
         {
           "type": "statement_block",
           "named": true
@@ -3376,17 +3396,24 @@
   {
     "type": "while_statement",
     "named": true,
-    "fields": {},
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "while_condition",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
           "type": "statement_block",
-          "named": true
-        },
-        {
-          "type": "while_condition",
           "named": true
         }
       ]

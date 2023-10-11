@@ -1755,8 +1755,12 @@
             "value": "("
           },
           {
-            "type": "SYMBOL",
-            "name": "pipeline"
+            "type": "FIELD",
+            "name": "condition",
+            "content": {
+              "type": "SYMBOL",
+              "name": "pipeline"
+            }
           },
           {
             "type": "STRING",
@@ -1824,8 +1828,12 @@
           "value": "("
         },
         {
-          "type": "SYMBOL",
-          "name": "pipeline"
+          "type": "FIELD",
+          "name": "condition",
+          "content": {
+            "type": "SYMBOL",
+            "name": "pipeline"
+          }
         },
         {
           "type": "STRING",
@@ -2285,8 +2293,12 @@
           "value": "("
         },
         {
-          "type": "SYMBOL",
-          "name": "while_condition"
+          "type": "FIELD",
+          "name": "condition",
+          "content": {
+            "type": "SYMBOL",
+            "name": "while_condition"
+          }
         },
         {
           "type": "STRING",
@@ -2331,8 +2343,12 @@
           "value": "("
         },
         {
-          "type": "SYMBOL",
-          "name": "while_condition"
+          "type": "FIELD",
+          "name": "condition",
+          "content": {
+            "type": "SYMBOL",
+            "name": "while_condition"
+          }
         },
         {
           "type": "STRING",
