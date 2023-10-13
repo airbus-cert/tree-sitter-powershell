@@ -549,7 +549,7 @@ module.exports = grammar({
     ),
 
     command_name: $ => prec.right(seq(
-      /[^\{\}\(\);,\|\&`"'\s\n\[\]\+\-\*\/\$@<]+/,
+      /[^\{\}\(\);,\|\&`"'\s\n\[\]\+\-\*\/\$@<\!]+/,
       repeat(
         choice(
           token.immediate(/[^\{\}\(\);,\|\&`"'\s\n]+/),
