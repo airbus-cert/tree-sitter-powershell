@@ -19,5 +19,18 @@
   "devDependencies": {
     "node-gyp": "^9.4.0",
     "tree-sitter-cli": "^0.20.8"
-  }
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.ps1",
+      "file-types": [
+        "ps1",
+        "psm1"
+      ],
+      "injection-regex": "^(ps1|psm1)$",
+      "highlights": [
+        "queries/highlights.scm"
+      ]
+    }
+  ]
 }
