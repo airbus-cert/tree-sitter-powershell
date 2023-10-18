@@ -239,8 +239,7 @@ Foreach statement without token separator
   (statement_list
     (pipeline
       (command
-        (command_name)
-        (command_elements
+        (foreach_command
           (script_block_expression
             (script_block
               (script_block_body

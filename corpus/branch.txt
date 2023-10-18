@@ -264,8 +264,7 @@ switch (3)
         (switch_clauses
           (switch_clause
             (switch_clause_condition
-              (integer_literal
-                (decimal_integer_literal)))
+              (generic_token))
             (statement_block
               (statement_list
                 (pipeline
@@ -282,8 +281,7 @@ switch (3)
                                       (expandable_string_literal)))))))))))))))
           (switch_clause
             (switch_clause_condition
-              (integer_literal
-                (decimal_integer_literal)))
+              (generic_token))
             (statement_block
               (statement_list
                 (pipeline
@@ -300,8 +298,7 @@ switch (3)
                                       (expandable_string_literal)))))))))))))))
           (switch_clause
             (switch_clause_condition
-              (integer_literal
-                (decimal_integer_literal)))
+              (generic_token))
             (statement_block
               (statement_list
                 (pipeline
@@ -318,8 +315,7 @@ switch (3)
                                       (expandable_string_literal)))))))))))))))
           (switch_clause
             (switch_clause_condition
-              (integer_literal
-                (decimal_integer_literal)))
+              (generic_token))
             (statement_block
               (statement_list
                 (pipeline
@@ -374,8 +370,7 @@ switch (4, 2)
         (switch_clauses
           (switch_clause
             (switch_clause_condition
-              (integer_literal
-                (decimal_integer_literal)))
+              (generic_token))
             (statement_block
               (statement_list
                 (pipeline
@@ -396,8 +391,7 @@ switch (4, 2)
                     (command_name))))))
           (switch_clause
             (switch_clause_condition
-              (integer_literal
-                (decimal_integer_literal)))
+              (generic_token))
             (statement_block
               (statement_list
                 (pipeline
@@ -418,8 +412,7 @@ switch (4, 2)
                     (command_name))))))
           (switch_clause
             (switch_clause_condition
-              (integer_literal
-                (decimal_integer_literal)))
+              (generic_token))
             (statement_block
               (statement_list
                 (pipeline
@@ -440,8 +433,7 @@ switch (4, 2)
                     (command_name))))))
           (switch_clause
             (switch_clause_condition
-              (integer_literal
-                (decimal_integer_literal)))
+              (generic_token))
             (statement_block
               (statement_list
                 (pipeline
@@ -462,8 +454,7 @@ switch (4, 2)
                     (command_name))))))
           (switch_clause
             (switch_clause_condition
-              (integer_literal
-                (decimal_integer_literal)))
+              (generic_token))
             (statement_block
               (statement_list
                 (pipeline

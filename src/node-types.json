@@ -575,7 +575,7 @@
       },
       "command_name": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "command_name",
@@ -595,6 +595,10 @@
         {
           "type": "command_invokation_operator",
           "named": true
+        },
+        {
+          "type": "foreach_command",
+          "named": true
         }
       ]
     }
@@ -605,7 +609,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "array_expression",
@@ -1316,6 +1320,22 @@
     }
   },
   {
+    "type": "foreach_command",
+    "named": true,
+    "fields": {
+      "command_elements": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "script_block_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "foreach_parameter",
     "named": true,
     "fields": {}
@@ -1399,7 +1419,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "array_expression",
@@ -1474,7 +1494,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "parameter_list",
@@ -1501,25 +1521,6 @@
         },
         {
           "type": "script_block",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "generic_token",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "sub_expression",
-          "named": true
-        },
-        {
-          "type": "variable",
           "named": true
         }
       ]
@@ -2542,7 +2543,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "array_expression",
@@ -2955,7 +2956,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "array_expression",
@@ -3064,7 +3065,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "array_expression",
@@ -3421,6 +3422,10 @@
   },
   {
     "type": "\n",
+    "named": false
+  },
+  {
+    "type": " ",
     "named": false
   },
   {
@@ -4032,12 +4037,20 @@
     "named": false
   },
   {
+    "type": "foreach-object",
+    "named": false
+  },
+  {
     "type": "format_operator",
     "named": true
   },
   {
     "type": "function",
     "named": false
+  },
+  {
+    "type": "generic_token",
+    "named": true
   },
   {
     "type": "hexadecimal_integer_literal",

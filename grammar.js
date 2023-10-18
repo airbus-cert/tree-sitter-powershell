@@ -218,22 +218,14 @@ module.exports = grammar({
     braced_variable: $=> /\${[^}]+}/,
 
     // Commands
-    generic_token: $ => prec.right(
-      seq(
-        /[^\{\}\(\);\|\&\$\-`"'\s\n]+/,
-        repeat(
-          choice(
-            token.immediate(/[^\{\}\(\);\|\&\$`"'\s\n]+/),
-            seq(token.immediate("\""), $._expandable_string_literal_immediate)
-          )
-        )
-      )  
+    generic_token: $ => token(
+      /[^\(\$\"\'\-\{@\|\[][^\s\(\)\}\|]*/,
     ),
 
     // Parameters
     command_parameter: $ => token(
       choice(
-        /-+[a-zA-Z_?][^\{\}\(\);,\|\&\.\[:\s]*/,
+        /-+[a-zA-Z_?\-]+/,
         "--"
       )
     ),
@@ -426,7 +418,7 @@ module.exports = grammar({
     function_name: $ => $._command_argument,
 
     function_parameter_declaration: $ => seq(
-      "(", $.parameter_list, ")"
+      "(", optional($.parameter_list), ")"
     ),
 
     flow_control_statement: $ => choice(
@@ -520,10 +512,11 @@ module.exports = grammar({
       seq('|', $.command)
     ),
 
-    command: $ => prec.left(choice(
+    command: $ => choice(
       seq(field("command_name", $.command_name), field("command_elements", optional($.command_elements))),
+      $.foreach_command,
       seq($.command_invokation_operator, /*optional($.command_module),*/ field("command_name", $.command_name_expr), field("command_elements", optional($.command_elements)))
-    )),
+    ),
 
     command_invokation_operator: $ => choice(
       ".",
@@ -549,7 +542,7 @@ module.exports = grammar({
     ),
 
     command_name: $ => prec.right(seq(
-      /[^\{\}\(\);,\|\&`"'\s\n\[\]\+\-\*\/\$@<\!]+/,
+      /[^\{\}\(\);,\|\&`"'\s\n\[\]\+\-\*\/\$@<\!%]+/,
       repeat(
         choice(
           token.immediate(/[^\{\}\(\);,\|\&`"'\s\n]+/),
@@ -565,7 +558,7 @@ module.exports = grammar({
       $._primary_expression
     ),
 
-    command_elements: $ => repeat1($._command_element),
+    command_elements: $ => prec.right(repeat1($._command_element)),
 
     _command_element: $ => choice(
       $.command_parameter,
@@ -573,11 +566,16 @@ module.exports = grammar({
       $.redirection
     ),
 
+    _generic_token_sep: $ => prec.right(repeat1(" ")),
+
     // Adapt the grammar to have same behavior
     _command_argument: $ => choice(
-      $.generic_token,
-      $._primary_expression
+      seq($._generic_token_sep, optional($.generic_token)),
+      $._primary_expression,
+      ","
     ),
+
+    foreach_command: $ => seq(choice("%", "foreach-object"), field("command_elements", repeat1($.script_block_expression))),
 
     verbatim_command_argument: $ => seq(
       "--%", $._verbatim_command_argument_chars
