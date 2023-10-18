@@ -604,6 +604,11 @@
     }
   },
   {
+    "type": "command_argument_sep",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "command_elements",
     "named": true,
     "fields": {},
@@ -613,6 +618,10 @@
       "types": [
         {
           "type": "array_expression",
+          "named": true
+        },
+        {
+          "type": "command_argument_sep",
           "named": true
         },
         {
@@ -1418,11 +1427,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
           "type": "array_expression",
+          "named": true
+        },
+        {
+          "type": "command_argument_sep",
           "named": true
         },
         {
@@ -2542,11 +2555,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
           "type": "array_expression",
+          "named": true
+        },
+        {
+          "type": "command_argument_sep",
           "named": true
         },
         {
@@ -2955,11 +2972,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
           "type": "array_expression",
+          "named": true
+        },
+        {
+          "type": "command_argument_sep",
           "named": true
         },
         {
@@ -3064,11 +3085,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
           "type": "array_expression",
+          "named": true
+        },
+        {
+          "type": "command_argument_sep",
           "named": true
         },
         {

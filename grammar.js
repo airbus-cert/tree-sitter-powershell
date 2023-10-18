@@ -566,11 +566,13 @@ module.exports = grammar({
       $.redirection
     ),
 
-    _generic_token_sep: $ => prec.right(repeat1(" ")),
+    // Generic token is hard to manage
+    // So a definition is that a generic token must have to begin by one or more space char
+    command_argument_sep: $ => prec.right(repeat1(" ")),
 
     // Adapt the grammar to have same behavior
     _command_argument: $ => choice(
-      seq($._generic_token_sep, optional($.generic_token)),
+      seq($.command_argument_sep, optional($.generic_token)),
       $._primary_expression,
       ","
     ),

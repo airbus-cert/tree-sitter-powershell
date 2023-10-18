@@ -82,6 +82,7 @@ Invoke-Expression ([System.Text.Encoding]::Unicode.GetString(([convert]::FromBas
       (command
         (command_name)
         (command_elements
+          (command_argument_sep)
           (parenthesized_expression
             (pipeline
               (logical_expression
@@ -170,4 +171,5 @@ Obfuscated command
               (command
                 (command_name)
                 (command_elements
+                  (command_argument_sep)
                   (generic_token))))))))))

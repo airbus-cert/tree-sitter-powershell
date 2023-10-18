@@ -199,7 +199,9 @@ $(Get-ChildItem . | Measure-Object)
                               (command
                                 (command_name)
                                 (command_elements
-                                  (generic_token)))
+                                  (command_argument_sep)
+                                  (generic_token)
+                                  (command_argument_sep)))
                               (command
                                 (command_name)))))))))))))))))
 
@@ -257,7 +259,9 @@ $(Get-ChildItem . | Measure-Object).count
                                 (command
                                   (command_name)
                                   (command_elements
-                                    (generic_token)))
+                                    (command_argument_sep)
+                                    (generic_token)
+                                    (command_argument_sep)))
                                 (command
                                   (command_name)))))
                           (member_name
@@ -278,16 +282,21 @@ Get-ChildItem (Join-Path $PSScriptRoot *.ps1) | ForEach-Object { . $_.FullName}
       (command
         (command_name)
         (command_elements
+          (command_argument_sep)
           (parenthesized_expression
             (pipeline
               (command
                 (command_name)
                 (command_elements
+                  (command_argument_sep)
                   (variable)
-                  (generic_token)))))))
+                  (command_argument_sep)
+                  (generic_token)))))
+          (command_argument_sep)))
       (command
         (command_name)
         (command_elements
+          (command_argument_sep)
           (script_block_expression
             (script_block
               (script_block_body

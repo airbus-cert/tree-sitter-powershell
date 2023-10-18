@@ -38,6 +38,7 @@ if ($a -gt 2) {
         (command 
           (command_name)
           (command_elements
+            (command_argument_sep)
             (string_literal
               (expandable_string_literal
                 (variable)))))))))))
@@ -85,6 +86,7 @@ else {
           (command
             (command_name)
             (command_elements
+              (command_argument_sep)
               (string_literal
                 (expandable_string_literal
                   (variable))))))))
@@ -95,6 +97,7 @@ else {
             (command
               (command_name)
               (command_elements
+                (command_argument_sep)
                 (parenthesized_expression
                   (pipeline
                     (logical_expression
@@ -165,6 +168,7 @@ else {
             (command
               (command_name)
               (command_elements
+                (command_argument_sep)
                 (string_literal
                   (expandable_string_literal
                     (variable))))))))
@@ -197,6 +201,7 @@ else {
                 (command
                   (command_name)
                   (command_elements
+                    (command_argument_sep)
                     (string_literal
                       (expandable_string_literal
                         (variable))))))))))
@@ -207,6 +212,7 @@ else {
               (command
                 (command_name)
                 (command_elements
+                  (command_argument_sep)
                   (parenthesized_expression
                     (pipeline
                       (logical_expression
@@ -264,6 +270,7 @@ switch (3)
         (switch_clauses
           (switch_clause
             (switch_clause_condition
+              (command_argument_sep)
               (generic_token))
             (statement_block
               (statement_list
@@ -281,6 +288,7 @@ switch (3)
                                       (expandable_string_literal)))))))))))))))
           (switch_clause
             (switch_clause_condition
+              (command_argument_sep)
               (generic_token))
             (statement_block
               (statement_list
@@ -298,6 +306,7 @@ switch (3)
                                       (expandable_string_literal)))))))))))))))
           (switch_clause
             (switch_clause_condition
+              (command_argument_sep)
               (generic_token))
             (statement_block
               (statement_list
@@ -315,6 +324,7 @@ switch (3)
                                       (expandable_string_literal)))))))))))))))
           (switch_clause
             (switch_clause_condition
+              (command_argument_sep)
               (generic_token))
             (statement_block
               (statement_list
@@ -370,6 +380,7 @@ switch (4, 2)
         (switch_clauses
           (switch_clause
             (switch_clause_condition
+              (command_argument_sep)
               (generic_token))
             (statement_block
               (statement_list
@@ -391,6 +402,7 @@ switch (4, 2)
                     (command_name))))))
           (switch_clause
             (switch_clause_condition
+              (command_argument_sep)
               (generic_token))
             (statement_block
               (statement_list
@@ -412,6 +424,7 @@ switch (4, 2)
                     (command_name))))))
           (switch_clause
             (switch_clause_condition
+              (command_argument_sep)
               (generic_token))
             (statement_block
               (statement_list
@@ -433,6 +446,7 @@ switch (4, 2)
                     (command_name))))))
           (switch_clause
             (switch_clause_condition
+              (command_argument_sep)
               (generic_token))
             (statement_block
               (statement_list
@@ -454,6 +468,7 @@ switch (4, 2)
                     (command_name))))))
           (switch_clause
             (switch_clause_condition
+              (command_argument_sep)
               (generic_token))
             (statement_block
               (statement_list

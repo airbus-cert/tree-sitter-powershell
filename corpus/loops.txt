@@ -338,6 +338,7 @@ for (;;)
             (command
               (command_name)
               (command_elements
+                (command_argument_sep)
                 (variable)))))))))
 
 ===
@@ -400,6 +401,7 @@ for (;;$i++)
             (command
               (command_name)
               (command_elements
+                (command_argument_sep)
                 (variable)))))))))
 
 ===
@@ -484,6 +486,7 @@ for(;$i -le 10;$i++)
             (command
               (command_name)
               (command_elements
+                (command_argument_sep)
                 (variable)))))))))
 
 ===
@@ -565,6 +568,7 @@ for($i=1; $i -le 10; $i++){Write-Host $i}
             (command
               (command_name)
               (command_elements
+                (command_argument_sep)
                 (variable)))))))))
 
 ===

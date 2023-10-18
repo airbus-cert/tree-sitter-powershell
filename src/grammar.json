@@ -3148,7 +3148,7 @@
         }
       ]
     },
-    "_generic_token_sep": {
+    "command_argument_sep": {
       "type": "PREC_RIGHT",
       "value": 0,
       "content": {
@@ -3167,7 +3167,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_generic_token_sep"
+              "name": "command_argument_sep"
             },
             {
               "type": "CHOICE",

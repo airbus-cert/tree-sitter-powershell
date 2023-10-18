@@ -15,6 +15,7 @@ function Test
   (statement_list
     (function_statement
       (function_name
+        (command_argument_sep)
         (generic_token))
       (script_block
         (param_block
@@ -40,6 +41,7 @@ function Test
   (statement_list
     (function_statement
       (function_name
+        (command_argument_sep)
         (generic_token))
       (script_block
         (param_block
@@ -71,6 +73,7 @@ function Test
   (statement_list
     (function_statement
       (function_name
+        (command_argument_sep)
         (generic_token))
       (script_block
         (param_block
@@ -115,6 +118,7 @@ function Test
   (statement_list
     (function_statement
       (function_name
+        (command_argument_sep)
         (generic_token))
       (script_block
         (param_block
@@ -169,6 +173,7 @@ function Test
   (statement_list
     (function_statement
       (function_name
+        (command_argument_sep)
         (generic_token))
       (script_block
         (param_block
@@ -228,6 +233,7 @@ function Test
   (statement_list
     (function_statement
       (function_name
+        (command_argument_sep)
         (generic_token))
       (script_block
         (param_block
@@ -375,6 +381,7 @@ function Test
   (statement_list
     (function_statement
       (function_name
+        (command_argument_sep)
         (generic_token))
       (script_block
         (param_block
@@ -461,6 +468,7 @@ function Test
   (statement_list
     (function_statement
       (function_name
+        (command_argument_sep)
         (generic_token))
       (script_block
         (script_block_body

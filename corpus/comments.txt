@@ -43,6 +43,7 @@ Get-ChildItem .
       (command
         (command_name)
         (command_elements
+          (command_argument_sep)
           (generic_token))))))
 
 
@@ -91,6 +92,7 @@ Get-ChildItem .
       (command
         (command_name)
         (command_elements
+          (command_argument_sep)
           (generic_token))))))
 
 ===
@@ -146,6 +148,7 @@ Get-ChildItem .
       (command
         (command_name)
         (command_elements
+          (command_argument_sep)
           (generic_token))))))
 
 ===

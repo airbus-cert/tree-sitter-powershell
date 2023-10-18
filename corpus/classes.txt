@@ -89,6 +89,7 @@ class MyClass
                 (command
                   (command_name)
                   (command_elements
+                    (command_argument_sep)
                     (string_literal
                       (expandable_string_literal))))))))))))
 
@@ -130,6 +131,7 @@ class MyClass
                 (command
                   (command_name)
                   (command_elements
+                    (command_argument_sep)
                     (string_literal
                       (expandable_string_literal
                         (variable)
@@ -188,6 +190,7 @@ class MyClass
                 (command
                   (command_name)
                   (command_elements
+                    (command_argument_sep)
                     (string_literal
                       (expandable_string_literal)))))))))
       (class_property_definition
@@ -214,6 +217,7 @@ class MyClass
                 (command
                   (command_name)
                   (command_elements
+                    (command_argument_sep)
                     (string_literal
                       (expandable_string_literal
                         (variable)
