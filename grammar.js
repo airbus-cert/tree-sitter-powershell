@@ -219,7 +219,7 @@ module.exports = grammar({
 
     // Commands
     generic_token: $ => token(
-      /[^\(\$\"\'\-\{@\|\[][^\s\(\)\}\|]*/,
+      /[^\(\)\$\"\'\-\{\}@\|\[][^\s\(\)\}\|]*/,
     ),
 
     // Parameters
