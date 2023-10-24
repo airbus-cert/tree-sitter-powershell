@@ -505,7 +505,7 @@ module.exports = grammar({
     left_assignment_expression: $ => $._expression,
 
     assignment_expression: $ => seq(
-      $.left_assignment_expression, $.assignement_operator, $._statement
+      $.left_assignment_expression, $.assignement_operator, field("value", $._statement)
     ),
 
     _pipeline_tail: $ => repeat1(

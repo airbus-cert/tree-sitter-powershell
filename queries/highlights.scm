@@ -125,3 +125,6 @@
 (comment) @comment
 
 (array_expression) @array
+
+(assignment_expression
+  value: (pipeline) @assignvalue)
