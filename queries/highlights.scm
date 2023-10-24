@@ -123,3 +123,5 @@
 (variable) @variable
 
 (comment) @comment
+
+(array_expression) @array
