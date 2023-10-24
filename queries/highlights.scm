@@ -124,4 +124,4 @@
 
 (comment) @comment
 
-(array_expression) @array
+(array_literal_expression) @array
