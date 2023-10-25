@@ -2378,8 +2378,11 @@
       ]
     },
     "function_name": {
-      "type": "SYMBOL",
-      "name": "_command_argument"
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[^\\(\\{]+"
+      }
     },
     "function_parameter_declaration": {
       "type": "SEQ",

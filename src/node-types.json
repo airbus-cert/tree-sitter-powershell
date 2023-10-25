@@ -1430,85 +1430,6 @@
     }
   },
   {
-    "type": "function_name",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "array_expression",
-          "named": true
-        },
-        {
-          "type": "command_argument_sep",
-          "named": true
-        },
-        {
-          "type": "element_access",
-          "named": true
-        },
-        {
-          "type": "generic_token",
-          "named": true
-        },
-        {
-          "type": "hash_literal_expression",
-          "named": true
-        },
-        {
-          "type": "integer_literal",
-          "named": true
-        },
-        {
-          "type": "invokation_expression",
-          "named": true
-        },
-        {
-          "type": "member_access",
-          "named": true
-        },
-        {
-          "type": "parenthesized_expression",
-          "named": true
-        },
-        {
-          "type": "post_decrement_expression",
-          "named": true
-        },
-        {
-          "type": "post_increment_expression",
-          "named": true
-        },
-        {
-          "type": "real_literal",
-          "named": true
-        },
-        {
-          "type": "script_block_expression",
-          "named": true
-        },
-        {
-          "type": "string_literal",
-          "named": true
-        },
-        {
-          "type": "sub_expression",
-          "named": true
-        },
-        {
-          "type": "type_literal",
-          "named": true
-        },
-        {
-          "type": "variable",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "function_parameter_declaration",
     "named": true,
     "fields": {},
@@ -4079,6 +4000,10 @@
   {
     "type": "function",
     "named": false
+  },
+  {
+    "type": "function_name",
+    "named": true
   },
   {
     "type": "generic_token",

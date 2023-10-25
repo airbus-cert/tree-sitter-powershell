@@ -14,9 +14,7 @@ function Test
 (program
   (statement_list
     (function_statement
-      (function_name
-        (command_argument_sep)
-        (generic_token))
+      (function_name)
       (script_block
         (param_block
           (parameter_list
@@ -40,9 +38,7 @@ function Test
 (program
   (statement_list
     (function_statement
-      (function_name
-        (command_argument_sep)
-        (generic_token))
+      (function_name)
       (script_block
         (param_block
           (parameter_list
@@ -72,9 +68,7 @@ function Test
 (program
   (statement_list
     (function_statement
-      (function_name
-        (command_argument_sep)
-        (generic_token))
+      (function_name)
       (script_block
         (param_block
           (parameter_list
@@ -117,9 +111,7 @@ function Test
 (program
   (statement_list
     (function_statement
-      (function_name
-        (command_argument_sep)
-        (generic_token))
+      (function_name)
       (script_block
         (param_block
           (attribute_list
@@ -172,9 +164,7 @@ function Test
 (program
   (statement_list
     (function_statement
-      (function_name
-        (command_argument_sep)
-        (generic_token))
+      (function_name)
       (script_block
         (param_block
           (attribute_list
@@ -232,9 +222,7 @@ function Test
 (program
   (statement_list
     (function_statement
-      (function_name
-        (command_argument_sep)
-        (generic_token))
+      (function_name)
       (script_block
         (param_block
           (attribute_list
@@ -380,9 +368,7 @@ function Test
 (program
   (statement_list
     (function_statement
-      (function_name
-        (command_argument_sep)
-        (generic_token))
+      (function_name)
       (script_block
         (param_block
           (attribute_list
@@ -467,9 +453,7 @@ function Test
 (program
   (statement_list
     (function_statement
-      (function_name
-        (command_argument_sep)
-        (generic_token))
+      (function_name)
       (script_block
         (script_block_body
           (named_block_list
@@ -479,3 +463,25 @@ function Test
             (named_block
               (block_name)
               (statement_block))))))))
+
+===
+A complex but valid function name
+===
+
+function 1+1{
+    param(
+        $Name
+    )
+}
+
+---
+
+(program
+  (statement_list
+    (function_statement
+      (function_name)
+      (script_block
+        (param_block
+          (parameter_list
+            (script_parameter
+              (variable))))))))
