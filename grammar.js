@@ -415,7 +415,7 @@ module.exports = grammar({
       "{", optional($.script_block), "}"
     ),
 
-    function_name: $ => token(/[^\(\{]+/),
+    function_name: $ => token(/[^\(\{\s]+/),
 
     function_parameter_declaration: $ => seq(
       "(", optional($.parameter_list), ")"

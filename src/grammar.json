@@ -2381,7 +2381,7 @@
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "[^\\(\\{]+"
+        "value": "[^\\(\\{\\s]+"
       }
     },
     "function_parameter_declaration": {
