@@ -1430,6 +1430,11 @@
     }
   },
   {
+    "type": "function_name",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "function_parameter_declaration",
     "named": true,
     "fields": {},
@@ -2900,7 +2905,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "types": [
         {
@@ -2908,15 +2913,7 @@
           "named": true
         },
         {
-          "type": "command_argument_sep",
-          "named": true
-        },
-        {
           "type": "element_access",
-          "named": true
-        },
-        {
-          "type": "generic_token",
           "named": true
         },
         {
@@ -3013,7 +3010,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "types": [
         {
@@ -3021,15 +3018,7 @@
           "named": true
         },
         {
-          "type": "command_argument_sep",
-          "named": true
-        },
-        {
           "type": "element_access",
-          "named": true
-        },
-        {
-          "type": "generic_token",
           "named": true
         },
         {
@@ -4000,10 +3989,6 @@
   {
     "type": "function",
     "named": false
-  },
-  {
-    "type": "function_name",
-    "named": true
   },
   {
     "type": "generic_token",

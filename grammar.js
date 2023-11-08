@@ -222,6 +222,8 @@ module.exports = grammar({
       /[^\(\)\$\"\'\-\{\}@\|\[][^\s\(\)\}\|]*/,
     ),
 
+    _command_token: $ => token(/[^\(\{\s]+/),
+
     // Parameters
     command_parameter: $ => token(
       choice(
@@ -349,7 +351,7 @@ module.exports = grammar({
     ),
 
     switch_filename: $ => choice(
-      $._command_argument,
+      $._command_token,
       $._primary_expression
     ),
 
@@ -360,7 +362,7 @@ module.exports = grammar({
     switch_clause: $ => seq($.switch_clause_condition, $.statement_block, $._statement_terminator),
 
     switch_clause_condition: $ => choice(
-      $._command_argument,
+      $._command_token,
       $._primary_expression
     ),
 
@@ -415,7 +417,7 @@ module.exports = grammar({
       "{", optional($.script_block), "}"
     ),
 
-    function_name: $ => token(/[^\(\{\s]+/),
+    function_name: $ => $._command_token,
 
     function_parameter_declaration: $ => seq(
       "(", optional($.parameter_list), ")"

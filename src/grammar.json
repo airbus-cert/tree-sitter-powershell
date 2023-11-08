@@ -1295,6 +1295,13 @@
         "value": "[^\\(\\)\\$\\\"\\'\\-\\{\\}@\\|\\[][^\\s\\(\\)\\}\\|]*"
       }
     },
+    "_command_token": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[^\\(\\{\\s]+"
+      }
+    },
     "command_parameter": {
       "type": "TOKEN",
       "content": {
@@ -1947,7 +1954,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_command_argument"
+          "name": "_command_token"
         },
         {
           "type": "SYMBOL",
@@ -2009,7 +2016,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_command_argument"
+          "name": "_command_token"
         },
         {
           "type": "SYMBOL",
@@ -2378,11 +2385,8 @@
       ]
     },
     "function_name": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PATTERN",
-        "value": "[^\\(\\{\\s]+"
-      }
+      "type": "SYMBOL",
+      "name": "_command_token"
     },
     "function_parameter_declaration": {
       "type": "SEQ",
