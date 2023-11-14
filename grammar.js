@@ -14,7 +14,7 @@ module.exports = grammar({
 
   extras: $ => [
     $.comment,
-    /`?\s/,
+    /\s/,
     /[\uFEFF\u2060\u200B\u00A0]/
   ],
 
@@ -227,7 +227,7 @@ module.exports = grammar({
     // Parameters
     command_parameter: $ => token(
       choice(
-        /-+[a-zA-Z_?\-]+/,
+        /-+[a-zA-Z_?\-`]+/,
         "--"
       )
     ),
@@ -547,7 +547,7 @@ module.exports = grammar({
       /[^\{\}\(\);,\|\&`"'\s\n\[\]\+\-\*\/\$@<\!%]+/,
       repeat(
         choice(
-          token.immediate(/[^\{\}\(\);,\|\&`"'\s\n]+/),
+          token.immediate(/[^\{\}\(\);,\|\&"'\s\n]+/),
           seq(token.immediate("\""), $._expandable_string_literal_immediate),
           token.immediate("\"\""),
           token.immediate("''")
