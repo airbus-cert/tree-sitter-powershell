@@ -22,11 +22,10 @@ module.exports = grammar({
     [$.array_type_name, $.generic_type_name],
     [$._command_argument, $.redirected_file_name],
     [$._literal, $.member_name],
-    [$.switch_clause_condition, $._command_argument],
-    [$.switch_filename, $._command_argument],
     [$.class_property_definition, $.attribute],
     [$.class_method_definition, $.attribute],
-    [$.class_method_definition, $.class_property_definition]
+    [$.class_method_definition, $.class_property_definition],
+    [$.expandable_string_literal]
   ],
   
   rules: {
@@ -103,7 +102,8 @@ module.exports = grammar({
           $.sub_expression,
           token.immediate(/\$(`.{1}|`\n|[\s\\])/),
           token.immediate(/`.{1}|`\n/),
-          token.immediate("\"\"")
+          token.immediate("\"\""),
+          token.immediate("$"),
         )
       ),
       repeat(token.immediate("$")),
@@ -222,7 +222,7 @@ module.exports = grammar({
       /[^\(\)\$\"\'\-\{\}@\|\[][^\s\(\)\}\|;]*/,
     ),
 
-    _command_token: $ => token(/[^\(\{\s]+/),
+    _command_token: $ => token(/[^\(\)\{\}\s;]+/),
 
     // Parameters
     command_parameter: $ => token(
@@ -359,7 +359,7 @@ module.exports = grammar({
 
     switch_clauses: $ => repeat1($.switch_clause),
 
-    switch_clause: $ => seq($.switch_clause_condition, $.statement_block, $._statement_terminator),
+    switch_clause: $ => seq($.switch_clause_condition, $.statement_block, $._statement_terminator, repeat(";")),
 
     switch_clause_condition: $ => choice(
       $._command_token,

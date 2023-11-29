@@ -553,6 +553,13 @@
                   "type": "STRING",
                   "value": "\"\""
                 }
+              },
+              {
+                "type": "IMMEDIATE_TOKEN",
+                "content": {
+                  "type": "STRING",
+                  "value": "$"
+                }
               }
             ]
           }
@@ -1299,7 +1306,7 @@
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "[^\\(\\{\\s]+"
+        "value": "[^\\(\\)\\{\\}\\s;]+"
       }
     },
     "command_parameter": {
@@ -2008,6 +2015,13 @@
         {
           "type": "SYMBOL",
           "name": "_statement_terminator"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "STRING",
+            "value": ";"
+          }
         }
       ]
     },
@@ -5147,14 +5161,6 @@
       "member_name"
     ],
     [
-      "switch_clause_condition",
-      "_command_argument"
-    ],
-    [
-      "switch_filename",
-      "_command_argument"
-    ],
-    [
       "class_property_definition",
       "attribute"
     ],
@@ -5165,6 +5171,9 @@
     [
       "class_method_definition",
       "class_property_definition"
+    ],
+    [
+      "expandable_string_literal"
     ]
   ],
   "precedences": [],
