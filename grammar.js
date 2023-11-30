@@ -94,7 +94,7 @@ module.exports = grammar({
     ),
 
     expandable_string_literal: $ => seq(
-      /\"\s*#*/,  // this is a trick to avoid tree-sitter allowing comment between tokens, as string should be tokenize but powershell allow subexpression inside it...
+      /\"(\s*\#*)*/,  // this is a trick to avoid tree-sitter allowing comment between tokens, as string should be tokenize but powershell allow subexpression inside it...
       repeat(
         choice(
           token.immediate(/[^\$\"`]+/),
