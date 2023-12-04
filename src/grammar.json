@@ -1299,7 +1299,7 @@
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "[^\\(\\)\\$\\\"\\'\\-\\{\\}@\\|\\[][^\\s\\(\\)\\}\\|;]*"
+        "value": "[^\\(\\)\\$\\\"\\'\\-\\{\\}@\\|\\[`][^\\s\\(\\)\\}\\|;]*"
       }
     },
     "_command_token": {
@@ -4333,6 +4333,18 @@
           "value": "{"
         },
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "param_block"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "SYMBOL",
           "name": "script_block"
         },
@@ -5169,6 +5181,10 @@
     {
       "type": "PATTERN",
       "value": "\\s"
+    },
+    {
+      "type": "PATTERN",
+      "value": "`\\n"
     },
     {
       "type": "PATTERN",

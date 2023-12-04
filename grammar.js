@@ -16,6 +16,7 @@ module.exports = grammar({
   extras: $ => [
     $.comment,
     /\s/,
+    /`\n/,
     /[\uFEFF\u2060\u200B\u00A0]/
   ],
 
@@ -220,7 +221,7 @@ module.exports = grammar({
 
     // Commands
     generic_token: $ => token(
-      /[^\(\)\$\"\'\-\{\}@\|\[][^\s\(\)\}\|;]*/,
+      /[^\(\)\$\"\'\-\{\}@\|\[`][^\s\(\)\}\|;]*/,
     ),
 
     _command_token: $ => token(/[^\(\)\{\}\s;]+/),
@@ -791,7 +792,7 @@ module.exports = grammar({
 
     array_expression: $ => seq("@(", field("statements", optional($.statement_list)), ")"),
 
-    script_block_expression: $ => seq("{", $.script_block, "}"),
+    script_block_expression: $ => seq("{", optional($.param_block), $.script_block, "}"),
 
     hash_literal_expression: $ => seq("@{", optional($.hash_literal_body), "}"),
 

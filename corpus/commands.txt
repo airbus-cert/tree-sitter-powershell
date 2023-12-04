@@ -307,3 +307,21 @@ Foreach statement without token separator
                                                                             (type_identifier))))
                                                                       (unary_expression
                                                                         (variable)))))))))))))))))))))))))))))))))))))
+
+===
+multiline command line
+===
+
+Write-Debug `
+	"debug"
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (command
+        (command_name)
+        (command_elements
+          (command_argument_sep)
+          (generic_token))))))
