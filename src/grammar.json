@@ -577,8 +577,8 @@
         {
           "type": "IMMEDIATE_TOKEN",
           "content": {
-            "type": "STRING",
-            "value": "\""
+            "type": "PATTERN",
+            "value": "(\\s*\\#*)*\\\""
           }
         }
       ]
@@ -1214,7 +1214,7 @@
               },
               {
                 "type": "PATTERN",
-                "value": "[a-zA-Z0-9_]+"
+                "value": "[a-zA-Z0-9_]+|\\?"
               }
             ]
           }
@@ -1280,7 +1280,7 @@
               },
               {
                 "type": "PATTERN",
-                "value": "[a-zA-Z0-9_]+"
+                "value": "[a-zA-Z0-9_]+|\\?"
               }
             ]
           }
@@ -3132,12 +3132,40 @@
         ]
       }
     },
+    "path_command_name": {
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "REPEAT1",
+        "content": {
+          "type": "PREC",
+          "value": 4,
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "[0-9a-zA-Z_?\\-\\.\\\\]+"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "variable"
+              }
+            ]
+          }
+        }
+      }
+    },
     "command_name_expr": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
           "name": "command_name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "path_command_name"
         },
         {
           "type": "SYMBOL",

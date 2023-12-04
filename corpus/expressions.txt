@@ -305,10 +305,8 @@ Get-ChildItem (Join-Path $PSScriptRoot *.ps1) | ForEach-Object { . $_.FullName}
                     (command
                       (command_invokation_operator)
                       (command_name_expr
-                        (member_access
-                            (variable)
-                            (member_name
-                              (simple_name)))))))))))))))
+                        (path_command_name
+                              (variable))))))))))))))
 
 
 ===
@@ -626,3 +624,20 @@ $foo[-1..-$foo.Length]
                                                   (variable)
                                                   (member_name
                                                     (simple_name)))))))))))))))))))))))))))
+
+===
+Invoke from Path
+===
+
+. $PSScriptRoot\ConsoleMode.ps1
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (command
+        (command_invokation_operator)
+        (command_name_expr
+          (path_command_name
+            (variable)))))))

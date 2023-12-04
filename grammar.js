@@ -2,7 +2,8 @@ const PREC = {
   UNARY: 1,
   CAST : 2,
   ELEMENT_ACCESS : 3,
-  EMPTY : 3
+  EMPTY : 3,
+  PATH: 4
 }
 
 module.exports = grammar({
@@ -107,7 +108,7 @@ module.exports = grammar({
         )
       ),
       repeat(token.immediate("$")),
-      token.immediate("\"")
+      token.immediate(/(\s*\#*)*\"/)
     ),
 
     expandable_here_string_literal: $ => seq(
@@ -210,8 +211,8 @@ module.exports = grammar({
       '$^',
       '$?',
       '$_',
-      token(seq('$', optional(seq(choice("global:", "local:", "private:", "script:", "using:", "workflow:", /[a-zA-Z0-9_]+/), ":")), /[a-zA-Z0-9_]+/)),
-      token(seq('@', optional(seq(choice("global:", "local:", "private:", "script:", "using:", "workflow:", /[a-zA-Z0-9_]+/), ":")), /[a-zA-Z0-9_]+/)),
+      token(seq('$', optional(seq(choice("global:", "local:", "private:", "script:", "using:", "workflow:", /[a-zA-Z0-9_]+/), ":")), /[a-zA-Z0-9_]+|\?/)),
+      token(seq('@', optional(seq(choice("global:", "local:", "private:", "script:", "using:", "workflow:", /[a-zA-Z0-9_]+/), ":")), /[a-zA-Z0-9_]+|\?/)),
       $.braced_variable
     ),
 
@@ -555,8 +556,17 @@ module.exports = grammar({
       )
     )),
 
+    // Use to parse command path
+    path_command_name: $ => prec.right(repeat1(
+      prec(PREC.PATH,choice(
+        /[0-9a-zA-Z_?\-\.\\]+/,
+        $.variable
+      ))
+    )),
+
     command_name_expr: $ => choice(
       $.command_name,
+      $.path_command_name,
       $._primary_expression
     ),
 
