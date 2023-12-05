@@ -581,7 +581,7 @@ module.exports = grammar({
 
     // Generic token is hard to manage
     // So a definition is that a generic token must have to begin by one or more space char
-    command_argument_sep: $ => prec.right(repeat1(" ")),
+    command_argument_sep: $ => prec.right(choice(repeat1(" "), ":")),
 
     // Adapt the grammar to have same behavior
     _command_argument: $ => choice(

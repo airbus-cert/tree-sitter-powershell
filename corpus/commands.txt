@@ -325,3 +325,36 @@ Write-Debug `
         (command_elements
           (command_argument_sep)
           (generic_token))))))
+
+===
+command with argument set by :
+===
+
+New-Item $profileDir -ItemType Directory -Force -Verbose:$VerbosePreference > $null
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (command
+        (command_name)
+        (command_elements
+          (command_argument_sep)
+          (variable)
+          (command_argument_sep)
+          (command_parameter)
+          (command_argument_sep)
+          (generic_token)
+          (command_argument_sep)
+          (command_parameter)
+          (command_argument_sep)
+          (command_parameter)
+          (command_argument_sep)
+          (variable)
+          (command_argument_sep)
+          (redirection
+            (file_redirection_operator)
+            (redirected_file_name
+              (command_argument_sep)))
+          (variable))))))

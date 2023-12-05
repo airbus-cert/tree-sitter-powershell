@@ -3205,11 +3205,20 @@
       "type": "PREC_RIGHT",
       "value": 0,
       "content": {
-        "type": "REPEAT1",
-        "content": {
-          "type": "STRING",
-          "value": " "
-        }
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "REPEAT1",
+            "content": {
+              "type": "STRING",
+              "value": " "
+            }
+          },
+          {
+            "type": "STRING",
+            "value": ":"
+          }
+        ]
       }
     },
     "_command_argument": {
