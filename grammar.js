@@ -2,8 +2,7 @@ const PREC = {
   UNARY: 1,
   CAST : 2,
   ELEMENT_ACCESS : 3,
-  EMPTY : 3,
-  PATH: 4
+  EMPTY : 3
 }
 
 module.exports = grammar({
@@ -27,7 +26,8 @@ module.exports = grammar({
     [$.class_property_definition, $.attribute],
     [$.class_method_definition, $.attribute],
     [$.class_method_definition, $.class_property_definition],
-    [$.expandable_string_literal]
+    [$.expandable_string_literal],
+    [$.path_command_name, $._value]
   ],
   
   rules: {
@@ -557,13 +557,17 @@ module.exports = grammar({
       )
     )),
 
+    path_command_name_token: $ => /[0-9a-zA-Z_?\-\.\\]+/,
+
     // Use to parse command path
-    path_command_name: $ => prec.right(repeat1(
-      prec(PREC.PATH,choice(
-        /[0-9a-zA-Z_?\-\.\\]+/,
-        $.variable
-      ))
-    )),
+    path_command_name: $ => prec.right(
+      repeat1(
+        choice(
+          $.path_command_name_token,
+          $.variable
+        )
+      )
+    ),
 
     command_name_expr: $ => choice(
       $.command_name,

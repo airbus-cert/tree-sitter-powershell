@@ -3132,27 +3132,27 @@
         ]
       }
     },
+    "path_command_name_token": {
+      "type": "PATTERN",
+      "value": "[0-9a-zA-Z_?\\-\\.\\\\]+"
+    },
     "path_command_name": {
       "type": "PREC_RIGHT",
       "value": 0,
       "content": {
         "type": "REPEAT1",
         "content": {
-          "type": "PREC",
-          "value": 4,
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "PATTERN",
-                "value": "[0-9a-zA-Z_?\\-\\.\\\\]+"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "variable"
-              }
-            ]
-          }
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "path_command_name_token"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "variable"
+            }
+          ]
         }
       }
     },
@@ -5227,6 +5227,10 @@
     ],
     [
       "expandable_string_literal"
+    ],
+    [
+      "path_command_name",
+      "_value"
     ]
   ],
   "precedences": [],

@@ -2233,8 +2233,12 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
+        {
+          "type": "path_command_name_token",
+          "named": true
+        },
         {
           "type": "variable",
           "named": true
@@ -4048,6 +4052,10 @@
   {
     "type": "param",
     "named": false
+  },
+  {
+    "type": "path_command_name_token",
+    "named": true
   },
   {
     "type": "process",
