@@ -3198,8 +3198,16 @@
         {
           "type": "SYMBOL",
           "name": "redirection"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "stop_parsing"
         }
       ]
+    },
+    "stop_parsing": {
+      "type": "PATTERN",
+      "value": "--%[^\\n]*"
     },
     "command_argument_sep": {
       "type": "PREC_RIGHT",

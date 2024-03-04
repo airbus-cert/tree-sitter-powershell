@@ -580,8 +580,12 @@ module.exports = grammar({
     _command_element: $ => choice(
       $.command_parameter,
       $._command_argument,
-      $.redirection
+      $.redirection,
+      $.stop_parsing
     ),
+
+    // Stop parsing is a token that end the parsing of command line
+    stop_parsing: $ => /--%[^\n]*/,
 
     // Generic token is hard to manage
     // So a definition is that a generic token must have to begin by one or more space char

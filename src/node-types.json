@@ -684,6 +684,10 @@
           "named": true
         },
         {
+          "type": "stop_parsing",
+          "named": true
+        },
+        {
           "type": "string_literal",
           "named": true
         },
@@ -4080,6 +4084,10 @@
   {
     "type": "static",
     "named": false
+  },
+  {
+    "type": "stop_parsing",
+    "named": true
   },
   {
     "type": "switch",
