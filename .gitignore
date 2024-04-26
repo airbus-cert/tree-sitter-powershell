@@ -8,3 +8,9 @@ build
 package-lock.json
 Cargo.lock
 target
+
+# Python artifacts
+.venv/
+dist/
+*.egg-info
+*.whl
