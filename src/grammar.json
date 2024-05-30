@@ -1293,7 +1293,7 @@
     },
     "braced_variable": {
       "type": "PATTERN",
-      "value": "\\${[^}]+}"
+      "value": "\\$\\{[^}]+\\}"
     },
     "generic_token": {
       "type": "TOKEN",
@@ -5256,4 +5256,3 @@
   "inline": [],
   "supertypes": []
 }
-

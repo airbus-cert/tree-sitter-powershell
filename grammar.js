@@ -217,7 +217,7 @@ module.exports = grammar({
       $.braced_variable
     ),
 
-    braced_variable: $=> /\${[^}]+}/,
+    braced_variable: $=> /\$\{[^}]+\}/,
 
     // Commands
     generic_token: $ => token(
