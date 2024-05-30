@@ -1299,7 +1299,7 @@
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "[^\\(\\)\\$\\\"\\'\\-\\{\\}@\\|\\[`][^\\s\\(\\)\\}\\|;]*"
+        "value": "[^\\(\\)\\$\\\"\\'\\-\\{\\}@\\|\\[`\\s][^\\s\\(\\)\\}\\|;,]*"
       }
     },
     "_command_token": {
@@ -3254,12 +3254,17 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "_primary_expression"
-        },
-        {
-          "type": "STRING",
-          "value": ","
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "command_argument_sep"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "array_literal_expression"
+            }
+          ]
         }
       ]
     },

@@ -221,7 +221,7 @@ module.exports = grammar({
 
     // Commands
     generic_token: $ => token(
-      /[^\(\)\$\"\'\-\{\}@\|\[`][^\s\(\)\}\|;]*/,
+      /[^\(\)\$\"\'\-\{\}@\|\[`\s][^\s\(\)\}\|;,]*/,
     ),
 
     _command_token: $ => token(/[^\(\)\{\}\s;]+/),
@@ -594,8 +594,7 @@ module.exports = grammar({
     // Adapt the grammar to have same behavior
     _command_argument: $ => choice(
       seq($.command_argument_sep, optional($.generic_token)),
-      $._primary_expression,
-      ","
+      seq($.command_argument_sep, $.array_literal_expression)
     ),
 
     foreach_command: $ => seq(choice("%", "foreach-object"), field("command_elements", repeat1($.script_block_expression))),

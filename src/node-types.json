@@ -621,10 +621,10 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
-          "type": "array_expression",
+          "type": "array_literal_expression",
           "named": true
         },
         {
@@ -636,43 +636,7 @@
           "named": true
         },
         {
-          "type": "element_access",
-          "named": true
-        },
-        {
           "type": "generic_token",
-          "named": true
-        },
-        {
-          "type": "hash_literal_expression",
-          "named": true
-        },
-        {
-          "type": "integer_literal",
-          "named": true
-        },
-        {
-          "type": "invokation_expression",
-          "named": true
-        },
-        {
-          "type": "member_access",
-          "named": true
-        },
-        {
-          "type": "parenthesized_expression",
-          "named": true
-        },
-        {
-          "type": "post_decrement_expression",
-          "named": true
-        },
-        {
-          "type": "post_increment_expression",
-          "named": true
-        },
-        {
-          "type": "real_literal",
           "named": true
         },
         {
@@ -680,27 +644,7 @@
           "named": true
         },
         {
-          "type": "script_block_expression",
-          "named": true
-        },
-        {
           "type": "stop_parsing",
-          "named": true
-        },
-        {
-          "type": "string_literal",
-          "named": true
-        },
-        {
-          "type": "sub_expression",
-          "named": true
-        },
-        {
-          "type": "type_literal",
-          "named": true
-        },
-        {
-          "type": "variable",
           "named": true
         }
       ]
@@ -2516,10 +2460,14 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "array_expression",
+          "named": true
+        },
+        {
+          "type": "array_literal_expression",
           "named": true
         },
         {

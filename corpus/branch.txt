@@ -39,9 +39,11 @@ if ($a -gt 2) {
           (command_name)
           (command_elements
             (command_argument_sep)
-            (string_literal
-              (expandable_string_literal
-                (variable)))))))))))
+            (array_literal_expression
+              (unary_expression
+                (string_literal
+                  (expandable_string_literal
+                    (variable)))))))))))))
 ===
 If else
 ===
@@ -87,9 +89,11 @@ else {
             (command_name)
             (command_elements
               (command_argument_sep)
-              (string_literal
-                (expandable_string_literal
-                  (variable))))))))
+              (array_literal_expression
+                (unary_expression
+                  (string_literal
+                    (expandable_string_literal
+                      (variable))))))))))
     (else_clause
       (statement_block
         (statement_list
@@ -98,28 +102,30 @@ else {
               (command_name)
               (command_elements
                 (command_argument_sep)
-                (parenthesized_expression
-                  (pipeline
-                    (logical_expression
-                      (bitwise_expression
-                        (comparison_expression
-                          (additive_expression
+                (array_literal_expression
+                  (unary_expression
+                    (parenthesized_expression
+                    (pipeline
+                      (logical_expression
+                        (bitwise_expression
+                          (comparison_expression
                             (additive_expression
+                              (additive_expression
+                                (multiplicative_expression
+                                  (format_expression
+                                    (range_expression
+                                      (array_literal_expression
+                                        (unary_expression
+                                          (string_literal
+                                            (expandable_string_literal
+                                              (variable)))))))))
                               (multiplicative_expression
                                 (format_expression
                                   (range_expression
                                     (array_literal_expression
                                       (unary_expression
                                         (string_literal
-                                          (expandable_string_literal
-                                            (variable)))))))))
-                            (multiplicative_expression
-                              (format_expression
-                                (range_expression
-                                  (array_literal_expression
-                                    (unary_expression
-                                      (string_literal
-                                        (expandable_string_literal))))))))))))))))))))))
+                                          (expandable_string_literal))))))))))))))))))))))))
 
 ===
 If elseif else
@@ -169,9 +175,11 @@ else {
               (command_name)
               (command_elements
                 (command_argument_sep)
-                (string_literal
-                  (expandable_string_literal
-                    (variable))))))))
+                (array_literal_expression
+                  (unary_expression
+                    (string_literal
+                      (expandable_string_literal
+                        (variable))))))))))
       (elseif_clauses
         (elseif_clause
           (pipeline
@@ -202,9 +210,11 @@ else {
                   (command_name)
                   (command_elements
                     (command_argument_sep)
-                    (string_literal
-                      (expandable_string_literal
-                        (variable))))))))))
+                    (array_literal_expression
+                      (unary_expression
+                      (string_literal
+                        (expandable_string_literal
+                          (variable))))))))))))
       (else_clause
         (statement_block
           (statement_list
@@ -213,28 +223,30 @@ else {
                 (command_name)
                 (command_elements
                   (command_argument_sep)
-                  (parenthesized_expression
-                    (pipeline
-                      (logical_expression
-                        (bitwise_expression
-                          (comparison_expression
-                            (additive_expression
+                  (array_literal_expression
+                    (unary_expression
+                    (parenthesized_expression
+                      (pipeline
+                        (logical_expression
+                          (bitwise_expression
+                            (comparison_expression
                               (additive_expression
+                                (additive_expression
+                                  (multiplicative_expression
+                                    (format_expression
+                                      (range_expression
+                                        (array_literal_expression
+                                          (unary_expression
+                                            (string_literal
+                                              (expandable_string_literal
+                                                (variable)))))))))
                                 (multiplicative_expression
                                   (format_expression
                                     (range_expression
                                       (array_literal_expression
                                         (unary_expression
                                           (string_literal
-                                            (expandable_string_literal
-                                              (variable)))))))))
-                              (multiplicative_expression
-                                (format_expression
-                                  (range_expression
-                                    (array_literal_expression
-                                      (unary_expression
-                                        (string_literal
-                                          (expandable_string_literal))))))))))))))))))))))
+                                            (expandable_string_literal))))))))))))))))))))))))
 
 ===
 Switch Test 1
