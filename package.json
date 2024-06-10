@@ -3,22 +3,35 @@
   "version": "1.0.0",
   "description": "",
   "main": "bindings/node",
+  "types": "bindings/node",
   "scripts": {
     "generate": "tree-sitter generate",
     "build-node": "tree-sitter generate && node-gyp build",
     "test": "tree-sitter test",
     "parse": "tree-sitter parse",
     "parse-debug": "tree-sitter parse -d",
-    "build-wasm":  "tree-sitter build-wasm"
+    "build-wasm": "tree-sitter build --wasm",
+    "install": "node-gyp-build",
+    "prebuildify": "prebuildify --napi --strip"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "nan": "^2.17.0"
+    "node-addon-api": "^7.1.0",
+    "node-gyp-build": "^4.8.0"
+  },
+  "peerDependencies": {
+    "tree-sitter": "^0.21.0"
+  },
+  "peerDependenciesMeta": {
+    "tree_sitter": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "node-gyp": "^9.4.0",
-    "tree-sitter-cli": "^0.20.8"
+    "tree-sitter-cli": "^0.22.6",
+    "prebuildify": "^6.0.0"
   },
   "tree-sitter": [
     {
@@ -32,5 +45,13 @@
         "queries/highlights.scm"
       ]
     }
+  ],
+  "files": [
+    "grammar.js",
+    "binding.gyp",
+    "prebuilds/**",
+    "bindings/node/*",
+    "queries/*",
+    "src/**"
   ]
 }
