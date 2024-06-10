@@ -1293,7 +1293,7 @@
     },
     "braced_variable": {
       "type": "PATTERN",
-      "value": "\\${[^}]+}"
+      "value": "\\$\\{[^}]+\\}"
     },
     "generic_token": {
       "type": "TOKEN",
@@ -5236,14 +5236,6 @@
   ],
   "conflicts": [
     [
-      "array_type_name",
-      "generic_type_name"
-    ],
-    [
-      "_command_argument",
-      "redirected_file_name"
-    ],
-    [
       "_literal",
       "member_name"
     ],
@@ -5254,10 +5246,6 @@
     [
       "class_method_definition",
       "attribute"
-    ],
-    [
-      "class_method_definition",
-      "class_property_definition"
     ],
     [
       "expandable_string_literal"
@@ -5277,4 +5265,3 @@
   "inline": [],
   "supertypes": []
 }
-

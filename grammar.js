@@ -20,12 +20,9 @@ module.exports = grammar({
   ],
 
   conflicts: $ => [
-    [$.array_type_name, $.generic_type_name],
-    [$._command_argument, $.redirected_file_name],
     [$._literal, $.member_name],
     [$.class_property_definition, $.attribute],
     [$.class_method_definition, $.attribute],
-    [$.class_method_definition, $.class_property_definition],
     [$.expandable_string_literal],
     [$.path_command_name, $._value]
   ],
@@ -217,7 +214,7 @@ module.exports = grammar({
       $.braced_variable
     ),
 
-    braced_variable: $=> /\${[^}]+}/,
+    braced_variable: $=> /\$\{[^}]+\}/,
 
     // Commands
     generic_token: $ => token(
