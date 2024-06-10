@@ -379,3 +379,64 @@ New-Item $profileDir -ItemType Directory -Force -Verbose:$VerbosePreference > $n
               (array_literal_expression
                 (unary_expression
                   (variable))))))))))
+
+===
+Diff between argument and array literal
+===
+
+$rih2ymeurlleflu = & "New-Object" "System.Net.Sockets.TCPClient"("127.0.0.1", 4444)
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (assignment_expression
+        (left_assignment_expression
+          (logical_expression
+            (bitwise_expression
+              (comparison_expression
+                (additive_expression
+                  (multiplicative_expression
+                    (format_expression
+                      (range_expression
+                        (array_literal_expression
+                          (unary_expression
+                            (variable)))))))))))
+        (assignement_operator)
+        value: (pipeline
+          (command
+            (command_invokation_operator)
+            command_name: (command_name_expr
+              (string_literal
+                (expandable_string_literal)))
+            command_elements: (command_elements
+              (command_argument_sep)
+              (array_literal_expression
+                (unary_expression
+                  (string_literal
+                    (expandable_string_literal))))
+              (argument_list
+                argument_expression_list: (argument_expression_list
+                  (argument_expression
+                    (logical_argument_expression
+                      (bitwise_argument_expression
+                        (comparison_argument_expression
+                          (additive_argument_expression
+                            (multiplicative_argument_expression
+                              (format_argument_expression
+                                (range_argument_expression
+                                  (unary_expression
+                                    (string_literal
+                                      (expandable_string_literal)))))))))))
+                  (argument_expression
+                    (logical_argument_expression
+                      (bitwise_argument_expression
+                        (comparison_argument_expression
+                          (additive_argument_expression
+                            (multiplicative_argument_expression
+                              (format_argument_expression
+                                (range_argument_expression
+                                  (unary_expression
+                                    (integer_literal
+                                      (decimal_integer_literal))))))))))))))))))))

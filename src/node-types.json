@@ -624,6 +624,10 @@
       "required": true,
       "types": [
         {
+          "type": "argument_list",
+          "named": true
+        },
+        {
           "type": "array_literal_expression",
           "named": true
         },

@@ -579,7 +579,7 @@ module.exports = grammar({
 
     _command_element: $ => choice(
       $.command_parameter,
-      $._command_argument,
+      seq($._command_argument, optional($.argument_list)),
       $.redirection,
       $.stop_parsing
     ),
@@ -592,10 +592,10 @@ module.exports = grammar({
     command_argument_sep: $ => prec.right(choice(repeat1(" "), ":")),
 
     // Adapt the grammar to have same behavior
-    _command_argument: $ => choice(
+    _command_argument: $ => prec.right(choice(
       seq($.command_argument_sep, optional($.generic_token)),
       seq($.command_argument_sep, $.array_literal_expression)
-    ),
+    )),
 
     foreach_command: $ => seq(choice("%", "foreach-object"), field("command_elements", repeat1($.script_block_expression))),
 
