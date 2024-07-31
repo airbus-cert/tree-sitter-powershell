@@ -409,9 +409,7 @@ switch (4, 2)
                                     (string_literal
                                       (expandable_string_literal))))))))))))
                 (empty_statement)
-                (pipeline
-                  (command
-                    (command_name))))))
+                (flow_control_statement))))
           (switch_clause
             (switch_clause_condition
               (integer_literal
@@ -431,9 +429,7 @@ switch (4, 2)
                                     (string_literal
                                       (expandable_string_literal))))))))))))
                 (empty_statement)
-                (pipeline
-                  (command
-                    (command_name))))))
+                (flow_control_statement))))
           (switch_clause
             (switch_clause_condition
               (integer_literal
@@ -453,9 +449,7 @@ switch (4, 2)
                                     (string_literal
                                       (expandable_string_literal))))))))))))
                 (empty_statement)
-                (pipeline
-                  (command
-                    (command_name))))))
+                (flow_control_statement))))
           (switch_clause
             (switch_clause_condition
               (integer_literal
@@ -475,9 +469,7 @@ switch (4, 2)
                                     (string_literal
                                       (expandable_string_literal))))))))))))
                 (empty_statement)
-                (pipeline
-                  (command
-                    (command_name))))))
+                (flow_control_statement))))
           (switch_clause
             (switch_clause_condition
               (integer_literal

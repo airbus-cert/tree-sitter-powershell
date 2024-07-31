@@ -1386,6 +1386,11 @@
     }
   },
   {
+    "type": "format_operator",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "function_name",
     "named": true,
     "fields": {}
@@ -3566,6 +3571,10 @@
     "named": false
   },
   {
+    "type": "-f",
+    "named": false
+  },
+  {
     "type": "-file",
     "named": false
   },
@@ -3735,10 +3744,6 @@
   },
   {
     "type": "..",
-    "named": false
-  },
-  {
-    "type": ".foreach",
     "named": false
   },
   {
@@ -3964,10 +3969,6 @@
   {
     "type": "foreach-object",
     "named": false
-  },
-  {
-    "type": "format_operator",
-    "named": true
   },
   {
     "type": "function",

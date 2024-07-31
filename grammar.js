@@ -1,8 +1,9 @@
 const PREC = {
-  UNARY: 1,
-  CAST : 2,
-  ELEMENT_ACCESS : 3,
-  EMPTY : 3
+  KEYWORD: 1,
+  UNARY: 2,
+  CAST : 3,
+  ELEMENT_ACCESS : 4,
+  EMPTY : 5
 }
 
 module.exports = grammar({
@@ -181,26 +182,26 @@ module.exports = grammar({
     ),
 
     comparison_operator: $ => choice(
-      "-as","-ccontains","-ceq",
-      "-cge","-cgt","-cle",
-      "-clike","-clt","-cmatch",
-      "-cne","-cnotcontains","-cnotlike",
-      "-cnotmatch","-contains","-creplace",
-      "-csplit","-eq" ,"-ge",
-      "-gt", "-icontains","-ieq",
-      "-ige","-igt", "-ile",
-      "-ilike","-ilt","-imatch",
-      "-in","-ine","-inotcontains",
-      "-inotlike","-inotmatch","-ireplace",
-      "-is","-isnot","-isplit",
-      "-join","-le","-like",
-      "-lt","-match","-ne",
-      "-notcontains","-notin","-notlike",
-      "-notmatch","-replace","-shl",
-      "-shr","-split"
+      reservedWord("-as"),reservedWord("-ccontains"),reservedWord("-ceq"),
+      reservedWord("-cge"),reservedWord("-cgt"),reservedWord("-cle"),
+      reservedWord("-clike"),reservedWord("-clt"),reservedWord("-cmatch"),
+      reservedWord("-cne"),reservedWord("-cnotcontains"),reservedWord("-cnotlike"),
+      reservedWord("-cnotmatch"),reservedWord("-contains"),reservedWord("-creplace"),
+      reservedWord("-csplit"),reservedWord("-eq") ,reservedWord("-ge"),
+      reservedWord("-gt"), reservedWord("-icontains"),reservedWord("-ieq"),
+      reservedWord("-ige"),reservedWord("-igt"), reservedWord("-ile"),
+      reservedWord("-ilike"),reservedWord("-ilt"),reservedWord("-imatch"),
+      reservedWord("-in"),reservedWord("-ine"),reservedWord("-inotcontains"),
+      reservedWord("-inotlike"),reservedWord("-inotmatch"),reservedWord("-ireplace"),
+      reservedWord("-is"),reservedWord("-isnot"),reservedWord("-isplit"),
+      reservedWord("-join"),reservedWord("-le"),reservedWord("-like"),
+      reservedWord("-lt"),reservedWord("-match"),reservedWord("-ne"),
+      reservedWord("-notcontains"),reservedWord("-notin"),reservedWord("-notlike"),
+      reservedWord("-notmatch"),reservedWord("-replace"),reservedWord("-shl"),
+      reservedWord("-shr"),reservedWord("-split")
     ),
 
-    format_operator: $ => "-f",
+    format_operator: $ => reservedWord("-f"),
 
     // Variables
 
@@ -209,8 +210,8 @@ module.exports = grammar({
       '$^',
       '$?',
       '$_',
-      token(seq('$', optional(seq(choice("global:", "local:", "private:", "script:", "using:", "workflow:", /[a-zA-Z0-9_]+/), ":")), /[a-zA-Z0-9_]+|\?/)),
-      token(seq('@', optional(seq(choice("global:", "local:", "private:", "script:", "using:", "workflow:", /[a-zA-Z0-9_]+/), ":")), /[a-zA-Z0-9_]+|\?/)),
+      token(seq('$', optional(seq(choice(reservedWord("global:"), reservedWord("local:"), reservedWord("private:"), reservedWord("script:"), reservedWord("using:"), reservedWord("workflow:"), /[a-zA-Z0-9_]+/), ":")), /[a-zA-Z0-9_]+|\?/)),
+      token(seq('@', optional(seq(choice(reservedWord("global:"), reservedWord("local:"), reservedWord("private:"), reservedWord("script:"), reservedWord("using:"), reservedWord("workflow:"), /[a-zA-Z0-9_]+/), ":")), /[a-zA-Z0-9_]+|\?/)),
       $.braced_variable
     ),
 
@@ -249,7 +250,7 @@ module.exports = grammar({
     ),
 
     param_block: $ => seq(
-      optional($.attribute_list), "param", "(", optional($.parameter_list), ")"
+      optional($.attribute_list), reservedWord("param"), "(", optional($.parameter_list), ")"
     ),
 
     parameter_list: $ => seq(
@@ -279,10 +280,10 @@ module.exports = grammar({
     ),
 
     block_name: $ => choice(
-      "dynamicparam",
-      "begin",
-      "process",
-      "end"
+      reservedWord("dynamicparam"),
+      reservedWord("begin"),
+      reservedWord("process"),
+      reservedWord("end")
     ),
 
     statement_block: $ => seq(
@@ -311,16 +312,16 @@ module.exports = grammar({
     empty_statement: $ => prec(PREC.EMPTY, ";"),
 
     if_statement: $ => prec.left(seq(
-      "if", "(", field("condition", $.pipeline), ")", $.statement_block, field("elseif_clauses", optional($.elseif_clauses)), field("else_clause", optional($.else_clause))
+      reservedWord("if"), "(", field("condition", $.pipeline), ")", $.statement_block, field("elseif_clauses", optional($.elseif_clauses)), field("else_clause", optional($.else_clause))
     )),
 
     elseif_clauses: $ => prec.left(repeat1($.elseif_clause)),
 
     elseif_clause: $ => seq(
-      "elseif", "(", field("condition", $.pipeline), ")", $.statement_block
+      reservedWord("elseif"), "(", field("condition", $.pipeline), ")", $.statement_block
     ),
 
-    else_clause: $ => seq("else", $.statement_block),
+    else_clause: $ => seq(reservedWord("else"), $.statement_block),
 
     _labeled_statement: $ => choice(
       $.switch_statement,
@@ -331,22 +332,22 @@ module.exports = grammar({
     ),
 
     switch_statement: $ => seq(
-      "switch", optional($.switch_parameters), $.switch_condition, $.switch_body
+      reservedWord("switch"), optional($.switch_parameters), $.switch_condition, $.switch_body
     ),
 
     switch_parameters: $ => repeat1($.switch_parameter),
 
     switch_parameter: $ => choice(
-      "-regex",
-      "-wildcard",
-      "-exact",
-      "-casesensitive",
-      "-parallel"
+      reservedWord("-regex"),
+      reservedWord("-wildcard"),
+      reservedWord("-exact"),
+      reservedWord("-casesensitive"),
+      reservedWord("-parallel")
     ),
 
     switch_condition: $ => choice(
       seq("(", $.pipeline, ")"),
-      seq("-file", $.switch_filename)
+      seq(reservedWord("-file"), $.switch_filename)
     ),
 
     switch_filename: $ => choice(
@@ -366,15 +367,15 @@ module.exports = grammar({
     ),
 
     foreach_statement: $ => seq(
-      "foreach", optional($.foreach_parameter), "(", $.variable, "in", $.pipeline, ")", $.statement_block
+      reservedWord("foreach"), optional($.foreach_parameter), "(", $.variable, reservedWord("in"), $.pipeline, ")", $.statement_block
     ),
 
     foreach_parameter: $ => choice(
-      "-parallel"
+      reservedWord("-parallel")
     ),
 
     for_statement: $ => seq(
-      "for", "(",
+      reservedWord("for"), "(",
         optional(
           seq(optional(seq(field("for_initializer", $.for_initializer), $._statement_terminator)), 
             optional(
@@ -396,20 +397,20 @@ module.exports = grammar({
     for_iterator: $ => $.pipeline,
 
     while_statement: $ => seq(
-      "while", "(", field("condition", $.while_condition), ")", $.statement_block
+      reservedWord("while"), "(", field("condition", $.while_condition), ")", $.statement_block
     ),
 
     while_condition: $=> $.pipeline,
 
     do_statement: $ => seq(
-      "do", $.statement_block, choice("while", "until"), "(", field("condition", $.while_condition), ")"
+      reservedWord("do"), $.statement_block, choice(reservedWord("while"), reservedWord("until")), "(", field("condition", $.while_condition), ")"
     ),
 
     function_statement: $ => seq(
       choice(
-        "function",
-        "filter",
-        "workflow"
+        reservedWord("function"),
+        reservedWord("filter"),
+        reservedWord("workflow")
       ),
       $.function_name,
       optional($.function_parameter_declaration),
@@ -423,11 +424,11 @@ module.exports = grammar({
     ),
 
     flow_control_statement: $ => choice(
-      seq("break", optional($.label_expression)),
-      seq("continue", optional($.label_expression)),
-      seq("throw", optional($.pipeline)),
-      seq("return", optional($.pipeline)),
-      seq("exit", optional($.pipeline))
+      seq(reservedWord("break"), optional($.label_expression)),
+      seq(reservedWord("continue"), optional($.label_expression)),
+      seq(reservedWord("throw"), optional($.pipeline)),
+      seq(reservedWord("return"), optional($.pipeline)),
+      seq(reservedWord("exit"), optional($.pipeline))
     ),
 
     label: $ => token(seq(":", /[a-zA-Z_][a-zA-Z0-9_]*/)),
@@ -438,11 +439,11 @@ module.exports = grammar({
     ),
 
     trap_statement: $ => seq(
-      "trap", optional($.type_literal), $.statement_block
+      reservedWord("trap"), optional($.type_literal), $.statement_block
     ),
 
     try_statement: $ => seq(
-      "try",
+      reservedWord("try"),
       $.statement_block,
       choice(
         seq($.catch_clauses, optional($.finally_clause)),
@@ -453,7 +454,7 @@ module.exports = grammar({
     catch_clauses: $ => repeat1($.catch_clause),
 
     catch_clause: $ => seq(
-      "catch", optional($.catch_type_list), $.statement_block
+      reservedWord("catch"), optional($.catch_type_list), $.statement_block
     ),
 
     catch_type_list: $ => seq(
@@ -464,17 +465,17 @@ module.exports = grammar({
     ),
 
     finally_clause: $ => seq(
-      "finally", $.statement_block
+      reservedWord("finally"), $.statement_block
     ),
 
     data_statement: $ => seq(
-      "data", $.data_name, optional($.data_commands_allowed), $.statement_block
+      reservedWord("data"), $.data_name, optional($.data_commands_allowed), $.statement_block
     ),
 
     data_name: $ =>$.simple_name,
 
     data_commands_allowed: $ => seq(
-      "-supportedcommand", $.data_commands_list
+      reservedWord("-supportedcommand"), $.data_commands_list
     ),
 
     data_commands_list: $ => seq(
@@ -485,15 +486,15 @@ module.exports = grammar({
     data_command: $ => $.command_name_expr,
 
     inlinescript_statement: $ => seq(
-      "inlinescript", $.statement_block
+      reservedWord("inlinescript"), $.statement_block
     ),
 
     parallel_statement: $ => seq(
-      "parallel", $.statement_block
+      reservedWord("parallel"), $.statement_block
     ),
 
     sequence_statement: $ => seq(
-      "sequence", $.statement_block
+      reservedWord("sequence"), $.statement_block
     ),
 
     pipeline: $ => choice(
@@ -594,7 +595,7 @@ module.exports = grammar({
       seq($.command_argument_sep, $.array_literal_expression)
     )),
 
-    foreach_command: $ => seq(choice("%", "foreach-object"), field("command_elements", repeat1($.script_block_expression))),
+    foreach_command: $ => seq(choice("%", reservedWord("foreach-object")), field("command_elements", repeat1($.script_block_expression))),
 
     verbatim_command_argument: $ => seq(
       "--%", $._verbatim_command_argument_chars
@@ -614,7 +615,7 @@ module.exports = grammar({
 
     // Class
 
-    class_attribute : $ => choice("hidden", "static"),
+    class_attribute : $ => choice(reservedWord("hidden"), reservedWord("static")),
 
     class_property_definition: $ => seq(
       optional($.attribute),
@@ -649,7 +650,7 @@ module.exports = grammar({
     ),
 
     class_statement: $ => seq(
-      "class", $.simple_name, optional(seq(":", $.simple_name, repeat(seq(",", $.simple_name)))), 
+      reservedWord("class"), $.simple_name, optional(seq(":", $.simple_name, repeat(seq(",", $.simple_name)))), 
       "{",
       repeat(
         choice(
@@ -663,7 +664,7 @@ module.exports = grammar({
     // Enums
 
     enum_statement: $ => seq(
-      "enum", $.simple_name, "{",
+      reservedWord("enum"), $.simple_name, "{",
       repeat(
         seq($.enum_member, $._statement_terminator, repeat(";"))
       ),
@@ -683,7 +684,7 @@ module.exports = grammar({
       $.bitwise_expression,
       seq (
         $.logical_expression,
-        choice("-and", "-or", "-xor"), $.bitwise_expression
+        choice(reservedWord("-and"), reservedWord("-or"), reservedWord("-xor")), $.bitwise_expression
       )
     )),
 
@@ -691,7 +692,7 @@ module.exports = grammar({
       $.comparison_expression,
       seq (
         $.bitwise_expression,
-        choice("-band", "-bor", "-bxor"), $.comparison_expression
+        choice(reservedWord("-band"), reservedWord("-bor"), reservedWord("-bxor")), $.comparison_expression
       )
     )),
 
@@ -750,16 +751,16 @@ module.exports = grammar({
 
     expression_with_unary_operator: $ => choice(
       seq(",", $.unary_expression),
-      seq("-not", $.unary_expression),
+      seq(reservedWord("-not"), $.unary_expression),
       seq("!", $.unary_expression),
-      seq("-bnot", $.unary_expression),
+      seq(reservedWord("-bnot"), $.unary_expression),
       seq("+", $.unary_expression),
       seq("-", $.unary_expression),
       $.pre_increment_expression,
       $.pre_decrement_expression,
       $.cast_expression,
-      seq("-split", $.unary_expression),
-      seq("-join", $.unary_expression)
+      seq(reservedWord("-split"), $.unary_expression),
+      seq(reservedWord("-join"), $.unary_expression)
     ),
 
     pre_increment_expression: $ => seq("++", $.unary_expression),
@@ -838,7 +839,7 @@ module.exports = grammar({
     ),
 
     // adding this rule to handle .foreach synthax
-    invokation_foreach_expression: $ => seq($._primary_expression, token.immediate(".foreach"), $.script_block_expression),
+    invokation_foreach_expression: $ => seq($._primary_expression, token.immediate(reservedWord(".foreach")), $.script_block_expression),
 
     argument_list: $ => seq("(", field("argument_expression_list", optional($.argument_expression_list)), ")"),
 
@@ -855,7 +856,7 @@ module.exports = grammar({
       $.bitwise_argument_expression,
       seq (
         $.logical_argument_expression,
-        choice("-and", "-or", "-xor"), $.bitwise_argument_expression
+        choice(reservedWord("-and"), reservedWord("-or"), reservedWord("-xor")), $.bitwise_argument_expression
       )
     )),
     
@@ -863,7 +864,7 @@ module.exports = grammar({
       $.comparison_argument_expression,
       seq (
         $.bitwise_argument_expression,
-        choice("-and", "-or", "-xor"), $.comparison_argument_expression
+        choice(reservedWord("-and"), reservedWord("-or"), reservedWord("-xor")), $.comparison_argument_expression
       )
     )),
 
@@ -943,3 +944,19 @@ module.exports = grammar({
     )
   },
 });
+
+// inspired from https://github.com/tree-sitter/tree-sitter/issues/261
+function reservedWord(word) {
+  //return word // when debuging
+  return alias(reserved(caseInsensitive(word)), word)
+}
+
+function reserved(regex) {
+  return token(prec(PREC.KEYWORD, new RegExp(regex)))
+}
+
+function caseInsensitive(word) {
+  return word.split('')
+      .map(letter => `[${letter}${letter.toUpperCase()}]`)
+      .join('')
+}
