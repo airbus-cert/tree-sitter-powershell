@@ -13,7 +13,7 @@ for (($i = 0), ($j = 0); $i -lt 10; $i++)
 (program
   (statement_list
     (for_statement
-      (for_initializer
+      for_initializer: (for_initializer
         (pipeline
           (logical_expression
             (bitwise_expression
@@ -23,35 +23,6 @@ for (($i = 0), ($j = 0); $i -lt 10; $i++)
                     (format_expression
                       (range_expression
                         (array_literal_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (parenthesized_expression
-                                (pipeline
-                                  (assignment_expression
-                                    (left_assignment_expression
-                                      (logical_expression
-                                        (bitwise_expression
-                                          (comparison_expression
-                                            (additive_expression
-                                              (multiplicative_expression
-                                                (format_expression
-                                                  (range_expression
-                                                    (array_literal_expression
-                                                      (unary_expression
-                                                        (variable)))))))))))
-                                    (assignement_operator)
-                                    (pipeline
-                                      (logical_expression
-                                        (bitwise_expression
-                                          (comparison_expression
-                                            (additive_expression
-                                              (multiplicative_expression
-                                                (format_expression
-                                                  (range_expression
-                                                    (array_literal_expression
-                                                      (unary_expression
-                                                        (integer_literal
-                                                          (decimal_integer_literal)))))))))))))))))
                           (unary_expression
                             (parenthesized_expression
                               (pipeline
@@ -68,7 +39,35 @@ for (($i = 0), ($j = 0); $i -lt 10; $i++)
                                                     (unary_expression
                                                       (variable)))))))))))
                                   (assignement_operator)
-                                  (pipeline
+                                  value: (pipeline
+                                    (logical_expression
+                                      (bitwise_expression
+                                        (comparison_expression
+                                          (additive_expression
+                                            (multiplicative_expression
+                                              (format_expression
+                                                (range_expression
+                                                  (array_literal_expression
+                                                    (unary_expression
+                                                      (integer_literal
+                                                        (decimal_integer_literal))))))))))))))))
+                          (unary_expression
+                            (parenthesized_expression
+                              (pipeline
+                                (assignment_expression
+                                  (left_assignment_expression
+                                    (logical_expression
+                                      (bitwise_expression
+                                        (comparison_expression
+                                          (additive_expression
+                                            (multiplicative_expression
+                                              (format_expression
+                                                (range_expression
+                                                  (array_literal_expression
+                                                    (unary_expression
+                                                      (variable)))))))))))
+                                  (assignement_operator)
+                                  value: (pipeline
                                     (logical_expression
                                       (bitwise_expression
                                         (comparison_expression
@@ -80,7 +79,7 @@ for (($i = 0), ($j = 0); $i -lt 10; $i++)
                                                     (unary_expression
                                                       (integer_literal
                                                         (decimal_integer_literal))))))))))))))))))))))))))
-      (for_condition
+      for_condition: (for_condition
         (pipeline
           (logical_expression
             (bitwise_expression
@@ -102,7 +101,7 @@ for (($i = 0), ($j = 0); $i -lt 10; $i++)
                           (unary_expression
                             (integer_literal
                               (decimal_integer_literal)))))))))))))
-      (for_iterator
+      for_iterator: (for_iterator
         (pipeline
           (logical_expression
             (bitwise_expression
@@ -116,7 +115,7 @@ for (($i = 0), ($j = 0); $i -lt 10; $i++)
                             (post_increment_expression
                               (variable)))))))))))))
       (statement_block
-        (statement_list
+        statement_list: (statement_list
           (pipeline
             (logical_expression
               (bitwise_expression

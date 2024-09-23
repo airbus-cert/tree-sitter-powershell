@@ -66,8 +66,8 @@ New-DynamicParam -Name Plugins -type string[] -ValidateSet $(((gci .\plugins\*.p
   (statement_list
     (pipeline
       (command
-        (command_name)
-        (command_elements
+        command_name: (command_name)
+        command_elements: (command_elements
           (command_argument_sep)
           (command_parameter)
           (command_argument_sep)
@@ -82,7 +82,7 @@ New-DynamicParam -Name Plugins -type string[] -ValidateSet $(((gci .\plugins\*.p
           (array_literal_expression
             (unary_expression
               (sub_expression
-                (statement_list
+                statements: (statement_list
                   (pipeline
                     (logical_expression
                       (bitwise_expression
@@ -109,8 +109,8 @@ New-DynamicParam -Name Plugins -type string[] -ValidateSet $(((gci .\plugins\*.p
                                                                 (parenthesized_expression
                                                                   (pipeline
                                                                     (command
-                                                                      (command_name)
-                                                                      (command_elements
+                                                                      command_name: (command_name)
+                                                                      command_elements: (command_elements
                                                                         (command_argument_sep)
                                                                         (generic_token)))))
                                                                 (member_name
@@ -121,10 +121,9 @@ New-DynamicParam -Name Plugins -type string[] -ValidateSet $(((gci .\plugins\*.p
                               (format_expression
                                 (range_expression
                                   (array_literal_expression
-                                    (array_literal_expression
-                                      (unary_expression
-                                        (string_literal
-                                          (expandable_string_literal))))
+                                    (unary_expression
+                                      (string_literal
+                                        (expandable_string_literal)))
                                     (unary_expression
                                       (string_literal
                                         (expandable_string_literal))))))))))))))))

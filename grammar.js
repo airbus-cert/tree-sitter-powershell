@@ -736,11 +736,13 @@ module.exports = grammar({
       )
     )),
 
-    array_literal_expression: $ => prec.left(choice(
+    array_literal_expression: $ => prec.left(seq(
       $.unary_expression,
-      seq (
-        $.array_literal_expression,
-        ",", $.unary_expression
+      repeat ( 
+        seq(
+          ",",
+          $.unary_expression
+        )
       )
     )),
 

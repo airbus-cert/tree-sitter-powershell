@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-powershell",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "",
   "main": "bindings/node",
   "types": "bindings/node",
@@ -21,7 +21,7 @@
     "node-gyp-build": "^4.8.0"
   },
   "peerDependencies": {
-    "tree-sitter": "^0.21.0"
+    "tree-sitter": "^0.21.1"
   },
   "peerDependenciesMeta": {
     "tree_sitter": {
@@ -30,8 +30,8 @@
   },
   "devDependencies": {
     "node-gyp": "^9.4.0",
-    "tree-sitter-cli": "^0.22.6",
-    "prebuildify": "^6.0.0"
+    "prebuildify": "^6.0.0",
+    "tree-sitter-cli": "^0.22.6"
   },
   "tree-sitter": [
     {

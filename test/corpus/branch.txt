@@ -381,10 +381,9 @@ switch (4, 2)
                     (format_expression
                       (range_expression
                         (array_literal_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (integer_literal
-                                (decimal_integer_literal))))
+                          (unary_expression
+                            (integer_literal
+                              (decimal_integer_literal)))
                           (unary_expression
                             (integer_literal
                               (decimal_integer_literal)))))))))))))
@@ -395,7 +394,7 @@ switch (4, 2)
               (integer_literal
                 (decimal_integer_literal)))
             (statement_block
-              (statement_list
+              statement_list: (statement_list
                 (pipeline
                   (logical_expression
                     (bitwise_expression
@@ -415,7 +414,7 @@ switch (4, 2)
               (integer_literal
                 (decimal_integer_literal)))
             (statement_block
-              (statement_list
+              statement_list: (statement_list
                 (pipeline
                   (logical_expression
                     (bitwise_expression
@@ -435,7 +434,7 @@ switch (4, 2)
               (integer_literal
                 (decimal_integer_literal)))
             (statement_block
-              (statement_list
+              statement_list: (statement_list
                 (pipeline
                   (logical_expression
                     (bitwise_expression
@@ -455,7 +454,7 @@ switch (4, 2)
               (integer_literal
                 (decimal_integer_literal)))
             (statement_block
-              (statement_list
+              statement_list: (statement_list
                 (pipeline
                   (logical_expression
                     (bitwise_expression
@@ -475,7 +474,7 @@ switch (4, 2)
               (integer_literal
                 (decimal_integer_literal)))
             (statement_block
-              (statement_list
+              statement_list: (statement_list
                 (pipeline
                   (logical_expression
                     (bitwise_expression
