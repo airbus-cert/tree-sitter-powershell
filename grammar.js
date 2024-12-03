@@ -27,7 +27,7 @@ module.exports = grammar({
     [$.expandable_string_literal],
     [$.path_command_name, $._value]
   ],
-  
+
   rules: {
 
     program: $ => seq(
@@ -156,7 +156,7 @@ module.exports = grammar({
 
     // Type names
     type_identifier: $ => /[a-zA-Z0-9_]+/,
-    
+
     type_name: $ => choice(
       $.type_identifier,
       seq($.type_name, ".", $.type_identifier )
@@ -270,7 +270,7 @@ module.exports = grammar({
       field("named_block_list", $.named_block_list),
       field("statement_list", $.statement_list)
     ),
-    
+
     named_block_list: $ => repeat1(
       $.named_block
     ),
@@ -377,7 +377,7 @@ module.exports = grammar({
     for_statement: $ => seq(
       reservedWord("for"), "(",
         optional(
-          seq(optional(seq(field("for_initializer", $.for_initializer), $._statement_terminator)), 
+          seq(optional(seq(field("for_initializer", $.for_initializer), $._statement_terminator)),
             optional(
               seq(choice(";", "\n"), optional(seq(field("for_condition", $.for_condition), $._statement_terminator)),
                 optional(
@@ -469,7 +469,7 @@ module.exports = grammar({
     ),
 
     data_statement: $ => seq(
-      reservedWord("data"), $.data_name, optional($.data_commands_allowed), $.statement_block
+      reservedWord("data"), optional($.data_name), optional($.data_commands_allowed), $.statement_block
     ),
 
     data_name: $ =>$.simple_name,
@@ -650,7 +650,7 @@ module.exports = grammar({
     ),
 
     class_statement: $ => seq(
-      reservedWord("class"), $.simple_name, optional(seq(":", $.simple_name, repeat(seq(",", $.simple_name)))), 
+      reservedWord("class"), $.simple_name, optional(seq(":", $.simple_name, repeat(seq(",", $.simple_name)))),
       "{",
       repeat(
         choice(
@@ -677,7 +677,7 @@ module.exports = grammar({
     ),
 
     // Expressions
-    
+
     _expression: $ => $.logical_expression,
 
     logical_expression: $ => prec.left(choice(
@@ -806,8 +806,8 @@ module.exports = grammar({
     hash_literal_body: $ => repeat1($.hash_entry),
 
     hash_entry: $ => seq(
-      $.key_expression, 
-      "=", 
+      $.key_expression,
+      "=",
       $._statement, $._statement_terminator, repeat(";")
     ),
 
@@ -861,7 +861,7 @@ module.exports = grammar({
         choice(reservedWord("-and"), reservedWord("-or"), reservedWord("-xor")), $.bitwise_argument_expression
       )
     )),
-    
+
     bitwise_argument_expression: $ => prec.left(choice(
       $.comparison_argument_expression,
       seq (
