@@ -31,21 +31,8 @@
   "devDependencies": {
     "node-gyp": "^9.4.0",
     "prebuildify": "^6.0.0",
-    "tree-sitter-cli": "^0.22.6"
+    "tree-sitter-cli": "^0.24.3"
   },
-  "tree-sitter": [
-    {
-      "scope": "source.ps1",
-      "file-types": [
-        "ps1",
-        "psm1"
-      ],
-      "injection-regex": "^(ps1|psm1)$",
-      "highlights": [
-        "queries/highlights.scm"
-      ]
-    }
-  ],
   "files": [
     "grammar.js",
     "binding.gyp",
