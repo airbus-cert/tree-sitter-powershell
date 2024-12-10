@@ -1,12 +1,12 @@
 {
   "name": "tree-sitter-powershell",
-  "version": "0.24.4",
+  "version": "1.2.0",
   "description": "",
   "main": "bindings/node",
   "types": "bindings/node",
   "scripts": {
     "generate": "tree-sitter generate",
-    "build-node": "tree-sitter generate && node-gyp build",
+    "build-node": "tree-sitter generate --no-bindings",
     "test": "tree-sitter test",
     "parse": "tree-sitter parse",
     "parse-debug": "tree-sitter parse -d",
@@ -31,8 +31,21 @@
   "devDependencies": {
     "node-gyp": "^9.4.0",
     "prebuildify": "^6.0.0",
-    "tree-sitter-cli": "0.24.4"
+    "tree-sitter-cli": "^0.22.6"
   },
+  "tree-sitter": [
+    {
+      "scope": "source.ps1",
+      "file-types": [
+        "ps1",
+        "psm1"
+      ],
+      "injection-regex": "^(ps1|psm1)$",
+      "highlights": [
+        "queries/highlights.scm"
+      ]
+    }
+  ],
   "files": [
     "grammar.js",
     "binding.gyp",
