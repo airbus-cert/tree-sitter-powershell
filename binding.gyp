@@ -17,6 +17,7 @@
         ["OS!='win'", {
           "cflags_c": [
             "-std=c11",
+            "-fPIC"
           ],
         }, { # OS == "win"
           "cflags_c": [
