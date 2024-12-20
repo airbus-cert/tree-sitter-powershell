@@ -3909,8 +3909,16 @@
           "value": "data"
         },
         {
-          "type": "SYMBOL",
-          "name": "data_name"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "data_name"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "CHOICE",
