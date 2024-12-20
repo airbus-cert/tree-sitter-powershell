@@ -469,7 +469,7 @@ module.exports = grammar({
     ),
 
     data_statement: $ => seq(
-      reservedWord("data"), $.data_name, optional($.data_commands_allowed), $.statement_block
+      reservedWord("data"), optional($.data_name), optional($.data_commands_allowed), $.statement_block
     ),
 
     data_name: $ =>$.simple_name,
