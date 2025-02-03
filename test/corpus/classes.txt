@@ -33,7 +33,6 @@ class MyClass
               (type_identifier))))
         (variable)))))
 
-
 ===
 Class : string property with attributes
 ===
@@ -91,9 +90,8 @@ class MyClass
                   (command_elements
                     (command_argument_sep)
                     (array_literal_expression
-                      (unary_expression
-                        (string_literal 
-                          (expandable_string_literal))))))))))))))
+                      (string_literal
+                        (expandable_string_literal)))))))))))))
 
 ===
 Class : method declaration with parameters
@@ -135,12 +133,10 @@ class MyClass
                   (command_elements
                     (command_argument_sep)
                     (array_literal_expression
-                      (unary_expression
-                        (string_literal
-                          (expandable_string_literal
-                            (variable)
-                            (variable)))))))))))))))
-
+                      (string_literal
+                        (expandable_string_literal
+                          (variable)
+                          (variable))))))))))))))
 
 ===
 Class : mix method and properties declaration
@@ -196,9 +192,8 @@ class MyClass
                   (command_elements
                     (command_argument_sep)
                     (array_literal_expression
-                      (unary_expression
-                        (string_literal
-                          (expandable_string_literal)))))))))))
+                      (string_literal
+                        (expandable_string_literal))))))))))
       (class_property_definition
         (type_literal
           (type_spec
@@ -225,10 +220,9 @@ class MyClass
                   (command_elements
                     (command_argument_sep)
                     (array_literal_expression
-                      (unary_expression
-                        (string_literal
-                          (expandable_string_literal
-                            (variable)
-                            (variable))))))))))))
+                      (string_literal
+                        (expandable_string_literal
+                          (variable)
+                          (variable)))))))))))
       (class_method_definition
         (simple_name)))))

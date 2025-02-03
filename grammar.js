@@ -17,6 +17,7 @@ module.exports = grammar({
     $.comment,
     /\s/,
     /`\n/,
+    /`\r\n/,
     /[\uFEFF\u2060\u200B\u00A0]/
   ],
 
@@ -25,11 +26,11 @@ module.exports = grammar({
     [$.class_property_definition, $.attribute],
     [$.class_method_definition, $.attribute],
     [$.expandable_string_literal],
-    [$.path_command_name, $._value]
+    [$.path_command_name, $._value],
+    [$._expression, $.array_literal_expression]
   ],
-  
-  rules: {
 
+  rules: {
     program: $ => seq(
       optional($.param_block),
       $.statement_list
@@ -38,14 +39,14 @@ module.exports = grammar({
     // Comments
     comment: $ => token(
       choice(
-        /#[^\n]*/,
+        /#[^\r\n]*/,
         seq(
           "<#",
           repeat(
             choice(
               /[^#`]+/,
               /#+[^>#]/,
-              /`.{1}|`\n/
+              /`.{1}|`\r?\n/
             )
           ),
           /#+>/
@@ -54,7 +55,6 @@ module.exports = grammar({
     ),
 
     // Literal
-
     _literal: $ => choice(
       $.integer_literal,
       $.string_literal,
@@ -62,30 +62,27 @@ module.exports = grammar({
     ),
 
     // Integer Literals
-
     integer_literal: $ => choice(
-      $.decimal_integer_literal,
-      $.hexadecimal_integer_literal
+      $._decimal_integer_literal,
+      $._hexadecimal_integer_literal
     ),
 
-    decimal_integer_literal: $ => token(seq(
+    _decimal_integer_literal: _ => token(seq(
       /[0-9]+/, optional(choice("l", "d")), optional(choice("kb", "mb", "gb", "tb", "pb"))
     )),
 
-    hexadecimal_integer_literal: $ => token(seq(
+    _hexadecimal_integer_literal: _ => token(seq(
       "0x", /[0-9a-fA-F]+/, optional("l"), optional(choice("kb", "mb", "gb", "tb", "pb"))
     )),
 
     // Real Literals
-
-    real_literal: $ => token(choice(
+    real_literal: _ => token(choice(
       seq(/[0-9]+\.[0-9]+/, optional(token(seq("e", optional(choice("+", "-")), /[0-9]+/))), optional(choice("kb", "mb", "gb", "tb", "pb"))),
       seq(/\.[0-9]+/, optional(token(seq("e", optional(choice("+", "-")), /[0-9]+/))), optional(choice("kb", "mb", "gb", "tb", "pb"))),
       seq(/[0-9]+/, token(seq("e", optional(choice("+", "-")), /[0-9]+/)), optional(choice("kb", "mb", "gb", "tb", "pb")))
     )),
 
     // String literal
-
     string_literal: $ => choice(
       $.expandable_string_literal,
       $.verbatim_string_characters,
@@ -100,8 +97,8 @@ module.exports = grammar({
           token.immediate(/[^\$\"`]+/),
           $.variable,
           $.sub_expression,
-          token.immediate(/\$(`.{1}|`\n|[\s\\])/),
-          token.immediate(/`.{1}|`\n/),
+          token.immediate(/\$(`.{1}|`\r?\n|[\s\\])/),
+          token.immediate(/`.{1}|`\r?\n/),
           token.immediate("\"\""),
           token.immediate("$"),
         )
@@ -111,19 +108,19 @@ module.exports = grammar({
     ),
 
     expandable_here_string_literal: $ => seq(
-      /@\" *\n/,
+      /@\" *\r?\n/,
       repeat(
         choice(
-          token.immediate(/[^\$\n`]+/),
+          token.immediate(/[^\$\r\n`]+/),
           $.variable,
           $.sub_expression,
-          token.immediate(/\n+[^\"\n]/),
-          token.immediate(/\n+\"[^@]/),
+          token.immediate(/(\r?\n)+[^\"\r\n]/),
+          token.immediate(/(\r?\n)+\"[^@]/),
           token.immediate("$"),
-          token.immediate(/`.{1}|`\n/)
+          token.immediate(/`.{1}|`\r?\n/)
         )
       ),
-      token.immediate(/\n+\"@/)
+      token.immediate(/(\r?\n)+\"@/)
     ),
 
     verbatim_string_characters: $ => token(seq(
@@ -139,15 +136,15 @@ module.exports = grammar({
 
     verbatim_here_string_characters: $ => token(
       seq(
-        /@\'\s*\n/,
+        /@\'\s*\r?\n/,
         repeat(
           choice(
-            /[^\n]/,
-            /\n+[^\'\n]/,
-            /\n\'[^@]/,
+            /[^\r\n]/,
+            /(\r?\n)+[^\'\r\n]/,
+            /\r?\n\'[^@]/,
           )
         ),
-        /\n+\'@/
+        /(\r?\n)+\'@/
       )
     ),
 
@@ -156,7 +153,7 @@ module.exports = grammar({
 
     // Type names
     type_identifier: $ => /[a-zA-Z0-9_]+/,
-    
+
     type_name: $ => choice(
       $.type_identifier,
       seq($.type_name, ".", $.type_identifier )
@@ -166,22 +163,21 @@ module.exports = grammar({
     generic_type_name: $ => seq($.type_name, "["),
 
     // Operators and punctuators
-
-    assignement_operator: $ => choice(
+    assignement_operator: _ => choice(
       "=", "!=", "+=", "*=", "/=", "%="
     ),
 
-    file_redirection_operator: $ => choice(
+    file_redirection_operator: _ => choice(
       ">",  ">>",  "2>",  "2>>",  "3>",  "3>>",  "4>",  "4>>",
       "5>",  "5>>",  "6>",  "6>>",  "*>",  "*>>",  "<"
     ),
 
-    merging_redirection_operator: $ => choice(
+    merging_redirection_operator: _ => choice(
       "*>&1",  "2>&1",  "3>&1",  "4>&1",  "5>&1",  "6>&1",
       "*>&2",  "1>&2",  "3>&2",  "4>&2",  "5>&2",  "6>&2"
     ),
 
-    comparison_operator: $ => choice(
+    comparison_operator: _ => choice(
       reservedWord("-as"),reservedWord("-ccontains"),reservedWord("-ceq"),
       reservedWord("-cge"),reservedWord("-cgt"),reservedWord("-cle"),
       reservedWord("-clike"),reservedWord("-clt"),reservedWord("-cmatch"),
@@ -201,10 +197,9 @@ module.exports = grammar({
       reservedWord("-shr"),reservedWord("-split")
     ),
 
-    format_operator: $ => reservedWord("-f"),
+    format_operator: _ => reservedWord("-f"),
 
     // Variables
-
     variable: $ => choice(
       '$$',
       '$^',
@@ -215,35 +210,34 @@ module.exports = grammar({
       $.braced_variable
     ),
 
-    braced_variable: $=> /\$\{[^}]+\}/,
+    braced_variable: _ => /\$\{[^}]+\}/,
 
     // Commands
-    generic_token: $ => token(
+    generic_token: _ => token(
       /[^\(\)\$\"\'\-\{\}@\|\[`\s][^\s\(\)\}\|;,]*/,
     ),
 
-    _command_token: $ => token(/[^\(\)\{\}\s;]+/),
+    _command_token: _ => token(/[^\(\)\{\}\s;]+/),
 
     // Parameters
-    command_parameter: $ => token(
+    command_parameter: _ => token(
       choice(
         /-+[a-zA-Z_?\-`]+/,
         "--"
       )
     ),
 
-    _verbatim_command_argument_chars: $ => repeat1(
+    _verbatim_command_argument_chars: _ => repeat1(
       choice(
         /"[^"]*"/,
         /&[^&]*/,
-        /[^\|\n]+/
+        /[^\|\r\n]+/
       )
     ),
 
     // Grammar
 
     // Statements
-
     script_block: $ => choice(
       field("script_block_body", $.script_block_body),
       seq(seq($.param_block, $._statement_terminator, repeat(";")), field("script_block_body", optional($.script_block_body)))
@@ -270,7 +264,7 @@ module.exports = grammar({
       field("named_block_list", $.named_block_list),
       field("statement_list", $.statement_list)
     ),
-    
+
     named_block_list: $ => repeat1(
       $.named_block
     ),
@@ -279,7 +273,7 @@ module.exports = grammar({
       $.block_name, $.statement_block
     ),
 
-    block_name: $ => choice(
+    block_name: _ => choice(
       reservedWord("dynamicparam"),
       reservedWord("begin"),
       reservedWord("process"),
@@ -309,7 +303,7 @@ module.exports = grammar({
       $.empty_statement
     )),
 
-    empty_statement: $ => prec(PREC.EMPTY, ";"),
+    empty_statement: _ => prec(PREC.EMPTY, ";"),
 
     if_statement: $ => prec.left(seq(
       reservedWord("if"), "(", field("condition", $.pipeline), ")", $.statement_block, field("elseif_clauses", optional($.elseif_clauses)), field("else_clause", optional($.else_clause))
@@ -337,7 +331,7 @@ module.exports = grammar({
 
     switch_parameters: $ => repeat1($.switch_parameter),
 
-    switch_parameter: $ => choice(
+    switch_parameter: _ => choice(
       reservedWord("-regex"),
       reservedWord("-wildcard"),
       reservedWord("-exact"),
@@ -370,18 +364,16 @@ module.exports = grammar({
       reservedWord("foreach"), optional($.foreach_parameter), "(", $.variable, reservedWord("in"), $.pipeline, ")", $.statement_block
     ),
 
-    foreach_parameter: $ => choice(
-      reservedWord("-parallel")
-    ),
+    foreach_parameter: _ => reservedWord("-parallel"),
 
     for_statement: $ => seq(
       reservedWord("for"), "(",
         optional(
-          seq(optional(seq(field("for_initializer", $.for_initializer), $._statement_terminator)), 
+          seq(optional(seq(field("for_initializer", $.for_initializer), $._statement_terminator)),
             optional(
-              seq(choice(";", "\n"), optional(seq(field("for_condition", $.for_condition), $._statement_terminator)),
+              seq(choice(";", token.immediate(/\r?\n/)), optional(seq(field("for_condition", $.for_condition), $._statement_terminator)),
                 optional(
-                  seq(choice(";", "\n"), optional(seq(field("for_iterator", $.for_iterator), $._statement_terminator)))
+                  seq(choice(";", token.immediate(/\r?\n/)), optional(seq(field("for_iterator", $.for_iterator), $._statement_terminator)))
                 )
               )
             )
@@ -400,7 +392,7 @@ module.exports = grammar({
       reservedWord("while"), "(", field("condition", $.while_condition), ")", $.statement_block
     ),
 
-    while_condition: $=> $.pipeline,
+    while_condition: $ => $.pipeline,
 
     do_statement: $ => seq(
       reservedWord("do"), $.statement_block, choice(reservedWord("while"), reservedWord("until")), "(", field("condition", $.while_condition), ")"
@@ -431,11 +423,11 @@ module.exports = grammar({
       seq(reservedWord("exit"), optional($.pipeline))
     ),
 
-    label: $ => token(seq(":", /[a-zA-Z_][a-zA-Z0-9_]*/)),
+    label: _ => token(seq(":", /[a-zA-Z_][a-zA-Z0-9_]*/)),
 
     label_expression: $ => choice(
       $.label,
-      $.unary_expression
+      $._unary_expression
     ),
 
     trap_statement: $ => seq(
@@ -472,7 +464,7 @@ module.exports = grammar({
       reservedWord("data"), optional($.data_name), optional($.data_commands_allowed), $.statement_block
     ),
 
-    data_name: $ =>$.simple_name,
+    data_name: $ => $.simple_name,
 
     data_commands_allowed: $ => seq(
       reservedWord("-supportedcommand"), $.data_commands_list
@@ -520,7 +512,7 @@ module.exports = grammar({
       seq($.command_invokation_operator, /*optional($.command_module),*/ field("command_name", $.command_name_expr), field("command_elements", optional($.command_elements)))
     ),
 
-    command_invokation_operator: $ => choice(
+    command_invokation_operator: _ => choice(
       ".",
       "&"
     ),
@@ -533,8 +525,8 @@ module.exports = grammar({
         choice(
           /[^\$"`]+/,
           $.variable,
-          /\$`(.{1}|`\n)/,
-          /`.{1}|`\n/,
+          /\$`(.{1}|`\r?\n)/,
+          /`.{1}|`\r?\n/,
           "\"\"",
           $.sub_expression
         )
@@ -544,10 +536,10 @@ module.exports = grammar({
     ),
 
     command_name: $ => prec.right(seq(
-      /[^\{\}\(\);,\|\&`"'\s\n\[\]\+\-\*\/\$@<\!%]+/,
+      /[^\{\}\(\);,\|\&`"'\s\r\n\[\]\+\-\*\/\$@<\!%]+/,
       repeat(
         choice(
-          token.immediate(/[^\{\}\(\);,\|\&"'\s\n]+/),
+          token.immediate(/[^\{\}\(\);,\|\&"'\s\r\n]+/),
           seq(token.immediate("\""), $._expandable_string_literal_immediate),
           token.immediate("\"\""),
           token.immediate("''")
@@ -583,11 +575,11 @@ module.exports = grammar({
     ),
 
     // Stop parsing is a token that end the parsing of command line
-    stop_parsing: $ => /--%[^\n]*/,
+    stop_parsing: _ => /--%[^\r\n]*/,
 
     // Generic token is hard to manage
     // So a definition is that a generic token must have to begin by one or more space char
-    command_argument_sep: $ => prec.right(choice(repeat1(" "), ":")),
+    command_argument_sep: _ => prec.right(choice(repeat1(" "), ":")),
 
     // Adapt the grammar to have same behavior
     _command_argument: $ => prec.right(choice(
@@ -614,8 +606,7 @@ module.exports = grammar({
     ),
 
     // Class
-
-    class_attribute : $ => choice(reservedWord("hidden"), reservedWord("static")),
+    class_attribute : _ => choice(reservedWord("hidden"), reservedWord("static")),
 
     class_property_definition: $ => seq(
       optional($.attribute),
@@ -650,7 +641,7 @@ module.exports = grammar({
     ),
 
     class_statement: $ => seq(
-      reservedWord("class"), $.simple_name, optional(seq(":", $.simple_name, repeat(seq(",", $.simple_name)))), 
+      reservedWord("class"), $.simple_name, optional(seq(":", $.simple_name, repeat(seq(",", $.simple_name)))),
       "{",
       repeat(
         choice(
@@ -662,7 +653,6 @@ module.exports = grammar({
     ),
 
     // Enums
-
     enum_statement: $ => seq(
       reservedWord("enum"), $.simple_name, "{",
       repeat(
@@ -677,99 +667,111 @@ module.exports = grammar({
     ),
 
     // Expressions
-    
-    _expression: $ => $.logical_expression,
-
-    logical_expression: $ => prec.left(choice(
+    _expression: $ => choice(
+      $.logical_expression,
       $.bitwise_expression,
-      seq (
-        $.logical_expression,
-        choice(reservedWord("-and"), reservedWord("-or"), reservedWord("-xor")), $.bitwise_expression
-      )
-    )),
-
-    bitwise_expression: $ => prec.left(choice(
       $.comparison_expression,
-      seq (
-        $.bitwise_expression,
-        choice(reservedWord("-band"), reservedWord("-bor"), reservedWord("-bxor")), $.comparison_expression
-      )
-    )),
-
-    comparison_expression: $ => prec.left(choice(
       $.additive_expression,
-      seq (
-        $.comparison_expression,
-        $.comparison_operator, $.additive_expression
-      )
-    )),
-
-    additive_expression: $ => prec.left(choice(
       $.multiplicative_expression,
-      seq (
-        $.additive_expression,
-        choice("+", "-"), $.multiplicative_expression
-      )
-    )),
-
-    multiplicative_expression: $ => prec.left(choice(
       $.format_expression,
-      seq (
-        $.multiplicative_expression,
-        choice("/", "\\", "%", "*"), $.format_expression
-      )
-    )),
-
-    format_expression: $ => prec.left(choice(
       $.range_expression,
-      seq (
-        $.format_expression,
-        $.format_operator, $.range_expression
-      )
-    )),
-
-    range_expression: $ => prec.left(choice(
       $.array_literal_expression,
-      seq (
-        $.range_expression,
-        "..", $.array_literal_expression
+      $._unary_expression,
+    ),
+
+    logical_expression: $ => prec.left(
+      seq(
+        $._expression,
+        choice(reservedWord("-and"), reservedWord("-or"), reservedWord("-xor")),
+        $._expression,
       )
-    )),
+    ),
+
+    bitwise_expression: $ => prec.left(
+      seq(
+        $._expression,
+        choice(reservedWord("-band"), reservedWord("-bor"), reservedWord("-bxor")),
+        $._expression,
+      )
+    ),
+
+    comparison_expression: $ => prec.left(
+      seq(
+        $._expression,
+        $.comparison_operator,
+        $._expression,
+      )
+    ),
+
+    additive_expression: $ => prec.left(
+      seq(
+        $._expression,
+        choice("+", "-"),
+        $._expression,
+      )
+    ),
+
+    multiplicative_expression: $ => prec.left(
+      seq(
+        $._expression,
+        choice("/", "\\", "%", "*"),
+        $._expression,
+      )
+    ),
+
+    format_expression: $ => prec.left(
+      seq(
+        $._expression,
+        $.format_operator,
+        $._expression,
+      )
+    ),
+
+    range_expression: $ => prec.left(
+      seq(
+        $._expression,
+        "..",
+        $._expression,
+      )
+    ),
 
     array_literal_expression: $ => prec.left(seq(
-      $.unary_expression,
-      repeat ( 
+      $._unary_expression,
+      repeat(
         seq(
           ",",
-          $.unary_expression
+          $._unary_expression
         )
       )
     )),
 
-    unary_expression: $ => prec.right(choice(
-      $._primary_expression,
-      $.expression_with_unary_operator
+    _unary_expression: $ => prec.right(choice(
+      $.unary_expression,
+      $._primary_expression
     )),
 
-    expression_with_unary_operator: $ => choice(
-      seq(",", $.unary_expression),
-      seq(reservedWord("-not"), $.unary_expression),
-      seq("!", $.unary_expression),
-      seq(reservedWord("-bnot"), $.unary_expression),
-      seq("+", $.unary_expression),
-      seq("-", $.unary_expression),
+    unary_expression: $ => prec.right(choice(
+      $._expression_with_unary_operator
+    )),
+
+    _expression_with_unary_operator: $ => choice(
+      seq(",", $._unary_expression),
+      seq(reservedWord("-not"), $._unary_expression),
+      seq("!", $._unary_expression),
+      seq(reservedWord("-bnot"), $._unary_expression),
+      seq("+", $._unary_expression),
+      seq("-", $._unary_expression),
       $.pre_increment_expression,
       $.pre_decrement_expression,
       $.cast_expression,
-      seq(reservedWord("-split"), $.unary_expression),
-      seq(reservedWord("-join"), $.unary_expression)
+      seq(reservedWord("-split"), $._unary_expression),
+      seq(reservedWord("-join"), $._unary_expression)
     ),
 
-    pre_increment_expression: $ => seq("++", $.unary_expression),
-    pre_decrement_expression: $ => seq("--", $.unary_expression),
+    pre_increment_expression: $ => seq("++", $._unary_expression),
+    pre_decrement_expression: $ => seq("--", $._unary_expression),
 
-
-    cast_expression: $ => prec(PREC.CAST, seq($.type_literal, $.unary_expression)),
+    cast_expression: $ => prec(PREC.CAST, seq($.type_literal, $._unary_expression)),
 
     attributed_variable: $ => seq($.type_literal, $.variable),
 
@@ -806,14 +808,14 @@ module.exports = grammar({
     hash_literal_body: $ => repeat1($.hash_entry),
 
     hash_entry: $ => seq(
-      $.key_expression, 
-      "=", 
+      $.key_expression,
+      "=",
       $._statement, $._statement_terminator, repeat(";")
     ),
 
     key_expression: $ => choice(
       $.simple_name,
-      $.unary_expression
+      $._unary_expression
     ),
 
     post_increment_expression: $ => prec(PREC.UNARY, seq($._primary_expression, "++")),
@@ -828,7 +830,7 @@ module.exports = grammar({
     member_name: $ => choice(
       $.simple_name,
       $.string_literal,
-      $.expression_with_unary_operator,
+      $._expression_with_unary_operator,
       $._value
     ),
 
@@ -861,7 +863,7 @@ module.exports = grammar({
         choice(reservedWord("-and"), reservedWord("-or"), reservedWord("-xor")), $.bitwise_argument_expression
       )
     )),
-    
+
     bitwise_argument_expression: $ => prec.left(choice(
       $.comparison_argument_expression,
       seq (
@@ -903,10 +905,10 @@ module.exports = grammar({
     )),
 
     range_argument_expression: $ => prec.left(choice(
-      $.unary_expression,
+      $._unary_expression,
       seq (
         $.range_argument_expression,
-        "..", $.unary_expression
+        "..", $._unary_expression
       )
     )),
 
@@ -918,7 +920,7 @@ module.exports = grammar({
       $.type_name
     ),
 
-    dimension: $ => repeat1(","),
+    dimension: _ => repeat1(","),
 
     generic_type_arguments: $ => seq(
       $.type_spec,
