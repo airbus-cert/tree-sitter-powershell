@@ -16,8 +16,6 @@ enum MyEnum
       (enum_member
         (simple_name)))))
 
-
-
 ===
 More complex enum
 ===
@@ -68,9 +66,7 @@ enum MyEnum
         (simple_name))
       (enum_member
         (simple_name)
-        (integer_literal
-          (decimal_integer_literal)))
+        (integer_literal))
       (enum_member
         (simple_name)
-        (integer_literal
-          (decimal_integer_literal))))))
+        (integer_literal)))))

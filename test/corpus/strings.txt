@@ -9,17 +9,8 @@ Strings : expandable
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (string_literal
-                          (expandable_string_literal))))))))))))))
+      (string_literal
+        (expandable_string_literal)))))
 
 ===
 Strings : empty expandable
@@ -32,17 +23,8 @@ Strings : empty expandable
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (string_literal
-                          (expandable_string_literal))))))))))))))
+      (string_literal
+        (expandable_string_literal)))))
 
 ===
 Strings : expandle with braced variable
@@ -55,19 +37,10 @@ Strings : expandle with braced variable
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (string_literal
-                          (expandable_string_literal
-                            (variable
-                              (braced_variable))))))))))))))))
+      (string_literal
+        (expandable_string_literal
+          (variable
+            (braced_variable)))))))
 
 ===
 Strings : expandle with subexpression
@@ -80,22 +53,13 @@ Strings : expandle with subexpression
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (string_literal
-                          (expandable_string_literal
-                            (sub_expression
-                              (statement_list
-                                (pipeline
-                                  (command
-                                    (command_name)))))))))))))))))))
+      (string_literal
+        (expandable_string_literal
+          (sub_expression
+            (statement_list
+              (pipeline
+                (command
+                  (command_name))))))))))
 
 ===
 Strings : verbatim
@@ -108,17 +72,8 @@ Strings : verbatim
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (string_literal
-                          (verbatim_string_characters))))))))))))))
+      (string_literal
+        (verbatim_string_characters)))))
 
 ===
 Strings : verbatim empty
@@ -131,17 +86,8 @@ Strings : verbatim empty
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (string_literal
-                          (verbatim_string_characters))))))))))))))
+      (string_literal
+        (verbatim_string_characters)))))
 
 ===
 Strings : verbatim here string
@@ -156,17 +102,8 @@ toto
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (string_literal
-                          (verbatim_here_string_characters))))))))))))))
+      (string_literal
+        (verbatim_here_string_characters)))))
 
 ===
 Strings : verbatim here string empty
@@ -181,17 +118,8 @@ Strings : verbatim here string empty
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (string_literal
-                          (verbatim_here_string_characters))))))))))))))
+      (string_literal
+        (verbatim_here_string_characters)))))
 
 ===
 Strings : expandle here string
@@ -206,17 +134,8 @@ Strings : expandle here string
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (string_literal
-                          (expandable_here_string_literal))))))))))))))
+      (string_literal
+        (expandable_here_string_literal)))))
 
 ===
 Strings : expandle here string with var
@@ -231,18 +150,9 @@ $toto
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (string_literal
-                          (expandable_here_string_literal
-                            (variable)))))))))))))))
+      (string_literal
+        (expandable_here_string_literal
+          (variable))))))
 
 ===
 Strings : expandle here string empty
@@ -257,18 +167,8 @@ Strings : expandle here string empty
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (string_literal
-                          (expandable_here_string_literal))))))))))))))
-
+      (string_literal
+        (expandable_here_string_literal)))))
 
 ===
 Strings : escape variable and print dollar
@@ -281,18 +181,8 @@ Strings : escape variable and print dollar
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (string_literal
-                          (expandable_string_literal))))))))))))))
-
+      (string_literal
+        (expandable_string_literal)))))
 
 ===
 Strings : concat var content and dollar
@@ -305,18 +195,9 @@ Strings : concat var content and dollar
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (string_literal
-                          (expandable_string_literal
-                            (variable)))))))))))))))
+      (string_literal
+        (expandable_string_literal
+          (variable))))))
 
 ===
 Strings : Single-quoted string
@@ -329,17 +210,8 @@ Strings : Single-quoted string
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (string_literal
-                          (verbatim_string_characters))))))))))))))
+      (string_literal
+        (verbatim_string_characters)))))
 
 ===
 Strings : Double-quoted string
@@ -352,17 +224,8 @@ Strings : Double-quoted string
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (string_literal
-                          (expandable_string_literal))))))))))))))
+      (string_literal
+        (expandable_string_literal)))))
 
 ===
 Strings : Variable substituted string
@@ -375,18 +238,9 @@ Strings : Variable substituted string
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (string_literal
-                          (expandable_string_literal
-                            (variable)))))))))))))))
+      (string_literal
+        (expandable_string_literal
+          (variable))))))
 
 ===
 Strings : Brace-variable substituted string
@@ -399,19 +253,10 @@ Strings : Brace-variable substituted string
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (string_literal
-                          (expandable_string_literal
-                            (variable
-                              (braced_variable))))))))))))))))
+      (string_literal
+        (expandable_string_literal
+          (variable
+            (braced_variable)))))))
 
 ===
 Strings : Escaped variable in double quoted string
@@ -424,17 +269,8 @@ Strings : Escaped variable in double quoted string
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (string_literal
-                          (expandable_string_literal))))))))))))))
+      (string_literal
+        (expandable_string_literal)))))
 
 ===
 Strings : Escaped brace variable in double quoted string
@@ -447,17 +283,8 @@ Strings : Escaped brace variable in double quoted string
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (string_literal
-                          (expandable_string_literal))))))))))))))
+      (string_literal
+        (expandable_string_literal)))))
 
 ===
 Strings : Regexp
@@ -470,17 +297,8 @@ Strings : Regexp
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (string_literal
-                          (expandable_string_literal))))))))))))))
+      (string_literal
+        (expandable_string_literal)))))
 
 ===
 Strings : Avoid comments
@@ -493,18 +311,8 @@ Strings : Avoid comments
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (string_literal
-                          (expandable_string_literal))))))))))))))
-
+      (string_literal
+        (expandable_string_literal)))))
 
 ===
 Strings : Avoid comments 2
@@ -517,15 +325,6 @@ Strings : Avoid comments 2
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (string_literal
-                          (expandable_string_literal
-                            (variable)))))))))))))))
+      (string_literal
+        (expandable_string_literal
+          (variable))))))
