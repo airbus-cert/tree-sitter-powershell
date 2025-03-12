@@ -18,7 +18,8 @@ Get-ChildItem .
           (variable))
         (assignement_operator)
         (pipeline
-          (integer_literal))))
+          (integer_literal
+            (decimal_integer_literal)))))
     (comment)
     (pipeline
       (command
@@ -47,7 +48,8 @@ Get-ChildItem .
           (variable))
         (assignement_operator)
         (pipeline
-          (integer_literal))))
+          (integer_literal
+            (decimal_integer_literal)))))
     (comment)
     (pipeline
       (command
@@ -84,7 +86,8 @@ Get-ChildItem .
           (variable))
         (assignement_operator)
         (pipeline
-          (integer_literal))))
+          (integer_literal
+            (decimal_integer_literal)))))
     (comment)
     (pipeline
       (command

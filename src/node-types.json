@@ -2293,7 +2293,21 @@
   {
     "type": "integer_literal",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "decimal_integer_literal",
+          "named": true
+        },
+        {
+          "type": "hexadecimal_integer_literal",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "invokation_expression",
@@ -5431,6 +5445,10 @@
     "named": false
   },
   {
+    "type": "decimal_integer_literal",
+    "named": true
+  },
+  {
     "type": "do",
     "named": false
   },
@@ -5484,6 +5502,10 @@
   },
   {
     "type": "generic_token",
+    "named": true
+  },
+  {
+    "type": "hexadecimal_integer_literal",
     "named": true
   },
   {

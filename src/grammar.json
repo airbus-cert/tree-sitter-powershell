@@ -90,15 +90,15 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_decimal_integer_literal"
+          "name": "decimal_integer_literal"
         },
         {
           "type": "SYMBOL",
-          "name": "_hexadecimal_integer_literal"
+          "name": "hexadecimal_integer_literal"
         }
       ]
     },
-    "_decimal_integer_literal": {
+    "decimal_integer_literal": {
       "type": "TOKEN",
       "content": {
         "type": "SEQ",
@@ -164,7 +164,7 @@
         ]
       }
     },
-    "_hexadecimal_integer_literal": {
+    "hexadecimal_integer_literal": {
       "type": "TOKEN",
       "content": {
         "type": "SEQ",

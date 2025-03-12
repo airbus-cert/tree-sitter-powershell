@@ -9,7 +9,8 @@ Integer
 (program
   (statement_list
     (pipeline
-      (integer_literal))))
+      (integer_literal
+        (decimal_integer_literal)))))
 
 ===
 Float
@@ -54,9 +55,11 @@ Byte size suffix
 (program
   (statement_list
     (pipeline
-      (integer_literal))
+      (integer_literal
+        (decimal_integer_literal)))
     (pipeline
-      (integer_literal))))
+      (integer_literal
+        (decimal_integer_literal)))))
 
 ===
 Integer operation
@@ -71,9 +74,12 @@ Integer operation
     (pipeline
       (additive_expression
         (additive_expression
-          (integer_literal)
-          (integer_literal))
-        (integer_literal)))))
+          (integer_literal
+            (decimal_integer_literal))
+          (integer_literal
+            (decimal_integer_literal)))
+        (integer_literal
+          (decimal_integer_literal))))))
 
 ===
 Integer operation with negative
@@ -88,10 +94,13 @@ Integer operation with negative
     (pipeline
       (additive_expression
         (additive_expression
-          (integer_literal)
-          (integer_literal))
+          (integer_literal
+            (decimal_integer_literal))
+          (integer_literal
+            (decimal_integer_literal)))
         (unary_expression
-          (integer_literal))))))
+          (integer_literal
+            (decimal_integer_literal)))))))
 
 ===
 Cast with composed expression
@@ -111,11 +120,13 @@ Cast with composed expression
               (type_spec
                 (type_name
                   (type_identifier))))
-            (integer_literal)))
+            (integer_literal
+              (decimal_integer_literal))))
         (unary_expression
           (cast_expression
             (type_literal
               (type_spec
                 (type_name
                   (type_identifier))))
-            (integer_literal)))))))
+            (integer_literal
+              (decimal_integer_literal))))))))

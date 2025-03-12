@@ -332,7 +332,8 @@ $upgrade += [char]($title[3] -bxor $update[$i])
                   (bitwise_expression
                     (element_access
                       (variable)
-                      (integer_literal))
+                      (integer_literal
+                        (decimal_integer_literal)))
                     (element_access
                       (variable)
                       (variable))))))))))))
@@ -352,7 +353,8 @@ $foo[-1..-$foo.Length]
         (variable)
         (range_expression
           (unary_expression
-            (integer_literal))
+            (integer_literal
+              (decimal_integer_literal)))
           (unary_expression
             (member_access
               (variable)

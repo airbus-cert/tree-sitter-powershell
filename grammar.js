@@ -63,15 +63,15 @@ module.exports = grammar({
 
     // Integer Literals
     integer_literal: $ => choice(
-      $._decimal_integer_literal,
-      $._hexadecimal_integer_literal
+      $.decimal_integer_literal,
+      $.hexadecimal_integer_literal
     ),
 
-    _decimal_integer_literal: _ => token(seq(
+    decimal_integer_literal: _ => token(seq(
       /[0-9]+/, optional(choice("l", "d")), optional(choice("kb", "mb", "gb", "tb", "pb"))
     )),
 
-    _hexadecimal_integer_literal: _ => token(seq(
+    hexadecimal_integer_literal: _ => token(seq(
       "0x", /[0-9a-fA-F]+/, optional("l"), optional(choice("kb", "mb", "gb", "tb", "pb"))
     )),
 

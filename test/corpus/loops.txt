@@ -23,7 +23,8 @@ for (($i = 0), ($j = 0); $i -lt 10; $i++)
                     (variable))
                   (assignement_operator)
                   value: (pipeline
-                    (integer_literal)))))
+                    (integer_literal
+                      (decimal_integer_literal))))))
             (parenthesized_expression
               (pipeline
                 (assignment_expression
@@ -31,13 +32,15 @@ for (($i = 0), ($j = 0); $i -lt 10; $i++)
                     (variable))
                   (assignement_operator)
                   value: (pipeline
-                    (integer_literal))))))))
+                    (integer_literal
+                      (decimal_integer_literal)))))))))
       for_condition: (for_condition
         (pipeline
           (comparison_expression
             (variable)
             (comparison_operator)
-            (integer_literal))))
+            (integer_literal
+              (decimal_integer_literal)))))
       for_iterator: (for_iterator
         (pipeline
           (post_increment_expression
@@ -80,7 +83,8 @@ for ($($i = 0;$j = 0); $i -lt 10; $i++)
                     (variable))
                   (assignement_operator)
                   (pipeline
-                    (integer_literal))))
+                    (integer_literal
+                      (decimal_integer_literal)))))
               (empty_statement)
               (pipeline
                 (assignment_expression
@@ -88,13 +92,15 @@ for ($($i = 0;$j = 0); $i -lt 10; $i++)
                     (variable))
                   (assignement_operator)
                   (pipeline
-                    (integer_literal))))))))
+                    (integer_literal
+                      (decimal_integer_literal)))))))))
       (for_condition
         (pipeline
           (comparison_expression
             (variable)
             (comparison_operator)
-            (integer_literal))))
+            (integer_literal
+              (decimal_integer_literal)))))
       (for_iterator
         (pipeline
           (post_increment_expression
@@ -130,7 +136,8 @@ for (;;)
           (variable))
         (assignement_operator)
         (pipeline
-          (integer_literal))))
+          (integer_literal
+            (decimal_integer_literal)))))
     (for_statement
       (statement_block
         (statement_list
@@ -162,7 +169,8 @@ for (;;$i++)
           (variable))
         (assignement_operator)
         (pipeline
-          (integer_literal))))
+          (integer_literal
+            (decimal_integer_literal)))))
     (for_statement
       (for_iterator
         (pipeline
@@ -198,14 +206,16 @@ for(;$i -le 10;$i++)
           (variable))
         (assignement_operator)
         (pipeline
-          (integer_literal))))
+          (integer_literal
+            (decimal_integer_literal)))))
     (for_statement
       (for_condition
         (pipeline
           (comparison_expression
             (variable)
             (comparison_operator)
-            (integer_literal))))
+            (integer_literal
+              (decimal_integer_literal)))))
       (for_iterator
         (pipeline
           (post_increment_expression
@@ -238,13 +248,15 @@ for($i=1; $i -le 10; $i++){Write-Host $i}
               (variable))
             (assignement_operator)
             (pipeline
-              (integer_literal)))))
+              (integer_literal
+                (decimal_integer_literal))))))
       (for_condition
         (pipeline
           (comparison_expression
             (variable)
             (comparison_operator)
-            (integer_literal))))
+            (integer_literal
+              (decimal_integer_literal)))))
       (for_iterator
         (pipeline
           (post_increment_expression
@@ -281,13 +293,15 @@ for ($i = 0
               (variable))
             (assignement_operator)
             (pipeline
-              (integer_literal)))))
+              (integer_literal
+                (decimal_integer_literal))))))
       (for_condition
         (pipeline
           (comparison_expression
             (variable)
             (comparison_operator)
-            (integer_literal))))
+            (integer_literal
+              (decimal_integer_literal)))))
       (for_iterator
         (pipeline
           (post_increment_expression

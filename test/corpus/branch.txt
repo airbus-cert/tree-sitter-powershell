@@ -15,7 +15,8 @@ if ($a -gt 2) {
         (comparison_expression
           (variable)
           (comparison_operator)
-          (integer_literal)))
+          (integer_literal
+            (decimal_integer_literal))))
       (statement_block
         (statement_list
           (pipeline
@@ -49,7 +50,8 @@ else {
         (comparison_expression
           (variable)
           (comparison_operator)
-          (integer_literal)))
+          (integer_literal
+            (decimal_integer_literal))))
       (statement_block
         (statement_list
           (pipeline
@@ -103,7 +105,8 @@ else {
         (comparison_expression
           (variable)
           (comparison_operator)
-          (integer_literal)))
+          (integer_literal
+            (decimal_integer_literal))))
       (statement_block
         (statement_list
           (pipeline
@@ -121,7 +124,8 @@ else {
             (comparison_expression
               (variable)
               (comparison_operator)
-              (integer_literal)))
+              (integer_literal
+                (decimal_integer_literal))))
           (statement_block
             (statement_list
               (pipeline
@@ -170,12 +174,14 @@ switch (3)
     (switch_statement
       (switch_condition
         (pipeline
-          (integer_literal)))
+          (integer_literal
+            (decimal_integer_literal))))
       (switch_body
         (switch_clauses
           (switch_clause
             (switch_clause_condition
-              (integer_literal))
+              (integer_literal
+                (decimal_integer_literal)))
             (statement_block
               (statement_list
                 (pipeline
@@ -183,7 +189,8 @@ switch (3)
                     (expandable_string_literal))))))
           (switch_clause
             (switch_clause_condition
-              (integer_literal))
+              (integer_literal
+                (decimal_integer_literal)))
             (statement_block
               (statement_list
                 (pipeline
@@ -191,7 +198,8 @@ switch (3)
                     (expandable_string_literal))))))
           (switch_clause
             (switch_clause_condition
-              (integer_literal))
+              (integer_literal
+                (decimal_integer_literal)))
             (statement_block
               (statement_list
                 (pipeline
@@ -199,7 +207,8 @@ switch (3)
                     (expandable_string_literal))))))
           (switch_clause
             (switch_clause_condition
-              (integer_literal))
+              (integer_literal
+                (decimal_integer_literal)))
             (statement_block
               (statement_list
                 (pipeline
@@ -227,13 +236,16 @@ switch (4, 2)
       (switch_condition
         (pipeline
           (array_literal_expression
-            (integer_literal)
-            (integer_literal))))
+            (integer_literal
+              (decimal_integer_literal))
+            (integer_literal
+              (decimal_integer_literal)))))
       (switch_body
         (switch_clauses
           (switch_clause
             (switch_clause_condition
-              (integer_literal))
+              (integer_literal
+                (decimal_integer_literal)))
             (statement_block
               statement_list: (statement_list
                 (pipeline
@@ -243,7 +255,8 @@ switch (4, 2)
                 (flow_control_statement))))
           (switch_clause
             (switch_clause_condition
-              (integer_literal))
+              (integer_literal
+                (decimal_integer_literal)))
             (statement_block
               statement_list: (statement_list
                 (pipeline
@@ -253,7 +266,8 @@ switch (4, 2)
                 (flow_control_statement))))
           (switch_clause
             (switch_clause_condition
-              (integer_literal))
+              (integer_literal
+                (decimal_integer_literal)))
             (statement_block
               statement_list: (statement_list
                 (pipeline
@@ -263,7 +277,8 @@ switch (4, 2)
                 (flow_control_statement))))
           (switch_clause
             (switch_clause_condition
-              (integer_literal))
+              (integer_literal
+                (decimal_integer_literal)))
             (statement_block
               statement_list: (statement_list
                 (pipeline
@@ -273,7 +288,8 @@ switch (4, 2)
                 (flow_control_statement))))
           (switch_clause
             (switch_clause_condition
-              (integer_literal))
+              (integer_literal
+                (decimal_integer_literal)))
             (statement_block
               statement_list: (statement_list
                 (pipeline

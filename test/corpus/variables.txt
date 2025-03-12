@@ -17,9 +17,12 @@ $Path = "C:\Windows\System32"
         (assignement_operator)
         (pipeline
           (array_literal_expression
-            (integer_literal)
-            (integer_literal)
-            (integer_literal)))))
+            (integer_literal
+              (decimal_integer_literal))
+            (integer_literal
+              (decimal_integer_literal))
+            (integer_literal
+              (decimal_integer_literal))))))
     (pipeline
       (assignment_expression
         (left_assignment_expression
@@ -89,7 +92,8 @@ $a = $b = $c = 0
                   (variable))
                 (assignement_operator)
                 (pipeline
-                  (integer_literal))))))))))
+                  (integer_literal
+                    (decimal_integer_literal)))))))))))
 
 ===
 Variable : Multi variables, Multi assignment
@@ -112,7 +116,8 @@ $i,$j = 10, "red", $true
         (assignement_operator)
         (pipeline
           (array_literal_expression
-            (integer_literal)
+            (integer_literal
+              (decimal_integer_literal))
             (string_literal
               (expandable_string_literal))
             (variable)))))
@@ -125,7 +130,8 @@ $i,$j = 10, "red", $true
         (assignement_operator)
         (pipeline
           (array_literal_expression
-            (integer_literal)
+            (integer_literal
+              (decimal_integer_literal))
             (string_literal
               (expandable_string_literal))
             (variable)))))))
@@ -162,14 +168,16 @@ $words += 10
           (variable))
         (assignement_operator)
         (pipeline
-          (integer_literal))))
+          (integer_literal
+            (decimal_integer_literal)))))
     (pipeline
       (assignment_expression
         (left_assignment_expression
           (variable))
         (assignement_operator)
         (pipeline
-          (integer_literal))))))
+          (integer_literal
+            (decimal_integer_literal)))))))
 
 ===
 Variable : Simple variable
