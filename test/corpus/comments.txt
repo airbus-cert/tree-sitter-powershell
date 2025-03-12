@@ -15,29 +15,11 @@ Get-ChildItem .
     (pipeline
       (assignment_expression
         (left_assignment_expression
-          (logical_expression
-            (bitwise_expression
-              (comparison_expression
-                (additive_expression
-                  (multiplicative_expression
-                    (format_expression
-                      (range_expression
-                        (array_literal_expression
-                          (unary_expression
-                            (variable)))))))))))
+          (variable))
         (assignement_operator)
         (pipeline
-          (logical_expression
-            (bitwise_expression
-              (comparison_expression
-                (additive_expression
-                  (multiplicative_expression
-                    (format_expression
-                      (range_expression
-                        (array_literal_expression
-                          (unary_expression
-                            (integer_literal
-                              (decimal_integer_literal))))))))))))))
+          (integer_literal
+            (decimal_integer_literal)))))
     (comment)
     (pipeline
       (command
@@ -45,7 +27,6 @@ Get-ChildItem .
         (command_elements
           (command_argument_sep)
           (generic_token))))))
-
 
 ===
 Single line block comment
@@ -64,29 +45,11 @@ Get-ChildItem .
     (pipeline
       (assignment_expression
         (left_assignment_expression
-          (logical_expression
-            (bitwise_expression
-              (comparison_expression
-                (additive_expression
-                  (multiplicative_expression
-                    (format_expression
-                      (range_expression
-                        (array_literal_expression
-                          (unary_expression
-                            (variable)))))))))))
+          (variable))
         (assignement_operator)
         (pipeline
-          (logical_expression
-            (bitwise_expression
-              (comparison_expression
-                (additive_expression
-                  (multiplicative_expression
-                    (format_expression
-                      (range_expression
-                        (array_literal_expression
-                          (unary_expression
-                            (integer_literal
-                              (decimal_integer_literal))))))))))))))
+          (integer_literal
+            (decimal_integer_literal)))))
     (comment)
     (pipeline
       (command
@@ -120,29 +83,11 @@ Get-ChildItem .
     (pipeline
       (assignment_expression
         (left_assignment_expression
-          (logical_expression
-            (bitwise_expression
-              (comparison_expression
-                (additive_expression
-                  (multiplicative_expression
-                    (format_expression
-                      (range_expression
-                        (array_literal_expression
-                          (unary_expression
-                            (variable)))))))))))
+          (variable))
         (assignement_operator)
         (pipeline
-          (logical_expression
-            (bitwise_expression
-              (comparison_expression
-                (additive_expression
-                  (multiplicative_expression
-                    (format_expression
-                      (range_expression
-                        (array_literal_expression
-                          (unary_expression
-                            (integer_literal
-                              (decimal_integer_literal))))))))))))))
+          (integer_literal
+            (decimal_integer_literal)))))
     (comment)
     (pipeline
       (command
@@ -164,16 +109,7 @@ $a
   (comment)
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (variable)))))))))))))
+      (variable))))
 
 ===
 Pathological block comment #2
@@ -189,13 +125,4 @@ $a
   (comment)
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (variable)))))))))))))
+      (variable))))
