@@ -17,6 +17,7 @@ module.exports = grammar({
     $.comment,
     /\s/,
     /`\n/,
+    /`\r\n/,
     /[\uFEFF\u2060\u200B\u00A0]/
   ],
 
@@ -27,9 +28,8 @@ module.exports = grammar({
     [$.expandable_string_literal],
     [$.path_command_name, $._value]
   ],
-  
-  rules: {
 
+  rules: {
     program: $ => seq(
       optional($.param_block),
       $.statement_list
@@ -38,14 +38,14 @@ module.exports = grammar({
     // Comments
     comment: $ => token(
       choice(
-        /#[^\n]*/,
+        /#[^\r\n]*/,
         seq(
           "<#",
           repeat(
             choice(
               /[^#`]+/,
               /#+[^>#]/,
-              /`.{1}|`\n/
+              /`.{1}|`\r?\n/
             )
           ),
           /#+>/
@@ -54,7 +54,6 @@ module.exports = grammar({
     ),
 
     // Literal
-
     _literal: $ => choice(
       $.integer_literal,
       $.string_literal,
@@ -62,7 +61,6 @@ module.exports = grammar({
     ),
 
     // Integer Literals
-
     integer_literal: $ => choice(
       $.decimal_integer_literal,
       $.hexadecimal_integer_literal
@@ -77,7 +75,6 @@ module.exports = grammar({
     )),
 
     // Real Literals
-
     real_literal: $ => token(choice(
       seq(/[0-9]+\.[0-9]+/, optional(token(seq("e", optional(choice("+", "-")), /[0-9]+/))), optional(choice("kb", "mb", "gb", "tb", "pb"))),
       seq(/\.[0-9]+/, optional(token(seq("e", optional(choice("+", "-")), /[0-9]+/))), optional(choice("kb", "mb", "gb", "tb", "pb"))),
@@ -85,7 +82,6 @@ module.exports = grammar({
     )),
 
     // String literal
-
     string_literal: $ => choice(
       $.expandable_string_literal,
       $.verbatim_string_characters,
@@ -100,8 +96,8 @@ module.exports = grammar({
           token.immediate(/[^\$\"`]+/),
           $.variable,
           $.sub_expression,
-          token.immediate(/\$(`.{1}|`\n|[\s\\])/),
-          token.immediate(/`.{1}|`\n/),
+          token.immediate(/\$(`.{1}|`\r?\n|[\s\\])/),
+          token.immediate(/`.{1}|`\r?\n/),
           token.immediate("\"\""),
           token.immediate("$"),
         )
@@ -111,19 +107,19 @@ module.exports = grammar({
     ),
 
     expandable_here_string_literal: $ => seq(
-      /@\" *\n/,
+      /@\" *\r?\n/,
       repeat(
         choice(
-          token.immediate(/[^\$\n`]+/),
+          token.immediate(/[^\$\r\n`]+/),
           $.variable,
           $.sub_expression,
-          token.immediate(/\n+[^\"\n]/),
-          token.immediate(/\n+\"[^@]/),
+          token.immediate(/(\r?\n)+[^\"\r\n]/),
+          token.immediate(/(\r?\n)+\"[^@]/),
           token.immediate("$"),
-          token.immediate(/`.{1}|`\n/)
+          token.immediate(/`.{1}|`\r?\n/)
         )
       ),
-      token.immediate(/\n+\"@/)
+      token.immediate(/(\r?\n)+\"@/)
     ),
 
     verbatim_string_characters: $ => token(seq(
@@ -139,15 +135,15 @@ module.exports = grammar({
 
     verbatim_here_string_characters: $ => token(
       seq(
-        /@\'\s*\n/,
+        /@\'\s*\r?\n/,
         repeat(
           choice(
-            /[^\n]/,
-            /\n+[^\'\n]/,
-            /\n\'[^@]/,
+            /[^\r\n]/,
+            /(\r?\n)+[^\'\r\n]/,
+            /\r?\n\'[^@]/,
           )
         ),
-        /\n+\'@/
+        /(\r?\n)+\'@/
       )
     ),
 
@@ -156,7 +152,7 @@ module.exports = grammar({
 
     // Type names
     type_identifier: $ => /[a-zA-Z0-9_]+/,
-    
+
     type_name: $ => choice(
       $.type_identifier,
       seq($.type_name, ".", $.type_identifier )
@@ -166,7 +162,6 @@ module.exports = grammar({
     generic_type_name: $ => seq($.type_name, "["),
 
     // Operators and punctuators
-
     assignement_operator: $ => choice(
       "=", "!=", "+=", "*=", "/=", "%="
     ),
@@ -204,7 +199,6 @@ module.exports = grammar({
     format_operator: $ => reservedWord("-f"),
 
     // Variables
-
     variable: $ => choice(
       '$$',
       '$^',
@@ -236,14 +230,13 @@ module.exports = grammar({
       choice(
         /"[^"]*"/,
         /&[^&]*/,
-        /[^\|\n]+/
+        /[^\|\r\n]+/
       )
     ),
 
     // Grammar
 
     // Statements
-
     script_block: $ => choice(
       field("script_block_body", $.script_block_body),
       seq(seq($.param_block, $._statement_terminator, repeat(";")), field("script_block_body", optional($.script_block_body)))
@@ -270,7 +263,7 @@ module.exports = grammar({
       field("named_block_list", $.named_block_list),
       field("statement_list", $.statement_list)
     ),
-    
+
     named_block_list: $ => repeat1(
       $.named_block
     ),
@@ -377,11 +370,11 @@ module.exports = grammar({
     for_statement: $ => seq(
       reservedWord("for"), "(",
         optional(
-          seq(optional(seq(field("for_initializer", $.for_initializer), $._statement_terminator)), 
+          seq(optional(seq(field("for_initializer", $.for_initializer), $._statement_terminator)),
             optional(
-              seq(choice(";", "\n"), optional(seq(field("for_condition", $.for_condition), $._statement_terminator)),
+              seq(choice(";", token.immediate(/\r?\n/)), optional(seq(field("for_condition", $.for_condition), $._statement_terminator)),
                 optional(
-                  seq(choice(";", "\n"), optional(seq(field("for_iterator", $.for_iterator), $._statement_terminator)))
+                  seq(choice(";", token.immediate(/\r?\n/)), optional(seq(field("for_iterator", $.for_iterator), $._statement_terminator)))
                 )
               )
             )
@@ -533,8 +526,8 @@ module.exports = grammar({
         choice(
           /[^\$"`]+/,
           $.variable,
-          /\$`(.{1}|`\n)/,
-          /`.{1}|`\n/,
+          /\$`(.{1}|`\r?\n)/,
+          /`.{1}|`\r?\n/,
           "\"\"",
           $.sub_expression
         )
@@ -544,10 +537,10 @@ module.exports = grammar({
     ),
 
     command_name: $ => prec.right(seq(
-      /[^\{\}\(\);,\|\&`"'\s\n\[\]\+\-\*\/\$@<\!%]+/,
+      /[^\{\}\(\);,\|\&`"'\s\r\n\[\]\+\-\*\/\$@<\!%]+/,
       repeat(
         choice(
-          token.immediate(/[^\{\}\(\);,\|\&"'\s\n]+/),
+          token.immediate(/[^\{\}\(\);,\|\&"'\s\r\n]+/),
           seq(token.immediate("\""), $._expandable_string_literal_immediate),
           token.immediate("\"\""),
           token.immediate("''")
@@ -583,7 +576,7 @@ module.exports = grammar({
     ),
 
     // Stop parsing is a token that end the parsing of command line
-    stop_parsing: $ => /--%[^\n]*/,
+    stop_parsing: $ => /--%[^\r\n]*/,
 
     // Generic token is hard to manage
     // So a definition is that a generic token must have to begin by one or more space char
@@ -614,7 +607,6 @@ module.exports = grammar({
     ),
 
     // Class
-
     class_attribute : $ => choice(reservedWord("hidden"), reservedWord("static")),
 
     class_property_definition: $ => seq(
@@ -650,7 +642,7 @@ module.exports = grammar({
     ),
 
     class_statement: $ => seq(
-      reservedWord("class"), $.simple_name, optional(seq(":", $.simple_name, repeat(seq(",", $.simple_name)))), 
+      reservedWord("class"), $.simple_name, optional(seq(":", $.simple_name, repeat(seq(",", $.simple_name)))),
       "{",
       repeat(
         choice(
@@ -662,7 +654,6 @@ module.exports = grammar({
     ),
 
     // Enums
-
     enum_statement: $ => seq(
       reservedWord("enum"), $.simple_name, "{",
       repeat(
@@ -677,7 +668,6 @@ module.exports = grammar({
     ),
 
     // Expressions
-    
     _expression: $ => $.logical_expression,
 
     logical_expression: $ => prec.left(choice(
@@ -738,7 +728,7 @@ module.exports = grammar({
 
     array_literal_expression: $ => prec.left(seq(
       $.unary_expression,
-      repeat ( 
+      repeat (
         seq(
           ",",
           $.unary_expression
@@ -767,7 +757,6 @@ module.exports = grammar({
 
     pre_increment_expression: $ => seq("++", $.unary_expression),
     pre_decrement_expression: $ => seq("--", $.unary_expression),
-
 
     cast_expression: $ => prec(PREC.CAST, seq($.type_literal, $.unary_expression)),
 
@@ -806,8 +795,8 @@ module.exports = grammar({
     hash_literal_body: $ => repeat1($.hash_entry),
 
     hash_entry: $ => seq(
-      $.key_expression, 
-      "=", 
+      $.key_expression,
+      "=",
       $._statement, $._statement_terminator, repeat(";")
     ),
 
@@ -861,7 +850,7 @@ module.exports = grammar({
         choice(reservedWord("-and"), reservedWord("-or"), reservedWord("-xor")), $.bitwise_argument_expression
       )
     )),
-    
+
     bitwise_argument_expression: $ => prec.left(choice(
       $.comparison_argument_expression,
       seq (
