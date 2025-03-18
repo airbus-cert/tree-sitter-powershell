@@ -5,67 +5,68 @@
 #include <wctype.h>
 
 enum TOKEN_TYPE {
-    STATEMENT_TERMINATOR
+  STATEMENT_TERMINATOR
 };
 
-/* --- API --- */
+// Helper function to consume whitespace.
+static inline void skip(TSLexer *lexer) {
+  lexer->advance(lexer, true);
+}
 
-void *tree_sitter_powershell_external_scanner_create();
-
-void tree_sitter_powershell_external_scanner_destroy(void *p);
-
-unsigned tree_sitter_powershell_external_scanner_serialize(void *payload, char *buffer);
-
-void tree_sitter_powershell_external_scanner_deserialize(void *payload, const char *buffer, unsigned length);
-
-bool tree_sitter_powershell_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols);
-
-/* --- Internal Functions --- */
-
-static void skip(TSLexer *lexer) { lexer->advance(lexer, true); }
-
-static bool scan_statement_terminator(void *payload, TSLexer *lexer, const bool *valid_symbols)
-{
-    if (valid_symbols[STATEMENT_TERMINATOR]) {
-        lexer->result_symbol = STATEMENT_TERMINATOR;
-        // This token has no characters -- everything is lookahead to determine its existence
-        lexer->mark_end(lexer);
-
-        for (;;) {
-            if (lexer->lookahead == 0) return true;
-            if (lexer->lookahead == '}') return true;
-            if (lexer->lookahead == ';') return true;
-            if (lexer->lookahead == ')') return true;
-            if (lexer->lookahead == '\n') return true;
-            if (!iswspace(lexer->lookahead)) return false;
-            skip(lexer);
-        }
-    }
-
+static bool scan_statement_terminator(void *payload, TSLexer *lexer, const bool *valid_symbols) {
+  // Only scan if the parser expects a STATEMENT_TERMINATOR.
+  if (!valid_symbols[STATEMENT_TERMINATOR])
     return false;
+
+  lexer->result_symbol = STATEMENT_TERMINATOR;
+  lexer->mark_end(lexer);
+
+  // Consume all whitespace, handling CR and CR+LF sequences.
+  while (iswspace(lexer->lookahead)) {
+    // If a carriage return, check if it's part of a CR+LF sequence.
+    if (lexer->lookahead == '\r') {
+      skip(lexer);
+      if (lexer->lookahead == '\n') {
+        skip(lexer);
+        return true;
+      }
+      return true;
+    }
+    skip(lexer);
+  }
+
+  // Check for expected terminator characters.
+  if (lexer->lookahead == 0 ||   // End-of-file
+      lexer->lookahead == '}' ||
+      lexer->lookahead == ';' ||
+      lexer->lookahead == ')' ||
+      lexer->lookahead == '\n') {
+    return true;
+  }
+
+  // If none of the expected characters are found, fail to match.
+  return false;
 }
 
-/* --- API Implementation --- */
+// --- API Implementation ---
 
-bool tree_sitter_powershell_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols)
-{
-    return scan_statement_terminator(payload, lexer, valid_symbols);
+void *tree_sitter_powershell_external_scanner_create() {
+  return NULL;
 }
 
-void *tree_sitter_powershell_external_scanner_create()
-{
-    return NULL;
+void tree_sitter_powershell_external_scanner_destroy(void *p) {
+  // No state to clean up.
 }
 
-void tree_sitter_powershell_external_scanner_destroy(void *p)
-{
+unsigned tree_sitter_powershell_external_scanner_serialize(void *payload, char *buffer) {
+  // No state to serialize.
+  return 0;
 }
 
-unsigned tree_sitter_powershell_external_scanner_serialize(void *payload, char *buffer)
-{
-    return 0;
+void tree_sitter_powershell_external_scanner_deserialize(void *payload, const char *buffer, unsigned length) {
+  // No state to deserialize.
 }
 
-void tree_sitter_powershell_external_scanner_deserialize(void *payload, const char *buffer, unsigned length)
-{
+bool tree_sitter_powershell_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols) {
+  return scan_statement_terminator(payload, lexer, valid_symbols);
 }
