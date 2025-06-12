@@ -199,17 +199,32 @@ module.exports = grammar({
     format_operator: $ => reservedWord("-f"),
 
     // Variables
+    variable_name: _ => token(seq(
+      optional(
+        seq(
+          choice(
+            reservedWord("global:"), 
+            reservedWord("local:"), 
+            reservedWord("private:"), 
+            reservedWord("script:"), 
+            reservedWord("using:"), 
+            reservedWord("workflow:"), 
+            /[a-zA-Z0-9_]+/
+          ), 
+          ":"
+        )
+      ), 
+      /[a-zA-Z0-9_]+|\?/
+    )),
+    
     variable: $ => choice(
       '$$',
       '$^',
       '$?',
       '$_',
-      token(seq('$', optional(seq(choice(reservedWord("global:"), reservedWord("local:"), reservedWord("private:"), reservedWord("script:"), reservedWord("using:"), reservedWord("workflow:"), /[a-zA-Z0-9_]+/), ":")), /[a-zA-Z0-9_]+|\?/)),
-      token(seq('@', optional(seq(choice(reservedWord("global:"), reservedWord("local:"), reservedWord("private:"), reservedWord("script:"), reservedWord("using:"), reservedWord("workflow:"), /[a-zA-Z0-9_]+/), ":")), /[a-zA-Z0-9_]+|\?/)),
-      $.braced_variable
+      seq(choice('$', '@'), $.variable_name),
+      seq('${', $.variable_name, '}'),
     ),
-
-    braced_variable: $=> /\$\{[^}]+\}/,
 
     // Commands
     generic_token: $ => token(
