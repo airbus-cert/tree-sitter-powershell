@@ -209,14 +209,14 @@ module.exports = grammar({
       // Simple variable with $ or spalted with @
       token(seq(
         choice('$', '@'), 
-        optional(seq(choice(reservedWord("global"), reservedWord("local"), reservedWord("private"), reservedWord("script"), reservedWord("using"), reservedWord("workflow"), reservedWord("function"), /[a-zA-Z0-9_]+/), ":")), 
+        optional(seq(choice(reservedWord("global"), reservedWord("local"), reservedWord("private"), reservedWord("script"), reservedWord("using"), reservedWord("workflow"), reservedWord("alias"), reservedWord("env"), reservedWord("function"), reservedWord("variable"), /[a-zA-Z0-9_]+/), ":")), 
         /([a-zA-Z0-9_?]+:?)+/
       )),
       
       // Braced variable surrounded by ${}
       token(seq(
         "${", 
-        optional(seq(choice(reservedWord("global"), reservedWord("local"), reservedWord("private"), reservedWord("script"), reservedWord("using"), reservedWord("workflow"), reservedWord("function"), /[a-zA-Z0-9_]+/), ":")), 
+        optional(seq(choice(reservedWord("global"), reservedWord("local"), reservedWord("private"), reservedWord("script"), reservedWord("using"), reservedWord("workflow"), reservedWord("alias"), reservedWord("env"), reservedWord("function"), reservedWord("variable"), /[a-zA-Z0-9_]+/), ":")), 
         /([^}]|`\})+\}/
       )),
     ),
