@@ -217,13 +217,18 @@ module.exports = grammar({
       /[a-zA-Z0-9_]+|\?/
     )),
     
-    variable: $ => choice(
+    variable: _ => choice(
       '$$',
       '$^',
       '$?',
       '$_',
-      seq(choice('$', '@'), $.variable_name),
-      seq('${', $.variable_name, '}'),
+      '$::',  // Weird variable allowed in powershell
+      
+      // Simple variable with $ or spalted with @
+      token(seq(choice('$', '@'), optional(seq(choice(reservedWord("global"), reservedWord("local"), reservedWord("private"), reservedWord("script"), reservedWord("using"), reservedWord("workflow"), reservedWord("function"), /[a-zA-Z0-9_]+/), ":")), /([a-zA-Z0-9_?]+:?)+/)),
+      
+      // Braced variable surrounded by ${}
+      token(seq("${", optional(seq(choice(reservedWord("global"), reservedWord("local"), reservedWord("private"), reservedWord("script"), reservedWord("using"), reservedWord("workflow"), reservedWord("function"), /[a-zA-Z0-9_]+/), ":")), /([^}]|`\})+\}/)),
     ),
 
     // Commands
