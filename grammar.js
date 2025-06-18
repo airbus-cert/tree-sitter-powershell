@@ -607,7 +607,7 @@ module.exports = grammar({
     ),
 
     // Class
-    class_attribute : $ => choice(reservedWord("hidden"), reservedWord("static")),
+    class_attribute : $ => choice(token(reservedWord("hidden")), token(reservedWord("static"))),
 
     class_property_definition: $ => seq(
       optional($.attribute),
@@ -642,7 +642,7 @@ module.exports = grammar({
     ),
 
     class_statement: $ => seq(
-      reservedWord("class"), $.simple_name, optional(seq(":", $.simple_name, repeat(seq(",", $.simple_name)))),
+      token(reservedWord("class")), $.simple_name, optional(seq(":", $.simple_name, repeat(seq(",", $.simple_name)))),
       "{",
       repeat(
         choice(
@@ -655,7 +655,7 @@ module.exports = grammar({
 
     // Enums
     enum_statement: $ => seq(
-      reservedWord("enum"), $.simple_name, "{",
+      token(reservedWord("enum")), $.simple_name, "{",
       repeat(
         seq($.enum_member, $._statement_terminator, repeat(";"))
       ),
@@ -943,7 +943,7 @@ function reservedWord(word) {
 }
 
 function reserved(regex) {
-  return token(prec(PREC.KEYWORD, new RegExp(regex)))
+  return prec(PREC.KEYWORD, new RegExp(regex))
 }
 
 function caseInsensitive(word) {

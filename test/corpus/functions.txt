@@ -485,3 +485,17 @@ function 1+1{
           (parameter_list
             (script_parameter
               (variable))))))))
+
+
+===
+Function name as keyword
+===
+
+function while {}
+
+---
+
+(program
+  (statement_list
+    (function_statement
+      (function_name))))

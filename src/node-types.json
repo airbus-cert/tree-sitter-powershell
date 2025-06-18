@@ -3892,10 +3892,6 @@
     "named": false
   },
   {
-    "type": "class",
-    "named": false
-  },
-  {
     "type": "command_parameter",
     "named": true
   },
@@ -3936,10 +3932,6 @@
     "named": false
   },
   {
-    "type": "enum",
-    "named": false
-  },
-  {
     "type": "exit",
     "named": false
   },
@@ -3974,10 +3966,6 @@
   {
     "type": "hexadecimal_integer_literal",
     "named": true
-  },
-  {
-    "type": "hidden",
-    "named": false
   },
   {
     "type": "if",
@@ -4026,10 +4014,6 @@
   {
     "type": "simple_name",
     "named": true
-  },
-  {
-    "type": "static",
-    "named": false
   },
   {
     "type": "stop_parsing",
