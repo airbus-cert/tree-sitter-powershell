@@ -28,8 +28,6 @@
 "inlinescript" @keyword
 "parallel" @keyword
 "sequence" @keyword
-"class" @keyword
-"enum" @keyword
 
 "-as" @operator
 "-ccontains" @operator
