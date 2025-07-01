@@ -3468,6 +3468,10 @@
     "named": false
   },
   {
+    "type": "-=",
+    "named": false
+  },
+  {
     "type": "-and",
     "named": false
   },

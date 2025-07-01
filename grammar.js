@@ -163,7 +163,7 @@ module.exports = grammar({
 
     // Operators and punctuators
     assignement_operator: $ => choice(
-      "=", "!=", "+=", "*=", "/=", "%="
+      "=", "!=", "+=", "*=", "/=", "%=", "-="
     ),
 
     file_redirection_operator: $ => choice(
