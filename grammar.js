@@ -3,7 +3,8 @@ const PREC = {
   UNARY: 2,
   CAST : 3,
   ELEMENT_ACCESS : 4,
-  EMPTY : 5
+  EMPTY : 5,
+  PARAM : 6
 }
 
 module.exports = grammar({
@@ -536,7 +537,7 @@ module.exports = grammar({
       "\""
     ),
 
-    command_name: $ => prec.right(seq(
+    command_name: $ => seq(
       /[^\{\}\(\);,\|\&`"'\s\r\n\[\]\+\-\*\/\$@<\!%]+/,
       repeat(
         choice(
@@ -546,17 +547,15 @@ module.exports = grammar({
           token.immediate("''")
         )
       )
-    )),
+    ),
 
     path_command_name_token: $ => /[0-9a-zA-Z_?\-\.\\]+/,
 
     // Use to parse command path
-    path_command_name: $ => prec.right(
-      repeat1(
-        choice(
-          $.path_command_name_token,
-          $.variable
-        )
+    path_command_name: $ => repeat1(
+      choice(
+        $.path_command_name_token,
+        $.variable
       )
     ),
 
@@ -568,12 +567,12 @@ module.exports = grammar({
 
     command_elements: $ => prec.right(repeat1($._command_element)),
 
-    _command_element: $ => choice(
+    _command_element: $ => prec.right(choice(
       $.command_parameter,
       seq($._command_argument, optional($.argument_list)),
       $.redirection,
       $.stop_parsing
-    ),
+    )),
 
     // Stop parsing is a token that end the parsing of command line
     stop_parsing: $ => /--%[^\r\n]*/,
@@ -583,9 +582,10 @@ module.exports = grammar({
     command_argument_sep: $ => prec.right(choice(repeat1(" "), ":")),
 
     // Adapt the grammar to have same behavior
-    _command_argument: $ => prec.right(choice(
+    _command_argument: $ => prec.right(PREC.PARAM, choice(
       seq($.command_argument_sep, optional($.generic_token)),
-      seq($.command_argument_sep, $.array_literal_expression)
+      seq($.command_argument_sep, $.array_literal_expression),
+      $.parenthesized_expression
     )),
 
     foreach_command: $ => seq(choice("%", reservedWord("foreach-object")), field("command_elements", repeat1($.script_block_expression))),
