@@ -200,17 +200,27 @@ module.exports = grammar({
     format_operator: $ => reservedWord("-f"),
 
     // Variables
-    variable: $ => choice(
+    variable: _ => choice(
       '$$',
       '$^',
       '$?',
       '$_',
-      token(seq('$', optional(seq(choice(reservedWord("global:"), reservedWord("local:"), reservedWord("private:"), reservedWord("script:"), reservedWord("using:"), reservedWord("workflow:"), /[a-zA-Z0-9_]+/), ":")), /[a-zA-Z0-9_]+|\?/)),
-      token(seq('@', optional(seq(choice(reservedWord("global:"), reservedWord("local:"), reservedWord("private:"), reservedWord("script:"), reservedWord("using:"), reservedWord("workflow:"), /[a-zA-Z0-9_]+/), ":")), /[a-zA-Z0-9_]+|\?/)),
-      $.braced_variable
+      '$::',  // Weird variable allowed in powershell
+      
+      // Simple variable with $ or spalted with @
+      token(seq(
+        choice('$', '@'), 
+        optional(seq(choice(reservedWord("global"), reservedWord("local"), reservedWord("private"), reservedWord("script"), reservedWord("using"), reservedWord("workflow"), reservedWord("alias"), reservedWord("env"), reservedWord("function"), reservedWord("variable"), /[a-zA-Z0-9_]+/), ":")), 
+        /([a-zA-Z0-9_?]+:?)+/
+      )),
+      
+      // Braced variable surrounded by ${}
+      token(seq(
+        "${", 
+        optional(seq(choice(reservedWord("global"), reservedWord("local"), reservedWord("private"), reservedWord("script"), reservedWord("using"), reservedWord("workflow"), reservedWord("alias"), reservedWord("env"), reservedWord("function"), reservedWord("variable"), /[a-zA-Z0-9_]+/), ":")), 
+        /([^}]|`\})+\}/
+      )),
     ),
-
-    braced_variable: $=> /\$\{[^}]+\}/,
 
     // Commands
     generic_token: $ => token(
