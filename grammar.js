@@ -538,7 +538,29 @@ module.exports = grammar({
     ),
 
     command_name: $ => seq(
-      /[^\{\}\(\);,\|\&`"'\s\r\n\[\]\+\-\*\/\$@<\!%]+/,
+      choice(
+        /[^\{\}\(\);,\|\&`"'\s\r\n\[\]\+\-\*\/\$@<\!%]+/,
+        // tree-sitter does not allow to control lexer
+        // each start keyword into _statement rule must be present here
+        // https://github.com/airbus-cert/tree-sitter-powershell/issues/24
+        new RegExp(caseInsensitive("break-")),
+        new RegExp(caseInsensitive("continue-")),
+        new RegExp(caseInsensitive("throw-")),
+        new RegExp(caseInsensitive("return-")),
+        new RegExp(caseInsensitive("exit-")),
+        new RegExp(caseInsensitive("try-")),
+        new RegExp(caseInsensitive("trap-")),
+        new RegExp(caseInsensitive("if-")),
+        new RegExp(caseInsensitive("function-")),
+        new RegExp(caseInsensitive("filter-")),
+        new RegExp(caseInsensitive("workflow-")),
+        new RegExp(caseInsensitive("class-")),
+        new RegExp(caseInsensitive("enum-")),
+        new RegExp(caseInsensitive("switch-")),
+        new RegExp(caseInsensitive("for-")),
+        new RegExp(caseInsensitive("while-")),
+        new RegExp(caseInsensitive("parallel-")),
+      ),
       repeat(
         choice(
           token.immediate(/[^\{\}\(\);,\|\&"'\s\r\n]+/),

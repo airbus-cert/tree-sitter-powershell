@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-powershell",
-  "version": "0.25.8",
+  "version": "0.25.9",
   "description": "",
   "main": "bindings/node",
   "types": "bindings/node",
