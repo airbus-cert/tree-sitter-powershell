@@ -9,14 +9,15 @@ Write-Host "CERT"
 (program
   (statement_list
     (pipeline
-      (command
-        (command_name)
-        (command_elements
-          (command_argument_sep)
-          (array_literal_expression
-            (unary_expression
-              (string_literal
-                (expandable_string_literal)))))))))
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (string_literal
+                  (expandable_string_literal))))))))))
 
 ===
 Cmdlet that start with a number
@@ -29,11 +30,12 @@ Cmdlet that start with a number
 (program
   (statement_list
     (pipeline
-      (command
-        (command_name)
-        (command_elements
-          (command_argument_sep)
-          (generic_token))))))
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (generic_token)))))))
 
 ===
 Cmdlet with mixed string
@@ -46,13 +48,14 @@ Cmdlet with mixed string
 (program
   (statement_list
     (pipeline
-      (command
-        (command_name
-          (variable
-            (braced_variable)))
-        (command_elements
-          (command_argument_sep)
-          (generic_token))))))
+      (pipeline_chain
+        (command
+          (command_name
+            (variable
+              (braced_variable)))
+          (command_elements
+            (command_argument_sep)
+            (generic_token)))))))
 
 ===
 Plain cmdlet
@@ -65,74 +68,78 @@ New-DynamicParam -Name Plugins -type string[] -ValidateSet $(((gci .\plugins\*.p
 (program
   (statement_list
     (pipeline
-      (command
-        command_name: (command_name)
-        command_elements: (command_elements
-          (command_argument_sep)
-          (command_parameter)
-          (command_argument_sep)
-          (generic_token)
-          (command_argument_sep)
-          (command_parameter)
-          (command_argument_sep)
-          (generic_token)
-          (command_argument_sep)
-          (command_parameter)
-          (command_argument_sep)
-          (array_literal_expression
-            (unary_expression
-              (sub_expression
-                statements: (statement_list
-                  (pipeline
-                    (logical_expression
-                      (bitwise_expression
-                        (comparison_expression
-                          (comparison_expression
-                            (additive_expression
-                              (multiplicative_expression
-                                (format_expression
-                                  (range_expression
-                                    (array_literal_expression
-                                      (unary_expression
-                                        (parenthesized_expression
-                                          (pipeline
-                                            (logical_expression
-                                              (bitwise_expression
-                                                (comparison_expression
-                                                  (additive_expression
-                                                    (multiplicative_expression
-                                                      (format_expression
-                                                        (range_expression
-                                                          (array_literal_expression
-                                                            (unary_expression
-                                                              (member_access
-                                                                (parenthesized_expression
-                                                                  (pipeline
-                                                                    (command
-                                                                      command_name: (command_name)
-                                                                      command_elements: (command_elements
-                                                                        (command_argument_sep)
-                                                                        (generic_token)))))
-                                                                (member_name
-                                                                  (simple_name)))))))))))))))))))))
-                          (comparison_operator)
-                          (additive_expression
-                            (multiplicative_expression
-                              (format_expression
-                                (range_expression
-                                  (array_literal_expression
-                                    (unary_expression
-                                      (string_literal
-                                        (expandable_string_literal)))
-                                    (unary_expression
-                                      (string_literal
-                                        (expandable_string_literal))))))))))))))))
-          (command_argument_sep)
-          (command_parameter)
-          (command_argument_sep)
-          (array_literal_expression
-            (unary_expression
-              (variable))))))))
+      (pipeline_chain
+        (command
+          command_name: (command_name)
+          command_elements: (command_elements
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (sub_expression
+                  statements: (statement_list
+                    (pipeline
+                      (pipeline_chain
+                        (logical_expression
+                          (bitwise_expression
+                            (comparison_expression
+                              (comparison_expression
+                                (additive_expression
+                                  (multiplicative_expression
+                                    (format_expression
+                                      (range_expression
+                                        (array_literal_expression
+                                          (unary_expression
+                                            (parenthesized_expression
+                                              (pipeline
+                                                (pipeline_chain
+                                                  (logical_expression
+                                                    (bitwise_expression
+                                                      (comparison_expression
+                                                        (additive_expression
+                                                          (multiplicative_expression
+                                                            (format_expression
+                                                              (range_expression
+                                                                (array_literal_expression
+                                                                  (unary_expression
+                                                                    (member_access
+                                                                      (parenthesized_expression
+                                                                        (pipeline
+                                                                          (pipeline_chain
+                                                                            (command
+                                                                              command_name: (command_name)
+                                                                              command_elements: (command_elements
+                                                                                (command_argument_sep)
+                                                                                (generic_token))))))
+                                                                      (member_name
+                                                                        (simple_name))))))))))))))))))))))
+                              (comparison_operator)
+                              (additive_expression
+                                (multiplicative_expression
+                                  (format_expression
+                                    (range_expression
+                                      (array_literal_expression
+                                        (unary_expression
+                                          (string_literal
+                                            (expandable_string_literal)))
+                                        (unary_expression
+                                          (string_literal
+                                            (expandable_string_literal)))))))))))))))))
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (variable)))))))))
 
 
 ===
@@ -146,14 +153,15 @@ i''ex "pwd"
 (program
   (statement_list
     (pipeline
-      (command
-        (command_name)
-        (command_elements
-          (command_argument_sep)
-          (array_literal_expression
-            (unary_expression
-              (string_literal
-                (expandable_string_literal)))))))))
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (string_literal
+                  (expandable_string_literal))))))))))
 
 ===
 Double Quoted CmdLet
@@ -166,14 +174,15 @@ i""ex "pwd"
 (program
   (statement_list
     (pipeline
-      (command
-        (command_name)
-        (command_elements
-          (command_argument_sep)
-          (array_literal_expression
-            (unary_expression
-              (string_literal
-                (expandable_string_literal)))))))))
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (string_literal
+                  (expandable_string_literal))))))))))
 
 ===
 Obfuscated cmdlet and string
@@ -186,14 +195,15 @@ ie""x'' "p`"`"w''d`"`""
 (program
   (statement_list
     (pipeline
-      (command
-        (command_name)
-        (command_elements
-          (command_argument_sep)
-          (array_literal_expression
-            (unary_expression
-              (string_literal
-                (expandable_string_literal)))))))))
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (string_literal
+                  (expandable_string_literal))))))))))
 
 ===
 Native command
@@ -206,8 +216,9 @@ net.exe
 (program
   (statement_list
     (pipeline
-      (command
-        (command_name)))))
+      (pipeline_chain
+        (command
+          (command_name))))))
 
 
 ===
@@ -221,19 +232,20 @@ git clone -b this_branch --single-branch https://github.com/PowerShell/PowerShel
 (program
   (statement_list
     (pipeline
-      (command
-        (command_name)
-        (command_elements
-          (command_argument_sep)
-          (generic_token)
-          (command_argument_sep)
-          (command_parameter)
-          (command_argument_sep)
-          (generic_token)
-          (command_argument_sep)
-          (command_parameter)
-          (command_argument_sep)
-          (generic_token))))))
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (generic_token)))))))
 
 ===
 Windows-style native command
@@ -246,23 +258,24 @@ net use e: \\usrsvr002\smithmark Ue345Ii /user:pdc01\msmith2 /savecred /p:yes
 (program
   (statement_list
     (pipeline
-      (command
-        (command_name)
-        (command_elements
-          (command_argument_sep)
-          (generic_token)
-          (command_argument_sep)
-          (generic_token)
-          (command_argument_sep)
-          (generic_token)
-          (command_argument_sep)
-          (generic_token)
-          (command_argument_sep)
-          (generic_token)
-          (command_argument_sep)
-          (generic_token)
-          (command_argument_sep)
-          (generic_token))))))
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)
+            (generic_token)))))))
 
 
 ===
@@ -276,39 +289,35 @@ Foreach statement without token separator
 (program
   (statement_list
     (pipeline
-      (command
-        (foreach_command
-          (script_block_expression
-            (script_block
-              (script_block_body
-                (statement_list
-                  (pipeline
-                    (logical_expression
-                      (bitwise_expression
-                        (comparison_expression
-                          (additive_expression
-                            (multiplicative_expression
-                              (format_expression
-                                (range_expression
-                                  (array_literal_expression
-                                    (unary_expression
-                                      (parenthesized_expression
-                                        (pipeline
-                                          (logical_expression
-                                            (bitwise_expression
-                                              (comparison_expression
-                                                (additive_expression
-                                                  (multiplicative_expression
-                                                    (format_expression
-                                                      (range_expression
-                                                        (array_literal_expression
-                                                          (unary_expression
-                                                            (expression_with_unary_operator
-                                                              (cast_expression
-                                                                (type_literal
-                                                                  (type_spec
-                                                                    (type_name
-                                                                      (type_identifier))))
+      (pipeline_chain
+        (command
+          (foreach_command
+            (script_block_expression
+              (script_block
+                (script_block_body
+                  (statement_list
+                    (pipeline
+                      (pipeline_chain
+                        (logical_expression
+                          (bitwise_expression
+                            (comparison_expression
+                              (additive_expression
+                                (multiplicative_expression
+                                  (format_expression
+                                    (range_expression
+                                      (array_literal_expression
+                                        (unary_expression
+                                          (parenthesized_expression
+                                            (pipeline
+                                              (pipeline_chain
+                                                (logical_expression
+                                                  (bitwise_expression
+                                                    (comparison_expression
+                                                      (additive_expression
+                                                        (multiplicative_expression
+                                                          (format_expression
+                                                            (range_expression
+                                                              (array_literal_expression
                                                                 (unary_expression
                                                                   (expression_with_unary_operator
                                                                     (cast_expression
@@ -317,7 +326,14 @@ Foreach statement without token separator
                                                                           (type_name
                                                                             (type_identifier))))
                                                                       (unary_expression
-                                                                        (variable)))))))))))))))))))))))))))))))))))))
+                                                                        (expression_with_unary_operator
+                                                                          (cast_expression
+                                                                            (type_literal
+                                                                              (type_spec
+                                                                                (type_name
+                                                                                  (type_identifier))))
+                                                                            (unary_expression
+                                                                              (variable))))))))))))))))))))))))))))))))))))))))
 
 ===
 multiline command line
@@ -331,14 +347,15 @@ Write-Debug `
 (program
   (statement_list
     (pipeline
-      (command
-        (command_name)
-        (command_elements
-          (command_argument_sep)
-          (array_literal_expression
-            (unary_expression
-              (string_literal
-                (expandable_string_literal)))))))))
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (string_literal
+                  (expandable_string_literal))))))))))
 
 ===
 command with argument set by :
@@ -351,33 +368,34 @@ New-Item $profileDir -ItemType Directory -Force -Verbose:$VerbosePreference > $n
 (program
   (statement_list
     (pipeline
-      (command
-        (command_name)
-        (command_elements
-          (command_argument_sep)
-          (array_literal_expression
-            (unary_expression
-              (variable)))
-          (command_argument_sep)
-          (command_parameter)
-          (command_argument_sep)
-          (generic_token)
-          (command_argument_sep)
-          (command_parameter)
-          (command_argument_sep)
-          (command_parameter)
-          (command_argument_sep)
-          (array_literal_expression
-            (unary_expression
-              (variable)))
-          (command_argument_sep)
-          (redirection
-            (file_redirection_operator)
-            (redirected_file_name
-              (command_argument_sep)
-              (array_literal_expression
-                (unary_expression
-                  (variable))))))))))
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (variable)))
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (variable)))
+            (command_argument_sep)
+            (redirection
+              (file_redirection_operator)
+              (redirected_file_name
+                (command_argument_sep)
+                (array_literal_expression
+                  (unary_expression
+                    (variable)))))))))))
 
 ===
 Diff between argument and array literal
@@ -404,41 +422,42 @@ $rih2ymeurlleflu = & "New-Object" "System.Net.Sockets.TCPClient"("127.0.0.1", 44
                             (variable)))))))))))
         (assignement_operator)
         value: (pipeline
-          (command
-            (command_invokation_operator)
-            command_name: (command_name_expr
-              (string_literal
-                (expandable_string_literal)))
-            command_elements: (command_elements
-              (command_argument_sep)
-              (array_literal_expression
-                (unary_expression
-                  (string_literal
-                    (expandable_string_literal))))
-              (argument_list
-                argument_expression_list: (argument_expression_list
-                  (argument_expression
-                    (logical_argument_expression
-                      (bitwise_argument_expression
-                        (comparison_argument_expression
-                          (additive_argument_expression
-                            (multiplicative_argument_expression
-                              (format_argument_expression
-                                (range_argument_expression
-                                  (unary_expression
-                                    (string_literal
-                                      (expandable_string_literal)))))))))))
-                  (argument_expression
-                    (logical_argument_expression
-                      (bitwise_argument_expression
-                        (comparison_argument_expression
-                          (additive_argument_expression
-                            (multiplicative_argument_expression
-                              (format_argument_expression
-                                (range_argument_expression
-                                  (unary_expression
-                                    (integer_literal
-                                      (decimal_integer_literal))))))))))))))))))))
+          (pipeline_chain
+            (command
+              (command_invokation_operator)
+              command_name: (command_name_expr
+                (string_literal
+                  (expandable_string_literal)))
+              command_elements: (command_elements
+                (command_argument_sep)
+                (array_literal_expression
+                  (unary_expression
+                    (string_literal
+                      (expandable_string_literal))))
+                (argument_list
+                  argument_expression_list: (argument_expression_list
+                    (argument_expression
+                      (logical_argument_expression
+                        (bitwise_argument_expression
+                          (comparison_argument_expression
+                            (additive_argument_expression
+                              (multiplicative_argument_expression
+                                (format_argument_expression
+                                  (range_argument_expression
+                                    (unary_expression
+                                      (string_literal
+                                        (expandable_string_literal)))))))))))
+                    (argument_expression
+                      (logical_argument_expression
+                        (bitwise_argument_expression
+                          (comparison_argument_expression
+                            (additive_argument_expression
+                              (multiplicative_argument_expression
+                                (format_argument_expression
+                                  (range_argument_expression
+                                    (unary_expression
+                                      (integer_literal
+                                        (decimal_integer_literal)))))))))))))))))))))
 
 ===
 Cmdlet that start with a keyword
@@ -451,11 +470,12 @@ download toto
 (program
   (statement_list
     (pipeline
-      (command
-        command_name: (command_name)
-        command_elements: (command_elements
-          (command_argument_sep)
-          (generic_token))))))
+      (pipeline_chain
+        (command
+          command_name: (command_name)
+          command_elements: (command_elements
+            (command_argument_sep)
+            (generic_token)))))))
 
 
 ===
@@ -469,22 +489,24 @@ iex("calc.exe")
 (program
   (statement_list
     (pipeline
-      (command
-        command_name: (command_name)
-        command_elements: (command_elements
-          (parenthesized_expression
-            (pipeline
-              (logical_expression
-                (bitwise_expression
-                  (comparison_expression
-                    (additive_expression
-                      (multiplicative_expression
-                        (format_expression
-                          (range_expression
-                            (array_literal_expression
-                              (unary_expression
-                                (string_literal
-                                  (expandable_string_literal))))))))))))))))))
+      (pipeline_chain
+        (command
+          command_name: (command_name)
+          command_elements: (command_elements
+            (parenthesized_expression
+              (pipeline
+                (pipeline_chain
+                  (logical_expression
+                    (bitwise_expression
+                      (comparison_expression
+                        (additive_expression
+                          (multiplicative_expression
+                            (format_expression
+                              (range_expression
+                                (array_literal_expression
+                                  (unary_expression
+                                    (string_literal
+                                      (expandable_string_literal))))))))))))))))))))
 
 ===
 Cmdlet that start with a keyword 2
@@ -497,8 +519,9 @@ Exit-test toto
 (program
   (statement_list
     (pipeline
-      (command
-        command_name: (command_name)
-        command_elements: (command_elements
-          (command_argument_sep)
-          (generic_token))))))
+      (pipeline_chain
+        (command
+          command_name: (command_name)
+          command_elements: (command_elements
+            (command_argument_sep)
+            (generic_token)))))))

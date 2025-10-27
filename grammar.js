@@ -214,10 +214,10 @@ module.exports = grammar({
 
     // Commands
     generic_token: $ => token(
-      /[^\(\)\$\"\'\-\{\}@\|\[`\s][^\s\(\)\}\|;,]*/,
+      /[^\(\)\$\"\'\-\{\}@\|\[`\&\s][^\&\s\(\)\}\|;,]*/,
     ),
 
-    _command_token: $ => token(/[^\(\)\{\}\s;]+/),
+    _command_token: $ => token(/[^\(\)\{\}\s;\&]+/),
 
     // Parameters
     command_parameter: $ => token(
@@ -493,9 +493,15 @@ module.exports = grammar({
 
     pipeline: $ => choice(
       $.assignment_expression,
+      seq($.pipeline_chain, repeat(seq($.pipeline_chain_tail, $.pipeline_chain)))
+    ),
+    
+    pipeline_chain: $ => choice(
       seq($._expression, optional($.redirections), optional($._pipeline_tail)),
       seq($.command, optional($.verbatim_command_argument), optional($._pipeline_tail))
     ),
+    
+    pipeline_chain_tail: $ => choice("&&", "||"),
 
     // Distinct a normal expression to a left assignement expession
     left_assignment_expression: $ => $._expression,

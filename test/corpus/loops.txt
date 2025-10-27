@@ -15,75 +15,9 @@ for (($i = 0), ($j = 0); $i -lt 10; $i++)
     (for_statement
       for_initializer: (for_initializer
         (pipeline
-          (logical_expression
-            (bitwise_expression
-              (comparison_expression
-                (additive_expression
-                  (multiplicative_expression
-                    (format_expression
-                      (range_expression
-                        (array_literal_expression
-                          (unary_expression
-                            (parenthesized_expression
-                              (pipeline
-                                (assignment_expression
-                                  (left_assignment_expression
-                                    (logical_expression
-                                      (bitwise_expression
-                                        (comparison_expression
-                                          (additive_expression
-                                            (multiplicative_expression
-                                              (format_expression
-                                                (range_expression
-                                                  (array_literal_expression
-                                                    (unary_expression
-                                                      (variable)))))))))))
-                                  (assignement_operator)
-                                  value: (pipeline
-                                    (logical_expression
-                                      (bitwise_expression
-                                        (comparison_expression
-                                          (additive_expression
-                                            (multiplicative_expression
-                                              (format_expression
-                                                (range_expression
-                                                  (array_literal_expression
-                                                    (unary_expression
-                                                      (integer_literal
-                                                        (decimal_integer_literal))))))))))))))))
-                          (unary_expression
-                            (parenthesized_expression
-                              (pipeline
-                                (assignment_expression
-                                  (left_assignment_expression
-                                    (logical_expression
-                                      (bitwise_expression
-                                        (comparison_expression
-                                          (additive_expression
-                                            (multiplicative_expression
-                                              (format_expression
-                                                (range_expression
-                                                  (array_literal_expression
-                                                    (unary_expression
-                                                      (variable)))))))))))
-                                  (assignement_operator)
-                                  value: (pipeline
-                                    (logical_expression
-                                      (bitwise_expression
-                                        (comparison_expression
-                                          (additive_expression
-                                            (multiplicative_expression
-                                              (format_expression
-                                                (range_expression
-                                                  (array_literal_expression
-                                                    (unary_expression
-                                                      (integer_literal
-                                                        (decimal_integer_literal))))))))))))))))))))))))))
-      for_condition: (for_condition
-        (pipeline
-          (logical_expression
-            (bitwise_expression
-              (comparison_expression
+          (pipeline_chain
+            (logical_expression
+              (bitwise_expression
                 (comparison_expression
                   (additive_expression
                     (multiplicative_expression
@@ -91,59 +25,132 @@ for (($i = 0), ($j = 0); $i -lt 10; $i++)
                         (range_expression
                           (array_literal_expression
                             (unary_expression
-                              (variable))))))))
-                (comparison_operator)
-                (additive_expression
-                  (multiplicative_expression
-                    (format_expression
-                      (range_expression
-                        (array_literal_expression
-                          (unary_expression
-                            (integer_literal
-                              (decimal_integer_literal)))))))))))))
+                              (parenthesized_expression
+                                (pipeline
+                                  (assignment_expression
+                                    (left_assignment_expression
+                                      (logical_expression
+                                        (bitwise_expression
+                                          (comparison_expression
+                                            (additive_expression
+                                              (multiplicative_expression
+                                                (format_expression
+                                                  (range_expression
+                                                    (array_literal_expression
+                                                      (unary_expression
+                                                        (variable)))))))))))
+                                    (assignement_operator)
+                                    value: (pipeline
+                                      (pipeline_chain
+                                        (logical_expression
+                                          (bitwise_expression
+                                            (comparison_expression
+                                              (additive_expression
+                                                (multiplicative_expression
+                                                  (format_expression
+                                                    (range_expression
+                                                      (array_literal_expression
+                                                        (unary_expression
+                                                          (integer_literal
+                                                            (decimal_integer_literal)))))))))))))))))
+                            (unary_expression
+                              (parenthesized_expression
+                                (pipeline
+                                  (assignment_expression
+                                    (left_assignment_expression
+                                      (logical_expression
+                                        (bitwise_expression
+                                          (comparison_expression
+                                            (additive_expression
+                                              (multiplicative_expression
+                                                (format_expression
+                                                  (range_expression
+                                                    (array_literal_expression
+                                                      (unary_expression
+                                                        (variable)))))))))))
+                                    (assignement_operator)
+                                    value: (pipeline
+                                      (pipeline_chain
+                                        (logical_expression
+                                          (bitwise_expression
+                                            (comparison_expression
+                                              (additive_expression
+                                                (multiplicative_expression
+                                                  (format_expression
+                                                    (range_expression
+                                                      (array_literal_expression
+                                                        (unary_expression
+                                                          (integer_literal
+                                                            (decimal_integer_literal))))))))))))))))))))))))))))
+      for_condition: (for_condition
+        (pipeline
+          (pipeline_chain
+            (logical_expression
+              (bitwise_expression
+                (comparison_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (variable))))))))
+                  (comparison_operator)
+                  (additive_expression
+                    (multiplicative_expression
+                      (format_expression
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (integer_literal
+                                (decimal_integer_literal))))))))))))))
       for_iterator: (for_iterator
         (pipeline
-          (logical_expression
-            (bitwise_expression
-              (comparison_expression
-                (additive_expression
-                  (multiplicative_expression
-                    (format_expression
-                      (range_expression
-                        (array_literal_expression
-                          (unary_expression
-                            (post_increment_expression
-                              (variable)))))))))))))
+          (pipeline_chain
+            (logical_expression
+              (bitwise_expression
+                (comparison_expression
+                  (additive_expression
+                    (multiplicative_expression
+                      (format_expression
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (post_increment_expression
+                                (variable))))))))))))))
       (statement_block
         statement_list: (statement_list
           (pipeline
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (expandable_string_literal
-                                  (variable)
-                                  (variable)))))))))))))
+            (pipeline_chain
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (string_literal
+                                  (expandable_string_literal
+                                    (variable)
+                                    (variable))))))))))))))
           (pipeline
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (expandable_string_literal
-                                  (variable)
-                                  (variable))))))))))))))))))
+            (pipeline_chain
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (string_literal
+                                  (expandable_string_literal
+                                    (variable)
+                                    (variable)))))))))))))))))))
 
 ===
 For loop : Sub-expression using the semicolon to separate statements
@@ -162,75 +169,9 @@ for ($($i = 0;$j = 0); $i -lt 10; $i++)
     (for_statement
       (for_initializer
         (pipeline
-          (logical_expression
-            (bitwise_expression
-              (comparison_expression
-                (additive_expression
-                  (multiplicative_expression
-                    (format_expression
-                      (range_expression
-                        (array_literal_expression
-                          (unary_expression
-                            (sub_expression
-                              (statement_list
-                                (pipeline
-                                  (assignment_expression
-                                    (left_assignment_expression
-                                      (logical_expression
-                                        (bitwise_expression
-                                          (comparison_expression
-                                            (additive_expression
-                                              (multiplicative_expression
-                                                (format_expression
-                                                  (range_expression
-                                                    (array_literal_expression
-                                                      (unary_expression
-                                                        (variable)))))))))))
-                                    (assignement_operator)
-                                    (pipeline
-                                      (logical_expression
-                                        (bitwise_expression
-                                          (comparison_expression
-                                            (additive_expression
-                                              (multiplicative_expression
-                                                (format_expression
-                                                  (range_expression
-                                                    (array_literal_expression
-                                                      (unary_expression
-                                                        (integer_literal
-                                                          (decimal_integer_literal))))))))))))))
-                                (empty_statement)
-                                (pipeline
-                                  (assignment_expression
-                                    (left_assignment_expression
-                                      (logical_expression
-                                        (bitwise_expression
-                                          (comparison_expression
-                                            (additive_expression
-                                              (multiplicative_expression
-                                                (format_expression
-                                                  (range_expression
-                                                    (array_literal_expression
-                                                      (unary_expression
-                                                        (variable)))))))))))
-                                    (assignement_operator)
-                                    (pipeline
-                                      (logical_expression
-                                        (bitwise_expression
-                                          (comparison_expression
-                                            (additive_expression
-                                              (multiplicative_expression
-                                                (format_expression
-                                                  (range_expression
-                                                    (array_literal_expression
-                                                      (unary_expression
-                                                        (integer_literal
-                                                          (decimal_integer_literal)))))))))))))))))))))))))))
-      (for_condition
-        (pipeline
-          (logical_expression
-            (bitwise_expression 
-              (comparison_expression
+          (pipeline_chain
+            (logical_expression
+              (bitwise_expression
                 (comparison_expression
                   (additive_expression
                     (multiplicative_expression
@@ -238,57 +179,130 @@ for ($($i = 0;$j = 0); $i -lt 10; $i++)
                         (range_expression
                           (array_literal_expression
                             (unary_expression
-                              (variable))))))))
-                (comparison_operator)
-                (additive_expression
-                  (multiplicative_expression
-                    (format_expression
-                      (range_expression
-                        (array_literal_expression
-                          (unary_expression
-                            (integer_literal
-                              (decimal_integer_literal)))))))))))))
+                              (sub_expression
+                                (statement_list
+                                  (pipeline
+                                    (assignment_expression
+                                      (left_assignment_expression
+                                        (logical_expression
+                                          (bitwise_expression
+                                            (comparison_expression
+                                              (additive_expression
+                                                (multiplicative_expression
+                                                  (format_expression
+                                                    (range_expression
+                                                      (array_literal_expression
+                                                        (unary_expression
+                                                          (variable)))))))))))
+                                      (assignement_operator)
+                                      (pipeline
+                                        (pipeline_chain
+                                          (logical_expression
+                                            (bitwise_expression
+                                              (comparison_expression
+                                                (additive_expression
+                                                  (multiplicative_expression
+                                                    (format_expression
+                                                      (range_expression
+                                                        (array_literal_expression
+                                                          (unary_expression
+                                                            (integer_literal
+                                                              (decimal_integer_literal)))))))))))))))
+                                  (empty_statement)
+                                  (pipeline
+                                    (assignment_expression
+                                      (left_assignment_expression
+                                        (logical_expression
+                                          (bitwise_expression
+                                            (comparison_expression
+                                              (additive_expression
+                                                (multiplicative_expression
+                                                  (format_expression
+                                                    (range_expression
+                                                      (array_literal_expression
+                                                        (unary_expression
+                                                          (variable)))))))))))
+                                      (assignement_operator)
+                                      (pipeline
+                                        (pipeline_chain
+                                          (logical_expression
+                                            (bitwise_expression
+                                              (comparison_expression
+                                                (additive_expression
+                                                  (multiplicative_expression
+                                                    (format_expression
+                                                      (range_expression
+                                                        (array_literal_expression
+                                                          (unary_expression
+                                                            (integer_literal
+                                                              (decimal_integer_literal)))))))))))))))))))))))))))))
+      (for_condition
+        (pipeline
+          (pipeline_chain
+            (logical_expression
+              (bitwise_expression
+                (comparison_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (variable))))))))
+                  (comparison_operator)
+                  (additive_expression
+                    (multiplicative_expression
+                      (format_expression
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (integer_literal
+                                (decimal_integer_literal))))))))))))))
       (for_iterator
         (pipeline
-          (logical_expression
-            (bitwise_expression
-              (comparison_expression
-                (additive_expression
-                  (multiplicative_expression
-                    (format_expression
-                      (range_expression
-                        (array_literal_expression
-                          (unary_expression
-                            (post_increment_expression
-                              (variable)))))))))))))
+          (pipeline_chain
+            (logical_expression
+              (bitwise_expression
+                (comparison_expression
+                  (additive_expression
+                    (multiplicative_expression
+                      (format_expression
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (post_increment_expression
+                                (variable))))))))))))))
       (statement_block
         (statement_list
           (pipeline
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (expandable_string_literal
-                                  (variable)))))))))))))
+            (pipeline_chain
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (string_literal
+                                  (expandable_string_literal
+                                    (variable))))))))))))))
           (pipeline
-            (logical_expression
-              (bitwise_expression
-                (comparison_expression
-                  (additive_expression
-                    (multiplicative_expression
-                      (format_expression
-                        (range_expression
-                          (array_literal_expression
-                            (unary_expression
-                              (string_literal
-                                (expandable_string_literal
-                                  (variable))))))))))))))))))
+            (pipeline_chain
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (string_literal
+                                  (expandable_string_literal
+                                    (variable)))))))))))))))))))
 
 ===
 For loop : Minimum
@@ -319,28 +333,30 @@ for (;;)
                             (variable)))))))))))
         (assignement_operator)
         (pipeline
-          (logical_expression
-            (bitwise_expression
-              (comparison_expression
-                (additive_expression
-                  (multiplicative_expression
-                    (format_expression
-                      (range_expression
-                        (array_literal_expression
-                          (unary_expression
-                            (integer_literal
-                              (decimal_integer_literal))))))))))))))
+          (pipeline_chain
+            (logical_expression
+              (bitwise_expression
+                (comparison_expression
+                  (additive_expression
+                    (multiplicative_expression
+                      (format_expression
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (integer_literal
+                                (decimal_integer_literal)))))))))))))))
     (for_statement
       (statement_block
         (statement_list
           (pipeline
-            (command
-              (command_name)
-              (command_elements
-                (command_argument_sep)
-                (array_literal_expression
-                  (unary_expression
-                    (variable)))))))))))
+            (pipeline_chain
+              (command
+                (command_name)
+                (command_elements
+                  (command_argument_sep)
+                  (array_literal_expression
+                    (unary_expression
+                      (variable))))))))))))
 
 ===
 For loop : Increment
@@ -371,41 +387,44 @@ for (;;$i++)
                             (variable)))))))))))
         (assignement_operator)
         (pipeline
-          (logical_expression
-            (bitwise_expression
-              (comparison_expression
-                (additive_expression
-                  (multiplicative_expression
-                    (format_expression
-                      (range_expression
-                        (array_literal_expression
-                          (unary_expression
-                            (integer_literal
-                              (decimal_integer_literal))))))))))))))
+          (pipeline_chain
+            (logical_expression
+              (bitwise_expression
+                (comparison_expression
+                  (additive_expression
+                    (multiplicative_expression
+                      (format_expression
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (integer_literal
+                                (decimal_integer_literal)))))))))))))))
     (for_statement
       (for_iterator
         (pipeline
-          (logical_expression
-            (bitwise_expression
-              (comparison_expression
-                (additive_expression
-                  (multiplicative_expression
-                    (format_expression
-                      (range_expression
-                        (array_literal_expression
-                          (unary_expression
-                            (post_increment_expression
-                              (variable)))))))))))))
+          (pipeline_chain
+            (logical_expression
+              (bitwise_expression
+                (comparison_expression
+                  (additive_expression
+                    (multiplicative_expression
+                      (format_expression
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (post_increment_expression
+                                (variable))))))))))))))
       (statement_block
         (statement_list
           (pipeline
-            (command
-              (command_name)
-              (command_elements
-                (command_argument_sep)
-                (array_literal_expression
-                  (unary_expression
-                    (variable)))))))))))
+            (pipeline_chain
+              (command
+                (command_name)
+                (command_elements
+                  (command_argument_sep)
+                  (array_literal_expression
+                    (unary_expression
+                      (variable))))))))))))
 
 ===
 For loop : Increment and condition
@@ -436,23 +455,9 @@ for(;$i -le 10;$i++)
                             (variable)))))))))))
         (assignement_operator)
         (pipeline
-          (logical_expression
-            (bitwise_expression
-              (comparison_expression
-                (additive_expression
-                  (multiplicative_expression
-                    (format_expression
-                      (range_expression
-                        (array_literal_expression
-                          (unary_expression
-                            (integer_literal
-                              (decimal_integer_literal))))))))))))))
-    (for_statement
-      (for_condition
-        (pipeline
-          (logical_expression
-            (bitwise_expression
-              (comparison_expression
+          (pipeline_chain
+            (logical_expression
+              (bitwise_expression
                 (comparison_expression
                   (additive_expression
                     (multiplicative_expression
@@ -460,39 +465,57 @@ for(;$i -le 10;$i++)
                         (range_expression
                           (array_literal_expression
                             (unary_expression
-                              (variable))))))))
-                (comparison_operator)
-                (additive_expression
-                  (multiplicative_expression
-                    (format_expression
-                      (range_expression
-                        (array_literal_expression
-                          (unary_expression
-                            (integer_literal
-                              (decimal_integer_literal)))))))))))))
+                              (integer_literal
+                                (decimal_integer_literal)))))))))))))))
+    (for_statement
+      (for_condition
+        (pipeline
+          (pipeline_chain
+            (logical_expression
+              (bitwise_expression
+                (comparison_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (variable))))))))
+                  (comparison_operator)
+                  (additive_expression
+                    (multiplicative_expression
+                      (format_expression
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (integer_literal
+                                (decimal_integer_literal))))))))))))))
       (for_iterator
         (pipeline
-          (logical_expression
-            (bitwise_expression
-              (comparison_expression
-                (additive_expression
-                  (multiplicative_expression
-                    (format_expression
-                      (range_expression
-                        (array_literal_expression
-                          (unary_expression
-                            (post_increment_expression
-                              (variable)))))))))))))
+          (pipeline_chain
+            (logical_expression
+              (bitwise_expression
+                (comparison_expression
+                  (additive_expression
+                    (multiplicative_expression
+                      (format_expression
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (post_increment_expression
+                                (variable))))))))))))))
       (statement_block
         (statement_list
           (pipeline
-            (command
-              (command_name)
-              (command_elements
-                (command_argument_sep)
-                (array_literal_expression
-                  (unary_expression
-                    (variable)))))))))))
+            (pipeline_chain
+              (command
+                (command_name)
+                (command_elements
+                  (command_argument_sep)
+                  (array_literal_expression
+                    (unary_expression
+                      (variable))))))))))))
 
 ===
 For loop : all
@@ -521,8 +544,24 @@ for($i=1; $i -le 10; $i++){Write-Host $i}
                                 (variable)))))))))))
             (assignement_operator)
             (pipeline
-              (logical_expression
-                (bitwise_expression
+              (pipeline_chain
+                (logical_expression
+                  (bitwise_expression
+                    (comparison_expression
+                      (additive_expression
+                        (multiplicative_expression
+                          (format_expression
+                            (range_expression
+                              (array_literal_expression
+                                (unary_expression
+                                  (integer_literal
+                                    (decimal_integer_literal))))))))))))))))
+      (for_condition
+        (pipeline
+          (pipeline_chain
+            (logical_expression
+              (bitwise_expression
+                (comparison_expression
                   (comparison_expression
                     (additive_expression
                       (multiplicative_expression
@@ -530,13 +569,21 @@ for($i=1; $i -le 10; $i++){Write-Host $i}
                           (range_expression
                             (array_literal_expression
                               (unary_expression
-                                (integer_literal
-                                  (decimal_integer_literal)))))))))))))))
-      (for_condition
+                                (variable))))))))
+                  (comparison_operator)
+                  (additive_expression
+                    (multiplicative_expression
+                      (format_expression
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (integer_literal
+                                (decimal_integer_literal))))))))))))))
+      (for_iterator
         (pipeline
-          (logical_expression
-            (bitwise_expression
-              (comparison_expression
+          (pipeline_chain
+            (logical_expression
+              (bitwise_expression
                 (comparison_expression
                   (additive_expression
                     (multiplicative_expression
@@ -544,39 +591,19 @@ for($i=1; $i -le 10; $i++){Write-Host $i}
                         (range_expression
                           (array_literal_expression
                             (unary_expression
-                              (variable))))))))
-                (comparison_operator)
-                (additive_expression
-                  (multiplicative_expression
-                    (format_expression
-                      (range_expression
-                        (array_literal_expression
-                          (unary_expression
-                            (integer_literal
-                              (decimal_integer_literal)))))))))))))
-      (for_iterator
-        (pipeline
-          (logical_expression
-            (bitwise_expression
-              (comparison_expression
-                (additive_expression
-                  (multiplicative_expression
-                    (format_expression
-                      (range_expression
-                        (array_literal_expression
-                          (unary_expression
-                            (post_increment_expression
-                              (variable)))))))))))))
+                              (post_increment_expression
+                                (variable))))))))))))))
       (statement_block
         (statement_list
           (pipeline
-            (command
-              (command_name)
-              (command_elements
-                (command_argument_sep)
-                (array_literal_expression
-                  (unary_expression
-                    (variable)))))))))))
+            (pipeline_chain
+              (command
+                (command_name)
+                (command_elements
+                  (command_argument_sep)
+                  (array_literal_expression
+                    (unary_expression
+                      (variable))))))))))))
 
 ===
 For loop : all without ; as statement terminator
@@ -609,8 +636,24 @@ for ($i = 0
                                 (variable)))))))))))
             (assignement_operator)
             (pipeline
-              (logical_expression
-                (bitwise_expression
+              (pipeline_chain
+                (logical_expression
+                  (bitwise_expression
+                    (comparison_expression
+                      (additive_expression
+                        (multiplicative_expression
+                          (format_expression
+                            (range_expression
+                              (array_literal_expression
+                                (unary_expression
+                                  (integer_literal
+                                    (decimal_integer_literal))))))))))))))))
+      (for_condition
+        (pipeline
+          (pipeline_chain
+            (logical_expression
+              (bitwise_expression
+                (comparison_expression
                   (comparison_expression
                     (additive_expression
                       (multiplicative_expression
@@ -618,46 +661,19 @@ for ($i = 0
                           (range_expression
                             (array_literal_expression
                               (unary_expression
-                                (integer_literal
-                                  (decimal_integer_literal)))))))))))))))
-      (for_condition
-        (pipeline
-          (logical_expression
-            (bitwise_expression
-              (comparison_expression
-                (comparison_expression
+                                (variable))))))))
+                  (comparison_operator)
                   (additive_expression
                     (multiplicative_expression
                       (format_expression
                         (range_expression
                           (array_literal_expression
                             (unary_expression
-                              (variable))))))))
-                (comparison_operator)
-                (additive_expression
-                  (multiplicative_expression
-                    (format_expression
-                      (range_expression
-                        (array_literal_expression
-                          (unary_expression
-                            (integer_literal
-                              (decimal_integer_literal)))))))))))))
+                              (integer_literal
+                                (decimal_integer_literal))))))))))))))
       (for_iterator
         (pipeline
-          (logical_expression
-            (bitwise_expression
-              (comparison_expression
-                (additive_expression
-                  (multiplicative_expression
-                    (format_expression
-                      (range_expression
-                        (array_literal_expression
-                          (unary_expression
-                            (post_increment_expression
-                              (variable)))))))))))))
-      (statement_block
-        (statement_list
-          (pipeline
+          (pipeline_chain
             (logical_expression
               (bitwise_expression
                 (comparison_expression
@@ -667,4 +683,19 @@ for ($i = 0
                         (range_expression
                           (array_literal_expression
                             (unary_expression
-                              (variable))))))))))))))))
+                              (post_increment_expression
+                                (variable))))))))))))))
+      (statement_block
+        (statement_list
+          (pipeline
+            (pipeline_chain
+              (logical_expression
+                (bitwise_expression
+                  (comparison_expression
+                    (additive_expression
+                      (multiplicative_expression
+                        (format_expression
+                          (range_expression
+                            (array_literal_expression
+                              (unary_expression
+                                (variable)))))))))))))))))
