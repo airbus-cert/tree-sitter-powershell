@@ -37,7 +37,11 @@
 
             # Tree-sitter
             pkgs.nodejs_23
-            pkgs.tree-sitter
+            pkgs-unstable.emscripten
+            pkgs-unstable.binaryen
+            (pkgs-unstable.tree-sitter.override {
+              webUISupport = true;
+						})
           ];
         };
       });
