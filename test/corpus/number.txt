@@ -9,17 +9,18 @@ Integer
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (integer_literal
-                          (decimal_integer_literal))))))))))))))
+      (pipeline_chain
+        (logical_expression
+          (bitwise_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (integer_literal
+                            (decimal_integer_literal)))))))))))))))
 
 ===
 Float
@@ -32,16 +33,17 @@ Float
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (real_literal)))))))))))))
+      (pipeline_chain
+        (logical_expression
+          (bitwise_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (real_literal))))))))))))))
 
 ===
 Scientific notation
@@ -56,27 +58,29 @@ Scientific notation
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (real_literal)))))))))))
+      (pipeline_chain
+        (logical_expression
+          (bitwise_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (real_literal))))))))))))
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (real_literal)))))))))))))
+      (pipeline_chain
+        (logical_expression
+          (bitwise_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (real_literal))))))))))))))
 
 ===
 Byte size suffix
@@ -91,29 +95,31 @@ Byte size suffix
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (integer_literal
-                          (decimal_integer_literal))))))))))))
+      (pipeline_chain
+        (logical_expression
+          (bitwise_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (integer_literal
+                            (decimal_integer_literal)))))))))))))
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (integer_literal
-                          (decimal_integer_literal))))))))))))))
+      (pipeline_chain
+        (logical_expression
+          (bitwise_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (integer_literal
+                            (decimal_integer_literal)))))))))))))))
 
 ===
 Integer operation
@@ -126,12 +132,20 @@ Integer operation
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
+      (pipeline_chain
+        (logical_expression
+          (bitwise_expression
+            (comparison_expression
               (additive_expression
                 (additive_expression
+                  (additive_expression
+                    (multiplicative_expression
+                      (format_expression
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (integer_literal
+                                (decimal_integer_literal))))))))
                   (multiplicative_expression
                     (format_expression
                       (range_expression
@@ -145,14 +159,7 @@ Integer operation
                       (array_literal_expression
                         (unary_expression
                           (integer_literal
-                            (decimal_integer_literal))))))))
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (integer_literal
-                          (decimal_integer_literal))))))))))))))
+                            (decimal_integer_literal)))))))))))))))
 
 ===
 Integer operation with negative
@@ -165,12 +172,20 @@ Integer operation with negative
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
+      (pipeline_chain
+        (logical_expression
+          (bitwise_expression
+            (comparison_expression
               (additive_expression
                 (additive_expression
+                  (additive_expression
+                    (multiplicative_expression
+                      (format_expression
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (integer_literal
+                                (decimal_integer_literal))))))))
                   (multiplicative_expression
                     (format_expression
                       (range_expression
@@ -183,17 +198,10 @@ Integer operation with negative
                     (range_expression
                       (array_literal_expression
                         (unary_expression
-                          (integer_literal
-                            (decimal_integer_literal))))))))
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (expression_with_unary_operator
-                          (unary_expression
-                            (integer_literal
-                              (decimal_integer_literal))))))))))))))))
+                          (expression_with_unary_operator
+                            (unary_expression
+                              (integer_literal
+                                (decimal_integer_literal)))))))))))))))))
 
 ===
 Cast with composed expression
@@ -206,11 +214,26 @@ Cast with composed expression
 (program
   (statement_list
     (pipeline
-      (logical_expression
-        (bitwise_expression
-          (comparison_expression
-            (additive_expression
+      (pipeline_chain
+        (logical_expression
+          (bitwise_expression
+            (comparison_expression
               (additive_expression
+                (additive_expression
+                  (multiplicative_expression
+                    (format_expression
+                      (range_expression
+                        (array_literal_expression
+                          (unary_expression
+                            (expression_with_unary_operator
+                              (cast_expression
+                                (type_literal
+                                  (type_spec
+                                    (type_name
+                                      (type_identifier))))
+                                (unary_expression
+                                  (integer_literal
+                                    (decimal_integer_literal)))))))))))
                 (multiplicative_expression
                   (format_expression
                     (range_expression
@@ -224,18 +247,4 @@ Cast with composed expression
                                     (type_identifier))))
                               (unary_expression
                                 (integer_literal
-                                  (decimal_integer_literal)))))))))))
-              (multiplicative_expression
-                (format_expression
-                  (range_expression
-                    (array_literal_expression
-                      (unary_expression
-                        (expression_with_unary_operator
-                          (cast_expression
-                            (type_literal
-                              (type_spec
-                                (type_name
-                                  (type_identifier))))
-                            (unary_expression 
-                              (integer_literal
-                                (decimal_integer_literal)))))))))))))))))
+                                  (decimal_integer_literal))))))))))))))))))
