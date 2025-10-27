@@ -12,6 +12,7 @@
     "parse-debug": "tree-sitter parse -d",
     "build-wasm": "tree-sitter build --wasm",
     "install": "node-gyp-build",
+    "lint": "eslint grammar.js",
     "prebuildify": "prebuildify --napi --strip"
   },
   "author": "",
@@ -29,6 +30,8 @@
     }
   },
   "devDependencies": {
+    "eslint": "^9.38.0",
+    "eslint-config-treesitter": "^1.0.2",
     "node-gyp": "^9.4.0",
     "prebuildify": "^6.0.0",
     "tree-sitter-cli": "0.24.4"
