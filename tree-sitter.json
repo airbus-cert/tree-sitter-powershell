@@ -20,7 +20,7 @@
     "license": "MIT",
     "description": "",
     "links": {
-      "repository": "https://github.com/tree-sitter/tree-sitter-powershell"
+      "repository": "https://github.com/airbus-cert/tree-sitter-powershell"
     }
   },
   "bindings": {
