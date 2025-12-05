@@ -516,7 +516,6 @@ module.exports = grammar({
 
     command: $ => choice(
       seq(field("command_name", $.command_name), field("command_elements", optional($.command_elements))),
-      $.foreach_command,
       seq($.command_invokation_operator, /*optional($.command_module),*/ field("command_name", $.command_name_expr), field("command_elements", optional($.command_elements)))
     ),
 
@@ -545,7 +544,7 @@ module.exports = grammar({
 
     command_name: $ => seq(
       choice(
-        /[^\{\}\(\);,\|\&`"'\s\r\n\[\]\+\-\*\/\$@<\!%]+/,
+        /[^\{\}\(\);,\|\&`"'\s\r\n\[\]\+\-\*\/\$@<\!]+/,
         // tree-sitter does not allow to control lexer
         // each start keyword into _statement rule must be present here
         // https://github.com/airbus-cert/tree-sitter-powershell/issues/24
@@ -615,8 +614,6 @@ module.exports = grammar({
       seq($.command_argument_sep, $.array_literal_expression),
       $.parenthesized_expression
     )),
-
-    foreach_command: $ => seq(choice("%", reservedWord("foreach-object")), field("command_elements", repeat1($.script_block_expression))),
 
     verbatim_command_argument: $ => seq(
       "--%", $._verbatim_command_argument_chars
