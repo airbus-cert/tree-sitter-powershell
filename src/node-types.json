@@ -644,6 +644,10 @@
           "named": true
         },
         {
+          "type": "script_block_expression",
+          "named": true
+        },
+        {
           "type": "stop_parsing",
           "named": true
         }

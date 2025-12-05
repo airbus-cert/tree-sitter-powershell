@@ -612,7 +612,8 @@ module.exports = grammar({
     _command_argument: $ => prec.right(PREC.PARAM, choice(
       seq($.command_argument_sep, optional($.generic_token)),
       seq($.command_argument_sep, $.array_literal_expression),
-      $.parenthesized_expression
+      $.parenthesized_expression,
+      $.script_block_expression
     )),
 
     verbatim_command_argument: $ => seq(
