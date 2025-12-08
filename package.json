@@ -34,7 +34,7 @@
     "eslint-config-treesitter": "^1.0.2",
     "node-gyp": "^9.4.0",
     "prebuildify": "^6.0.0",
-    "tree-sitter-cli": "0.24.4"
+    "tree-sitter-cli": "^0.25.0"
   },
   "files": [
     "grammar.js",
