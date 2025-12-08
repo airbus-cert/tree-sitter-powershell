@@ -5,6 +5,7 @@
 //!
 //! ```
 //! let code = r#"
+//! 123
 //! "#;
 //! let mut parser = tree_sitter::Parser::new();
 //! let language = tree_sitter_powershell::LANGUAGE;
@@ -34,7 +35,7 @@ pub const NODE_TYPES: &str = include_str!("../../src/node-types.json");
 
 // NOTE: uncomment these to include any queries that this grammar contains:
 
-// pub const HIGHLIGHTS_QUERY: &str = include_str!("../../queries/highlights.scm");
+pub const HIGHLIGHTS_QUERY: &str = include_str!("../../queries/highlights.scm");
 // pub const INJECTIONS_QUERY: &str = include_str!("../../queries/injections.scm");
 // pub const LOCALS_QUERY: &str = include_str!("../../queries/locals.scm");
 // pub const TAGS_QUERY: &str = include_str!("../../queries/tags.scm");
