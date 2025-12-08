@@ -1,6 +1,6 @@
 [package]
 name = "tree-sitter-powershell"
-description = ""
+description = "Powershell grammar for tree-sitter "
 version = "0.25.10"
 license = "MIT"
 readme = "README.md"
