@@ -4,7 +4,7 @@ endif
 
 LANGUAGE_NAME := tree-sitter-powershell
 HOMEPAGE_URL := https://github.com/airbus-cert/tree-sitter-powershell
-VERSION := 0.25.0
+VERSION := 0.25.10
 
 # repository
 SRC_DIR := src
