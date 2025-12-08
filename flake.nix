@@ -4,7 +4,7 @@
 
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
@@ -19,15 +19,14 @@
           default = self.packages.${system}.myapp;
         };
 
-        # Shell for app dependencies.
-        #
-        #     nix develop
-        #
-        # Use this shell for developing your app.
         devShells.default = pkgs.mkShell {
           packages = [
+            # Dev tools
             pkgs.gnumake
             pkgs.nixpkgs-fmt
+            pkgs.nil
+            pkgs.nixd
+            pkgs.alejandra
 
             # Rust
             pkgs-unstable.rustc
@@ -36,7 +35,7 @@
             pkgs-unstable.rustfmt
 
             # Tree-sitter
-            pkgs.nodejs_23
+            pkgs.nodejs_24
             pkgs-unstable.emscripten
             pkgs-unstable.binaryen
             (pkgs-unstable.tree-sitter.override {
