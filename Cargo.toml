@@ -1,15 +1,24 @@
 [package]
 name = "tree-sitter-powershell"
-description = "powershell grammar for the tree-sitter parsing library"
-version = "0.25.9"
-keywords = ["incremental", "parsing", "powershell"]
-categories = ["parsing", "text-editors"]
-repository = "https://github.com/tree-sitter/tree-sitter-powershell"
-edition = "2018"
+description = ""
+version = "0.25.0"
 license = "MIT"
+readme = "README.md"
+keywords = ["incremental", "parsing", "tree-sitter", "powershell"]
+categories = ["parser-implementations", "parsing", "text-editors"]
+repository = "https://github.com/airbus-cert/tree-sitter-powershell"
+edition = "2021"
+autoexamples = false
 
 build = "bindings/rust/build.rs"
-include = ["bindings/rust/*", "grammar.js", "queries/*", "src/*"]
+include = [
+  "bindings/rust/*",
+  "grammar.js",
+  "queries/*",
+  "src/*",
+  "tree-sitter.json",
+  "/LICENSE",
+]
 
 [lib]
 path = "bindings/rust/lib.rs"
@@ -18,7 +27,7 @@ path = "bindings/rust/lib.rs"
 tree-sitter-language = "0.1"
 
 [build-dependencies]
-cc = "1.0"
+cc = "1.2"
 
 [dev-dependencies]
-tree-sitter = "0.25.6"
+tree-sitter = "0.25.10"

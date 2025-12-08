@@ -1,18 +1,21 @@
-//! This crate provides powershell language support for the [tree-sitter][] parsing library.
+//! This crate provides Powershell language support for the [tree-sitter] parsing library.
 //!
-//! Typically, you will use the [language][language func] function to add this language to a
-//! tree-sitter [Parser][], and then use the parser to parse some code:
+//! Typically, you will use the [`LANGUAGE`] constant to add this language to a
+//! tree-sitter [`Parser`], and then use the parser to parse some code:
 //!
 //! ```
-//! let code = "";
+//! let code = r#"
+//! "#;
 //! let mut parser = tree_sitter::Parser::new();
-//! parser.set_language(&tree_sitter_powershell::LANGUAGE.into()).expect("Error loading powershell grammar");
+//! let language = tree_sitter_powershell::LANGUAGE;
+//! parser
+//!     .set_language(&language.into())
+//!     .expect("Error loading Powershell parser");
 //! let tree = parser.parse(code, None).unwrap();
+//! assert!(!tree.root_node().has_error());
 //! ```
 //!
-//! [Language]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Language.html
-//! [language func]: fn.language.html
-//! [Parser]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Parser.html
+//! [`Parser`]: https://docs.rs/tree-sitter/0.25.10/tree_sitter/struct.Parser.html
 //! [tree-sitter]: https://tree-sitter.github.io/
 
 use tree_sitter_language::LanguageFn;
@@ -21,22 +24,20 @@ extern "C" {
     fn tree_sitter_powershell() -> *const ();
 }
 
-/// The tree-sitter [`LanguageFn`][LanguageFn] for this grammar.
-///
-/// [LanguageFn]: https://docs.rs/tree-sitter-language/*/tree_sitter_language/struct.LanguageFn.html
+/// The tree-sitter [`LanguageFn`] for this grammar.
 pub const LANGUAGE: LanguageFn = unsafe { LanguageFn::from_raw(tree_sitter_powershell) };
 
-/// The content of the [`node-types.json`][] file for this grammar.
+/// The content of the [`node-types.json`] file for this grammar.
 ///
-/// [`node-types.json`]: https://tree-sitter.github.io/tree-sitter/using-parsers#static-node-types
-pub const NODE_TYPES: &'static str = include_str!("../../src/node-types.json");
+/// [`node-types.json`]: https://tree-sitter.github.io/tree-sitter/using-parsers/6-static-node-types
+pub const NODE_TYPES: &str = include_str!("../../src/node-types.json");
 
-// Uncomment these to include any queries that this grammar contains
+// NOTE: uncomment these to include any queries that this grammar contains:
 
-pub const HIGHLIGHTS_QUERY: &'static str = include_str!("../../queries/highlights.scm");
-// pub const INJECTIONS_QUERY: &'static str = include_str!("../../queries/injections.scm");
-// pub const LOCALS_QUERY: &'static str = include_str!("../../queries/locals.scm");
-// pub const TAGS_QUERY: &'static str = include_str!("../../queries/tags.scm");
+// pub const HIGHLIGHTS_QUERY: &str = include_str!("../../queries/highlights.scm");
+// pub const INJECTIONS_QUERY: &str = include_str!("../../queries/injections.scm");
+// pub const LOCALS_QUERY: &str = include_str!("../../queries/locals.scm");
+// pub const TAGS_QUERY: &str = include_str!("../../queries/tags.scm");
 
 #[cfg(test)]
 mod tests {
@@ -45,6 +46,6 @@ mod tests {
         let mut parser = tree_sitter::Parser::new();
         parser
             .set_language(&super::LANGUAGE.into())
-            .expect("Error loading powershell language");
+            .expect("Error loading Powershell parser");
     }
 }

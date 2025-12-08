@@ -1,4 +1,4 @@
-module github.com/tree-sitter/tree-sitter-powershell
+module github.com/airbus-cert/tree-sitter-powershell
 
 go 1.22
 
