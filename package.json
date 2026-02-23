@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-powershell",
-  "version": "0.25.10",
+  "version": "0.26.0",
   "description": "",
   "main": "bindings/node",
   "types": "bindings/node",
@@ -22,7 +22,7 @@
     "node-gyp-build": "^4.8.0"
   },
   "peerDependencies": {
-    "tree-sitter": "^0.25.0"
+    "tree-sitter": "^0.26.0"
   },
   "peerDependenciesMeta": {
     "tree-sitter": {
@@ -34,7 +34,7 @@
     "eslint-config-treesitter": "^1.0.2",
     "node-gyp": "^9.4.0",
     "prebuildify": "^6.0.0",
-    "tree-sitter-cli": "^0.25.0"
+    "tree-sitter-cli": "^0.26.0"
   },
   "files": [
     "grammar.js",
