@@ -1,0 +1,114 @@
+name: Publish Package to npm
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build_wasm:
+    name: Build Wasm binaries
+    runs-on: ubuntu-24.04
+    continue-on-error: true
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: Set up NodeJS
+        uses: actions/setup-node@v6
+        with:
+          cache: npm
+          node-version: ${{vars.NODE_VERSION || '22'}}
+      - name: Install dependencies
+        run: npm i --omit peer --omit optional
+      - name: Regenerate parser
+        run: |
+          while read -r grammar_dir; do
+            pushd "$grammar_dir"
+            tree-sitter generate
+            popd > /dev/null
+          done < <(jq -r '.grammars[].path // "."' tree-sitter.json)
+        env:
+          TREE_SITTER_ABI_VERSION: 15
+      - name: Build Wasm binaries
+        run: |-
+          while read -r grammar_dir; do
+            npm x -- tree-sitter build --wasm "$grammar_dir"
+          done < <(jq -r '.grammars[].path // "."' tree-sitter.json)
+      - name: Upload binaries
+        uses: actions/upload-artifact@v6
+        with:
+          path: "*.wasm"
+          name: prebuilds-wasm
+          retention-days: 2
+
+  build_node:
+    name: Build NodeJS binaries on ${{matrix.os}}
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os:
+          - windows-2025
+          - windows-11-arm
+          - ubuntu-24.04
+          - ubuntu-24.04-arm
+          - macos-15
+          - macos-15-intel
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: Set up NodeJS
+        uses: actions/setup-node@v6
+        with:
+          cache: npm
+          node-version: ${{vars.NODE_VERSION || '22'}}
+      - name: Install dependencies
+        run: npm i --omit peer --omit optional
+      - name: Regenerate parser
+        shell: bash
+        run: |
+          while read -r grammar_dir; do
+            pushd "$grammar_dir"
+            tree-sitter generate
+            popd > /dev/null
+          done < <(jq -r '.grammars[].path // "."' tree-sitter.json)
+      - name: Build binary
+        run: npm x -- prebuildify -t 20.19.5
+      - name: Upload binaries
+        uses: actions/upload-artifact@v6
+        with:
+          path: prebuilds/**
+          name: prebuilds-${{matrix.os}}
+          retention-days: 2
+
+  package:
+    name: Publish NodeJS package
+    needs: [build_wasm, build_node]
+    runs-on: ubuntu-24.04
+    permissions:
+      id-token: write # Required for OIDC
+      contents: read
+    environment:
+      name: npm
+      url: https://www.npmjs.com/package/${{github.event.repository.name}}/
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: Set up NodeJS
+        uses: actions/setup-node@v6
+        with:
+          cache: npm
+          node-version: ${{vars.NODE_VERSION || '22'}}
+          registry-url: https://registry.npmjs.org/
+      - name: Download binaries
+        uses: actions/download-artifact@v7
+        with:
+          path: prebuilds
+          pattern: prebuilds-*
+          merge-multiple: true
+      - name: Check binaries
+        run: tree prebuilds
+      - name: Move Wasm binaries to root
+        continue-on-error: true
+        run: mv -v prebuilds/*.wasm .
+      - name: Publish to npm
+        run: npm publish

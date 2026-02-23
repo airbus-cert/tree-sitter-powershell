@@ -1,0 +1,127 @@
+name: Publish package on pypi
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build_sdist:
+    name: Build source dist
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{vars.PYTHON_VERSION || '3.11'}}
+      - name: Set up tree-sitter CLI
+        uses: tree-sitter/setup-action/cli@v2
+      - name: Install dependencies
+        run: |-
+          if jq -e "$JQ_SCRIPT" package.json >/dev/null; then
+            npm i --ignore-scripts --omit peer --omit optional
+          fi
+        env:
+          JQ_SCRIPT: >-
+            .dependencies + .devDependencies |
+            with_entries(select(
+            (.key | startswith("tree-sitter-"))
+            and (.key != "tree-sitter-cli")
+            )) | length > 0
+      - name: Regenerate parser
+        shell: bash
+        run: |
+          while read -r grammar_dir; do
+            pushd "$grammar_dir"
+            tree-sitter generate
+            popd > /dev/null
+          done < <(jq -r '.grammars[].path // "."' tree-sitter.json)
+        env:
+          TREE_SITTER_ABI_VERSION: 15
+      - name: Install dependencies
+        run: pip install --upgrade pip build setuptools wheel
+      - name: Build sources
+        run: python -mbuild -n -s
+      - name: Upload sources
+        uses: actions/upload-artifact@v6
+        with:
+          name: dist-sources
+          path: dist/*.tar.gz
+          retention-days: 2
+
+  build_wheels:
+    name: Build wheels on ${{matrix.os}}
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os:
+          - windows-2025
+          - windows-11-arm
+          - ubuntu-24.04
+          - ubuntu-24.04-arm
+          - macos-15
+          - macos-15-intel
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: Set up tree-sitter CLI
+        uses: tree-sitter/setup-action/cli@v2
+      - name: Install dependencies
+        shell: bash
+        run: |-
+          if jq -e "$JQ_SCRIPT" package.json >/dev/null; then
+            npm i --ignore-scripts --omit peer --omit optional
+          fi
+        env:
+          JQ_SCRIPT: >-
+            .dependencies + .devDependencies |
+            with_entries(select(
+            (.key | startswith("tree-sitter-"))
+            and (.key != "tree-sitter-cli")
+            )) | length > 0
+      - name: Regenerate parser
+        shell: bash
+        run: |
+          while read -r grammar_dir; do
+            pushd "$grammar_dir"
+            tree-sitter generate
+            popd > /dev/null
+          done < <(jq -r '.grammars[].path // "."' tree-sitter.json)
+        env:
+          TREE_SITTER_ABI_VERSION: 15
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v3.3
+        with:
+          output-dir: dist
+        env:
+          CIBW_ARCHS: native
+      - name: Upload wheel artifacts
+        uses: actions/upload-artifact@v6
+        with:
+          path: dist/*.whl
+          name: dist-wheels-${{matrix.os}}
+          retention-days: 2
+
+  package:
+    name: Publish Python package
+    needs: [build_sdist, build_wheels]
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    environment:
+      name: pypi
+      url: https://pypi.org/project/${{github.event.repository.name}}/
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v7
+        with:
+          path: dist
+          pattern: dist-*
+          merge-multiple: true
+      - name: Check build artifacts
+        run: ls -l dist
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
