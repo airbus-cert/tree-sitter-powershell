@@ -5,15 +5,11 @@
   "main": "bindings/node",
   "types": "bindings/node",
   "scripts": {
-    "generate": "tree-sitter generate",
-    "build-node": "tree-sitter generate && node-gyp build",
-    "test": "tree-sitter test",
-    "parse": "tree-sitter parse",
-    "parse-debug": "tree-sitter parse -d",
-    "build-wasm": "tree-sitter build --wasm",
     "install": "node-gyp-build",
     "lint": "eslint grammar.js",
-    "prebuildify": "prebuildify --napi --strip"
+    "prestart": "tree-sitter build --wasm",
+    "start": "tree-sitter playground",
+    "test": "node --test bindings/node/*_test.js"
   },
   "author": "",
   "license": "MIT",
@@ -32,12 +28,12 @@
   "devDependencies": {
     "eslint": "^9.38.0",
     "eslint-config-treesitter": "^1.0.2",
-    "node-gyp": "^9.4.0",
     "prebuildify": "^6.0.0",
     "tree-sitter-cli": "^0.26.0"
   },
   "files": [
     "grammar.js",
+    "tree-sitter.json",
     "binding.gyp",
     "prebuilds/**",
     "bindings/node/*",
