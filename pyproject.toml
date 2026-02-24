@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "tree-sitter-powershell"
 description = "A Powershell grammar for tree-sitter"
-version = "0.26.1"
+version = "0.26.2"
 keywords = ["incremental", "parsing", "tree-sitter", "powershell"]
 classifiers = [
   "Intended Audience :: Developers",

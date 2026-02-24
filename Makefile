@@ -1,6 +1,6 @@
 LANGUAGE_NAME := tree-sitter-powershell
 HOMEPAGE_URL := https://github.com/airbus-cert/tree-sitter-powershell
-VERSION := 0.26.1
+VERSION := 0.26.2
 
 # repository
 SRC_DIR := src
