@@ -1,6 +1,6 @@
 [package]
 name = "tree-sitter-powershell"
-description = ""
+description = "A Powershell grammar for tree-sitter"
 version = "0.26.1"
 authors = [""]
 license = "MIT"

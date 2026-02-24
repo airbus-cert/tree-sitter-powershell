@@ -19,7 +19,7 @@
   "metadata": {
     "version": "0.26.1",
     "license": "MIT",
-    "description": "",
+    "description": "A Powershell grammar for tree-sitter",
     "links": {
       "repository": "https://github.com/airbus-cert/tree-sitter-powershell"
     }
