@@ -38,7 +38,6 @@ jobs:
         shell: bash
         run: |
           while read -r grammar_dir; do
-            grammar_dir="${grammar_dir%$'\r'}"
             pushd "$grammar_dir"
             tree-sitter generate
             popd > /dev/null
