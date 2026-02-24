@@ -44,7 +44,7 @@ pub const INJECTIONS_QUERY: &str = include_str!("../../queries/injections.scm");
 /// The local variable query for this grammar.
 pub const LOCALS_QUERY: &str = include_str!("../../queries/locals.scm");
 
-// #[cfg(with_tags_query)]
+#[cfg(with_tags_query)]
 /// The symbol tagging query for this grammar.
 pub const TAGS_QUERY: &str = include_str!("../../queries/tags.scm");
 
