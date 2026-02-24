@@ -5,12 +5,13 @@ on:
     tags:
       - "v*"
 
+permissions:
+  id-token: write # Required for OIDC
+
 jobs:
   package:
     name: Publish Rust package
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write # Required for OIDC
     environment:
       name: crates
       url: https://crates.io/crates/tree-sitter-powershell

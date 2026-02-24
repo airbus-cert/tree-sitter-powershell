@@ -5,6 +5,9 @@ on:
     tags:
       - "v*"
 
+permissions:
+  id-token: write
+
 jobs:
   build_sdist:
     name: Build source dist
@@ -109,8 +112,6 @@ jobs:
     name: Publish Python package
     needs: [build_sdist, build_wheels]
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write
     environment:
       name: pypi
       url: https://pypi.org/project/${{github.event.repository.name}}/
