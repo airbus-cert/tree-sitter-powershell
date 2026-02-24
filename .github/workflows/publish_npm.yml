@@ -21,7 +21,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           cache: npm
-          node-version: ${{vars.NODE_VERSION || '22'}}
+          node-version: ${{vars.NODE_VERSION || '24'}}
       - name: Install dependencies
         run: npm i --omit peer --omit optional
       - name: Regenerate parser
@@ -64,7 +64,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           cache: npm
-          node-version: ${{vars.NODE_VERSION || '22'}}
+          node-version: ${{vars.NODE_VERSION || '24'}}
       - name: Install dependencies
         run: npm i --omit peer --omit optional
       - name: Regenerate parser
@@ -99,7 +99,7 @@ jobs:
         uses: actions/setup-node@v6
         with:
           cache: npm
-          node-version: ${{vars.NODE_VERSION || '22'}}
+          node-version: ${{vars.NODE_VERSION || '24'}}
           registry-url: https://registry.npmjs.org/
       - name: Download binaries
         uses: actions/download-artifact@v7
