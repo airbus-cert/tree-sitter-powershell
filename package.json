@@ -1,36 +1,21 @@
 {
   "name": "tree-sitter-powershell",
-  "version": "0.26.0",
+  "version": "0.26.1",
   "description": "",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/airbus-cert/tree-sitter-powershell.git"
+  },
+  "license": "MIT",
   "main": "bindings/node",
   "types": "bindings/node",
-  "scripts": {
-    "install": "node-gyp-build",
-    "lint": "eslint grammar.js",
-    "prestart": "tree-sitter build --wasm",
-    "start": "tree-sitter playground",
-    "test": "node --test bindings/node/*_test.js"
-  },
-  "author": "",
-  "license": "MIT",
-  "dependencies": {
-    "node-addon-api": "^7.1.0",
-    "node-gyp-build": "^4.8.0"
-  },
-  "peerDependencies": {
-    "tree-sitter": "^0.26.0"
-  },
-  "peerDependenciesMeta": {
-    "tree-sitter": {
-      "optional": true
-    }
-  },
-  "devDependencies": {
-    "eslint": "^9.38.0",
-    "eslint-config-treesitter": "^1.0.2",
-    "prebuildify": "^6.0.0",
-    "tree-sitter-cli": "^0.26.0"
-  },
+  "keywords": [
+    "incremental",
+    "parsing",
+    "tree-sitter",
+    "powershell"
+  ],
   "files": [
     "grammar.js",
     "tree-sitter.json",
@@ -40,5 +25,28 @@
     "queries/*",
     "src/**",
     "*.wasm"
-  ]
+  ],
+  "dependencies": {
+    "node-addon-api": "^8.5.0",
+    "node-gyp-build": "^4.8.4"
+  },
+  "devDependencies": {
+    "prebuildify": "^6.0.1",
+    "tree-sitter": "^0.25.0",
+    "tree-sitter-cli": "^0.26.5"
+  },
+  "peerDependencies": {
+    "tree-sitter": "^0.25.0"
+  },
+  "peerDependenciesMeta": {
+    "tree-sitter": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "install": "node-gyp-build",
+    "prestart": "tree-sitter build --wasm",
+    "start": "tree-sitter playground",
+    "test": "node --test bindings/node/*_test.js"
+  }
 }
