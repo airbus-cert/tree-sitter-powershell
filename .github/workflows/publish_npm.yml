@@ -5,6 +5,10 @@ on:
     tags:
       - "v*"
 
+permissions:
+  id-token: write # Required for OIDC
+  contents: read
+
 jobs:
   build_wasm:
     name: Build Wasm binaries
@@ -24,7 +28,7 @@ jobs:
         run: |
           while read -r grammar_dir; do
             pushd "$grammar_dir"
-            tree-sitter generate
+            npm x -- tree-sitter generate
             popd > /dev/null
           done < <(jq -r '.grammars[].path // "."' tree-sitter.json)
         env:
@@ -68,7 +72,7 @@ jobs:
         run: |
           while read -r grammar_dir; do
             pushd "$grammar_dir"
-            tree-sitter generate
+            npm x -- tree-sitter generate
             popd > /dev/null
           done < <(jq -r '.grammars[].path // "."' tree-sitter.json)
       - name: Build binary
@@ -84,9 +88,6 @@ jobs:
     name: Publish NodeJS package
     needs: [build_wasm, build_node]
     runs-on: ubuntu-24.04
-    permissions:
-      id-token: write # Required for OIDC
-      contents: read
     environment:
       name: npm
       url: https://www.npmjs.com/package/${{github.event.repository.name}}/
