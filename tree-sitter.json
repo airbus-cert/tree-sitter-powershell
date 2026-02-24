@@ -6,13 +6,8 @@
       "camelcase": "Powershell",
       "scope": "source.ps1",
       "path": ".",
-      "file-types": [
-        "ps1",
-        "psm1"
-      ],
-      "highlights": [
-        "queries/highlights.scm"
-      ],
+      "file-types": ["ps1", "psm1"],
+      "highlights": ["queries/highlights.scm"],
       "injection-regex": "^(ps1|psm1)$"
     }
   ],
@@ -20,6 +15,12 @@
     "version": "0.26.2",
     "license": "MIT",
     "description": "A Powershell grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "Airbus CERT",
+        "email": "cert@airbus.com"
+      }
+    ],
     "links": {
       "repository": "https://github.com/airbus-cert/tree-sitter-powershell"
     }
