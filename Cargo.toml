@@ -1,8 +1,8 @@
 [package]
 name = "tree-sitter-powershell"
 description = "A Powershell grammar for tree-sitter"
-version = "0.26.2"
-authors = [""]
+version = "0.26.3"
+authors = ["Airbus CERT <cert@airbus.com>"]
 license = "MIT"
 readme = "README.md"
 keywords = ["incremental", "parsing", "tree-sitter", "powershell"]

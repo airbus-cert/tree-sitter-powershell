@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "tree-sitter-powershell"
 description = "A Powershell grammar for tree-sitter"
-version = "0.26.2"
+version = "0.26.3"
 keywords = ["incremental", "parsing", "tree-sitter", "powershell"]
 classifiers = [
   "Intended Audience :: Developers",
@@ -13,7 +13,7 @@ classifiers = [
   "Topic :: Text Processing :: Linguistic",
   "Typing :: Typed",
 ]
-authors = [{  }]
+authors = [{ name = "Airbus CERT", email = "cert@airbus.com" }]
 requires-python = ">=3.10"
 license.text = "MIT"
 readme = "README.md"
