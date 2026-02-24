@@ -7,7 +7,7 @@ const PREC = {
   PARAM: 6,
 };
 
-module.exports = grammar({
+export default grammar({
   name: 'powershell',
 
   externals: ($) => [$._statement_terminator],
