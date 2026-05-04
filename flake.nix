@@ -41,13 +41,7 @@
             pkgs-unstable.rust-analyzer
             pkgs-unstable.rustfmt
 
-            # Tree-sitter
             pkgs.nodejs_24
-            pkgs-unstable.emscripten
-            pkgs-unstable.binaryen
-            (pkgs-unstable.tree-sitter.override {
-              webUISupport = true;
-            })
           ];
         };
       }
