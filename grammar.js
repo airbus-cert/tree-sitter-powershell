@@ -708,6 +708,12 @@ export default grammar({
         '"',
       ),
 
+    _string_literal_immediate: ($) => 
+      seq(
+        /[^']+/,
+        '\'',
+      ),
+
     command_name: ($) =>
       seq(
         choice(
@@ -737,6 +743,7 @@ export default grammar({
           choice(
             token.immediate(/[^\{\}\(\);,\|\&"'\s\r\n]+/),
             seq(token.immediate('"'), $._expandable_string_literal_immediate),
+            seq(token.immediate('\''), $._string_literal_immediate),
             token.immediate('""'),
             token.immediate('\'\''),
           ),
