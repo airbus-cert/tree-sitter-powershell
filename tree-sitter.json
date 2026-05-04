@@ -6,18 +6,13 @@
       "camelcase": "Powershell",
       "scope": "source.ps1",
       "path": ".",
-      "file-types": [
-        "ps1",
-        "psm1"
-      ],
-      "highlights": [
-        "queries/highlights.scm"
-      ],
+      "file-types": ["ps1", "psm1"],
+      "highlights": ["queries/highlights.scm"],
       "injection-regex": "^(ps1|psm1)$"
     }
   ],
   "metadata": {
-    "version": "0.26.3",
+    "version": "0.26.4",
     "license": "MIT",
     "description": "A Powershell grammar for tree-sitter",
     "authors": [

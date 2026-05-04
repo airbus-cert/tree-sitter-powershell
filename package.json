@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-powershell",
-  "version": "0.26.3",
+  "version": "0.26.4",
   "description": "A Powershell grammar for tree-sitter",
   "type": "module",
   "repository": {
