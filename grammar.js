@@ -708,7 +708,7 @@ export default grammar({
         '"',
       ),
 
-    _string_literal_immediate: ($) => 
+    _string_literal_immediate: ($) =>
       seq(
         /[^']+/,
         '\'',
