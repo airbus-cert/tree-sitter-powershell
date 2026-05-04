@@ -49,6 +49,8 @@
     "prestart": "tree-sitter build --wasm",
     "start": "tree-sitter playground",
     "lint": "eslint grammar.js",
-    "test": "node --test bindings/node/*_test.js"
+    "parse": "tree-sitter parse",
+    "generate": "tree-sitter generate",
+    "test": "tree-sitter test"
   }
 }

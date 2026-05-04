@@ -4059,6 +4059,19 @@
         }
       ]
     },
+    "_string_literal_immediate": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[^']+"
+        },
+        {
+          "type": "STRING",
+          "value": "'"
+        }
+      ]
+    },
     "command_name": {
       "type": "SEQ",
       "members": [
@@ -4164,6 +4177,22 @@
                   {
                     "type": "SYMBOL",
                     "name": "_expandable_string_literal_immediate"
+                  }
+                ]
+              },
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "IMMEDIATE_TOKEN",
+                    "content": {
+                      "type": "STRING",
+                      "value": "'"
+                    }
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "_string_literal_immediate"
                   }
                 ]
               },
