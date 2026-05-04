@@ -435,31 +435,23 @@ $rih2ymeurlleflu = & "New-Object" "System.Net.Sockets.TCPClient"("127.0.0.1", 44
                   (unary_expression
                     (string_literal
                       (expandable_string_literal))))
-                (argument_list
-                  argument_expression_list: (argument_expression_list
-                    (argument_expression
-                      (logical_argument_expression
-                        (bitwise_argument_expression
-                          (comparison_argument_expression
-                            (additive_argument_expression
-                              (multiplicative_argument_expression
-                                (format_argument_expression
-                                  (range_argument_expression
-                                    (unary_expression
-                                      (string_literal
-                                        (expandable_string_literal)))))))))))
-                    (argument_expression
-                      (logical_argument_expression
-                        (bitwise_argument_expression
-                          (comparison_argument_expression
-                            (additive_argument_expression
-                              (multiplicative_argument_expression
-                                (format_argument_expression
-                                  (range_argument_expression
-                                    (unary_expression
-                                      (integer_literal
-                                        (decimal_integer_literal)))))))))))))))))))))
-
+                (parenthesized_expression
+                  (pipeline
+                    (pipeline_chain
+                      (logical_expression
+                        (bitwise_expression
+                          (comparison_expression
+                            (additive_expression
+                              (multiplicative_expression
+                                (format_expression
+                                  (range_expression
+                                    (array_literal_expression
+                                      (unary_expression
+                                        (string_literal
+                                          (expandable_string_literal)))
+                                      (unary_expression
+                                        (integer_literal
+                                          (decimal_integer_literal))))))))))))))))))))))
 ===
 Cmdlet that start with a keyword
 ===
@@ -526,3 +518,128 @@ Exit-test toto
           command_elements: (command_elements
             (command_argument_sep)
             (generic_token)))))))
+
+===
+Command with $^ variable followed by parenthesized expression
+===
+
+ls $^(calc)
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          command_name: (command_name)
+          command_elements: (command_elements
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (variable)))
+            (parenthesized_expression
+              (pipeline
+                (pipeline_chain
+                  (command
+                    command_name: (command_name)))))))))))
+
+===
+Command with $$ variable followed by parenthesized expression
+===
+
+ls $$(calc)
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          command_name: (command_name)
+          command_elements: (command_elements
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (variable)))
+            (parenthesized_expression
+              (pipeline
+                (pipeline_chain
+                  (command
+                    command_name: (command_name)))))))))))
+
+===
+Command with $? variable followed by parenthesized expression
+===
+
+ls $?(calc)
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          command_name: (command_name)
+          command_elements: (command_elements
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (variable)))
+            (parenthesized_expression
+              (pipeline
+                (pipeline_chain
+                  (command
+                    command_name: (command_name)))))))))))
+
+===
+Command with $_ variable followed by parenthesized expression
+===
+
+ls $_(calc)
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          command_name: (command_name)
+          command_elements: (command_elements
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (variable)))
+            (parenthesized_expression
+              (pipeline
+                (pipeline_chain
+                  (command
+                    command_name: (command_name)))))))))))
+
+===
+Command with named variable followed by parenthesized expression
+===
+
+ls $var(calc)
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          command_name: (command_name)
+          command_elements: (command_elements
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (variable)))
+            (parenthesized_expression
+              (pipeline
+                (pipeline_chain
+                  (command
+                    command_name: (command_name)))))))))))

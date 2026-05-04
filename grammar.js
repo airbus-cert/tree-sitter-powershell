@@ -765,7 +765,7 @@ export default grammar({
       prec.right(
         choice(
           $.command_parameter,
-          seq($._command_argument, optional($.argument_list)),
+          $._command_argument,
           $.redirection,
           $.stop_parsing,
         ),
