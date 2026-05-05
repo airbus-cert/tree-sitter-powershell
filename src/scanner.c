@@ -5,7 +5,8 @@
 #include <wctype.h>
 
 enum TOKEN_TYPE {
-    STATEMENT_TERMINATOR
+    STATEMENT_TERMINATOR,
+    CONCAT
 };
 
 /* --- API --- */
@@ -26,6 +27,34 @@ static void skip(TSLexer *lexer) { lexer->advance(lexer, true); }
 
 static bool scan_statement_terminator(void *payload, TSLexer *lexer, const bool *valid_symbols)
 {
+    if (valid_symbols[CONCAT]) {
+        if (!(lexer->lookahead == 0 || iswspace(lexer->lookahead) || lexer->lookahead == ')' ||
+              lexer->lookahead == ';' || lexer->lookahead == '&' || lexer->lookahead == '|' ||
+              lexer->lookahead == '}' || lexer->lookahead == '"' || lexer->lookahead == '\'')) {
+            lexer->result_symbol = CONCAT;
+
+            // Ensure that $ or @ is followed by [a-zA-Z_:] to validate concat
+            // Handle $$, $?, $_, $^
+            // Handle ${ which is the start of a braced variable (but do not validate if it's closed)
+            if (lexer->lookahead == '$' || lexer->lookahead == '@') {
+                lexer->mark_end(lexer);
+                lexer->advance(lexer, false);
+                if ((lexer->lookahead >= 65 && lexer->lookahead <= 90)  ||  // A-Z
+                    (lexer->lookahead >= 97 && lexer->lookahead <= 122) ||  // a-z
+                    (lexer->lookahead >= 48 && lexer->lookahead <= 57)  ||  // 0-9
+                    lexer->lookahead == '_' || lexer->lookahead == '$' || lexer->lookahead == ':' ||
+                    lexer->lookahead == '?' || lexer->lookahead == '^' || lexer->lookahead == '{')
+                {
+                    return true;
+                }
+
+                return false;
+            }
+
+            return true;
+        }
+    }
+
     if (valid_symbols[STATEMENT_TERMINATOR]) {
         lexer->result_symbol = STATEMENT_TERMINATOR;
         // This token has no characters -- everything is lookahead to determine its existence
