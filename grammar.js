@@ -10,7 +10,7 @@ const PREC = {
 export default grammar({
   name: "powershell",
 
-  externals: ($) => [$._statement_terminator, $._concat],
+  externals: ($) => [$._statement_terminator, $._concat, $._concat2],
 
   extras: ($) => [
     $.comment,
@@ -761,7 +761,7 @@ export default grammar({
     _command_element: ($) =>
       prec.right(
         choice(
-          $.command_parameter,
+          // $.command_parameter,
           $._command_argument,
           $.redirection,
           $.stop_parsing,
@@ -773,21 +773,23 @@ export default grammar({
 
     // Generic token is hard to manage
     // So a definition is that a generic token must have to begin by one or more space char
-    command_argument_sep: ($) => prec.right(repeat1(" ")),
+    command_argument_space_sep: ($) => repeat1(" "),
+    command_argument_sep: ($) =>
+      choice($.command_argument_space_sep, $._concat2),
 
     // Adapt the grammar to have same behavior
 
-    _tmp: ($) => choice($.generic_token, $.variable),
+    _expendable_command_argument: ($) => choice($.generic_token, $.variable),
 
     _command_argument: ($) =>
       seq(
-        optional(choice($.command_argument_sep)),
         choice(
           seq(
+            $.command_argument_space_sep,
             alias(/-[a-zA-Z0-9_]+/, "argument_name"),
             optional(seq(":", $.command_argument_value)),
           ),
-          $.command_argument_value,
+          seq($.command_argument_sep, $.command_argument_value),
         ),
       ),
 
@@ -795,7 +797,10 @@ export default grammar({
       prec.right(
         PREC.PARAM,
         choice(
-          seq($.command_argument_sep, $._tmp, repeat(seq($._concat, $._tmp))),
+          seq(
+            $._expendable_command_argument,
+            repeat(seq($._concat, $._expendable_command_argument)),
+          ),
           $.parenthesized_expression,
           $.script_block_expression,
         ),
