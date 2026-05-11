@@ -56,7 +56,8 @@ static bool scan(void *payload, TSLexer *lexer, const bool *valid_symbols)
     if (valid_symbols[CONCAT2]) {
         if (!(lexer->lookahead == 0 || iswspace(lexer->lookahead) || lexer->lookahead == ')' ||
               lexer->lookahead == ';' || lexer->lookahead == '&' || lexer->lookahead == '|' ||
-              lexer->lookahead == '}' || lexer->lookahead == '>' || lexer->lookahead == '<')) {
+              lexer->lookahead == '}' || lexer->lookahead == '>' || lexer->lookahead == '<'
+        )) {
             lexer->result_symbol = CONCAT2;
             lexer->mark_end(lexer);
             return true;
@@ -64,10 +65,18 @@ static bool scan(void *payload, TSLexer *lexer, const bool *valid_symbols)
     }
 
     if (valid_symbols[IS_NOT_COMMAND_PARAMETER]) {
+        lexer->result_symbol = IS_NOT_COMMAND_PARAMETER;
+        lexer->mark_end(lexer);
+
         if (lexer->lookahead != '-') {
-            lexer->result_symbol = IS_NOT_COMMAND_PARAMETER;
-            lexer->mark_end(lexer);
             return true;
+        } else {
+            lexer->advance(lexer, false);
+            return !(
+                (lexer->lookahead >= 65 && lexer->lookahead <= 90)  ||  // A-Z
+                (lexer->lookahead >= 97 && lexer->lookahead <= 122) ||  // a-z
+                 lexer->lookahead == '_'
+            );
         }
     }
 

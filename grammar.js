@@ -767,9 +767,9 @@ export default grammar({
 
     // Generic token is hard to manage
     // So a definition is that a generic token must have to begin by one or more space char
-    command_argument_space_sep: ($) => repeat1(' '),
+    _command_argument_space_sep: ($) => repeat1(' '),
     command_argument_sep: ($) =>
-      choice($.command_argument_space_sep, $._concat2),
+      choice($._command_argument_space_sep, $._concat2),
 
     // Adapt the grammar to have same behavior
 
@@ -781,19 +781,7 @@ export default grammar({
         choice($.command_parameter, $.command_argument_value),
       ),
 
-    command_parameter: ($) =>
-      choice(
-        token('--'),
-        seq(
-          seq(
-            alias(
-              /-[a-zA-Z_][a-zA-Z0-9-_\+\/\*$@\[\]]*/,
-              $.command_parameter_name,
-            ),
-            optional(seq(':', $.command_argument_value)),
-          ),
-        ),
-      ),
+    command_parameter: ($) => /-[a-zA-Z_][a-zA-Z0-9-_\+\/\*$@\[\]]*:?/,
 
     command_argument_value: ($) =>
       prec.right(
