@@ -7,7 +7,8 @@
 enum TOKEN_TYPE {
     STATEMENT_TERMINATOR,
     CONCAT,
-    CONCAT2
+    CONCAT2,
+    IS_NOT_COMMAND_PARAMETER,
 };
 
 /* --- API --- */
@@ -57,6 +58,14 @@ static bool scan(void *payload, TSLexer *lexer, const bool *valid_symbols)
               lexer->lookahead == ';' || lexer->lookahead == '&' || lexer->lookahead == '|' ||
               lexer->lookahead == '}' || lexer->lookahead == '>' || lexer->lookahead == '<')) {
             lexer->result_symbol = CONCAT2;
+            lexer->mark_end(lexer);
+            return true;
+        }
+    }
+
+    if (valid_symbols[IS_NOT_COMMAND_PARAMETER]) {
+        if (lexer->lookahead != '-') {
+            lexer->result_symbol = IS_NOT_COMMAND_PARAMETER;
             lexer->mark_end(lexer);
             return true;
         }

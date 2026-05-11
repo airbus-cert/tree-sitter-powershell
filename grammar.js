@@ -10,7 +10,12 @@ const PREC = {
 export default grammar({
   name: 'powershell',
 
-  externals: ($) => [$._statement_terminator, $._concat, $._concat2],
+  externals: ($) => [
+    $._statement_terminator,
+    $._concat,
+    $._concat2,
+    $._is_not_command_parameter,
+  ],
 
   extras: ($) => [
     $.comment,
@@ -307,12 +312,8 @@ export default grammar({
     // Commands
     generic_token: ($) =>
       repeat1(choice(token(/[^\&\$\"\'\s\|\(\)\{\}@]+/), /`./)),
-    // TODO: Handle -- in command generic_token?
 
     _command_token: ($) => token(/[^\(\)\{\}\s;\&]+/),
-
-    // Parameters
-    command_parameter: ($) => token(choice(/-+[a-zA-Z_?\-`]+/, '--')),
 
     _verbatim_command_argument_chars: ($) =>
       repeat1(choice(/"[^"]*"/, /&[^&]*/, /[^\|\r\n]+/)),
@@ -759,14 +760,7 @@ export default grammar({
     command_elements: ($) => prec.right(repeat1($._command_element)),
 
     _command_element: ($) =>
-      prec.right(
-        choice(
-          // $.command_parameter,
-          $._command_argument,
-          $.redirection,
-          $.stop_parsing,
-        ),
-      ),
+      prec.right(choice($._command_argument, $.redirection, $.stop_parsing)),
 
     // Stop parsing is a token that end the parsing of command line
     stop_parsing: ($) => /--%[^\r\n]*/,
@@ -783,26 +777,37 @@ export default grammar({
 
     _command_argument: ($) =>
       seq(
-        choice(
+        $.command_argument_sep,
+        choice($.command_parameter, $.command_argument_value),
+      ),
+
+    command_parameter: ($) =>
+      choice(
+        token('--'),
+        seq(
           seq(
-            $.command_argument_space_sep,
-            alias(/-[a-zA-Z0-9_]+/, 'argument_name'),
+            alias(
+              /-[a-zA-Z_][a-zA-Z0-9-_\+\/\*$@\[\]]*/,
+              $.command_parameter_name,
+            ),
             optional(seq(':', $.command_argument_value)),
           ),
-          seq($.command_argument_sep, $.command_argument_value),
         ),
       ),
 
     command_argument_value: ($) =>
       prec.right(
         PREC.PARAM,
-        choice(
-          seq(
-            $._expendable_command_argument,
-            repeat(seq($._concat, $._expendable_command_argument)),
+        seq(
+          $._is_not_command_parameter,
+          choice(
+            seq(
+              $._expendable_command_argument,
+              repeat(seq($._concat, $._expendable_command_argument)),
+            ),
+            $.parenthesized_expression,
+            $.script_block_expression,
           ),
-          $.parenthesized_expression,
-          $.script_block_expression,
         ),
       ),
 
