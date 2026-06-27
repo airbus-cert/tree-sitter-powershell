@@ -333,6 +333,54 @@ Strings : concat var content and dollar
                               (variable))))))))))))))))
 
 ===
+Strings : Regex inline comment stays string
+===
+
+"(?# this is a regex inline comment)oo"
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (logical_expression
+          (bitwise_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (string_literal
+                            (expandable_string_literal)))))))))))))))
+
+===
+Strings : Regex # comment stays string
+===
+
+"(?x)oo# regex comment in expanded mode"
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (logical_expression
+          (bitwise_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (string_literal
+                            (expandable_string_literal)))))))))))))))
+
+===
 Strings : Single-quoted string
 ===
 

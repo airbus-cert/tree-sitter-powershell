@@ -183,6 +183,72 @@ $a
                           (variable))))))))))))))
 
 ===
+Special comment: #Requires
+===
+
+#Requires -Version 7.0
+Get-ChildItem .
+
+---
+
+(program
+  (comment)
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (generic_token)))))))
+
+===
+Special comments: #region pair
+===
+
+#region Utilities
+Get-ChildItem .
+#endregion
+
+---
+
+(program
+  (comment)
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (generic_token))))))
+  (comment))
+
+===
+Special comments: # SIG block
+===
+
+# SIG # Begin signature block
+# MIIFakeSignatureLine
+# SIG # End signature block
+Get-ChildItem .
+
+---
+
+(program
+  (comment)
+  (comment)
+  (comment)
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (generic_token)))))))
+
+===
 Pathological block comment #2
 ===
 
