@@ -203,6 +203,26 @@ Get-ChildItem .
             (generic_token)))))))
 
 ===
+Special comment: shebang
+===
+
+#!/usr/bin/env pwsh
+Get-ChildItem .
+
+---
+
+(program
+  (comment)
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (generic_token)))))))
+
+===
 Special comments: #region pair
 ===
 
@@ -223,6 +243,47 @@ Get-ChildItem .
             (command_argument_sep)
             (generic_token))))))
   (comment))
+
+===
+Comment-based help: block comment
+===
+
+<#
+.SYNOPSIS
+Test block help comment.
+.DESCRIPTION
+More details.
+#>
+function while {}
+
+---
+
+(program
+  (comment)
+  (statement_list
+    (function_statement
+      (function_name))))
+
+===
+Comment-based help: line comments
+===
+
+# .SYNOPSIS
+# Test line help comment.
+# .DESCRIPTION
+# More details.
+function while {}
+
+---
+
+(program
+  (comment)
+  (comment)
+  (comment)
+  (comment)
+  (statement_list
+    (function_statement
+      (function_name))))
 
 ===
 Special comments: # SIG block
