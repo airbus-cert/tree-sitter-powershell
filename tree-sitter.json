@@ -8,6 +8,7 @@
       "path": ".",
       "file-types": ["ps1", "psm1"],
       "highlights": ["queries/highlights.scm"],
+      "folds": ["queries/folds.scm"],
       "injection-regex": "^(ps1|psm1)$"
     }
   ],
