@@ -3916,6 +3916,10 @@
     "named": false
   },
   {
+    "type": "class",
+    "named": false
+  },
+  {
     "type": "command_parameter",
     "named": true
   },
@@ -3954,6 +3958,10 @@
   },
   {
     "type": "end",
+    "named": false
+  },
+  {
+    "type": "enum",
     "named": false
   },
   {

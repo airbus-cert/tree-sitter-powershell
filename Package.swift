@@ -1,41 +1,51 @@
-// swift-tools-version:5.3
-
-import Foundation
+// swift-tools-version:5.9
 import PackageDescription
 
-var sources = ["src/parser.c"]
-if FileManager.default.fileExists(atPath: "src/scanner.c") {
-    sources.append("src/scanner.c")
-}
-
+/// Tree-sitter grammar for PowerShell.
+/// Always include scanner.c (upstream Package.swift probes the path at manifest
+/// evaluation time with the wrong cwd and can drop scanner symbols).
 let package = Package(
     name: "TreeSitterPowershell",
+    platforms: [.iOS(.v15), .macOS(.v13)],
     products: [
         .library(name: "TreeSitterPowershell", targets: ["TreeSitterPowershell"]),
-    ],
-    dependencies: [
-        .package(name: "SwiftTreeSitter", url: "https://github.com/tree-sitter/swift-tree-sitter", from: "0.9.0"),
     ],
     targets: [
         .target(
             name: "TreeSitterPowershell",
-            dependencies: [],
             path: ".",
-            sources: sources,
+            exclude: [
+                "Cargo.toml",
+                "binding.gyp",
+                "bindings/c",
+                "bindings/go",
+                "bindings/node",
+                "bindings/python",
+                "bindings/rust",
+                "prebuilds",
+                "grammar.js",
+                "package.json",
+                "package-lock.json",
+                "pyproject.toml",
+                "setup.py",
+                "test",
+                "examples",
+                ".editorconfig",
+                ".github",
+                ".gitignore",
+                ".gitattributes",
+                ".gitmodules",
+            ],
+            sources: [
+                "src/parser.c",
+                "src/scanner.c",
+            ],
             resources: [
-                .copy("queries")
+                .copy("queries"),
             ],
             publicHeadersPath: "bindings/swift",
             cSettings: [.headerSearchPath("src")]
         ),
-        .testTarget(
-            name: "TreeSitterPowershellTests",
-            dependencies: [
-                "SwiftTreeSitter",
-                "TreeSitterPowershell",
-            ],
-            path: "bindings/swift/TreeSitterPowershellTests"
-        )
     ],
     cLanguageStandard: .c11
 )
