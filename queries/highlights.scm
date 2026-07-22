@@ -1,118 +1,159 @@
-"param" @keyword
-"dynamicparam" @keyword
-"begin" @keyword
-"process" @keyword
-"end" @keyword
-"if" @keyword
-"elseif" @keyword
-"else" @keyword
-"switch" @keyword
-"foreach" @keyword
-"for" @keyword
-"while" @keyword
-"do" @keyword
-"until" @keyword
-"function" @keyword
-"filter" @keyword
-"workflow" @keyword
-"break" @keyword
-"continue" @keyword
-"throw" @keyword
-"return" @keyword
-"exit" @keyword
-"trap" @keyword
-"try" @keyword
-"catch" @keyword
-"finally" @keyword
-"data" @keyword
-"inlinescript" @keyword
-"parallel" @keyword
-"sequence" @keyword
+[
+  "if"
+  "elseif"
+  "else"
+  "switch"
+] @keyword.control.conditional
 
-"-as" @operator
-"-ccontains" @operator
-"-ceq" @operator
-"-cge" @operator
-"-cgt" @operator
-"-cle" @operator
-"-clike" @operator
-"-clt" @operator
-"-cmatch" @operator
-"-cne" @operator
-"-cnotcontains" @operator
-"-cnotlike" @operator
-"-cnotmatch" @operator
-"-contains" @operator
-"-creplace" @operator
-"-csplit" @operator
-"-eq" @operator
-"-ge" @operator
-"-gt" @operator
-"-icontains" @operator
-"-ieq" @operator
-"-ige" @operator
-"-igt" @operator
-"-ile" @operator
-"-ilike" @operator
-"-ilt" @operator
-"-imatch" @operator
-"-in" @operator
-"-ine" @operator
-"-inotcontains" @operator
-"-inotlike" @operator
-"-inotmatch" @operator
-"-ireplace" @operator
-"-is" @operator
-"-isnot" @operator
-"-isplit" @operator
-"-join" @operator
-"-le" @operator
-"-like" @operator
-"-lt" @operator
-"-match" @operator
-"-ne" @operator
-"-notcontains" @operator
-"-notin" @operator
-"-notlike" @operator
-"-notmatch" @operator
-"-replace" @operator
-"-shl" @operator
-"-shr" @operator
-"-split" @operator
-"-and" @operator
-"-or" @operator
-"-xor" @operator
-"-band" @operator
-"-bor" @operator
-"-bxor" @operator
-"+" @operator
-"-" @operator
-"/" @operator
-"\\" @operator
-"%" @operator
-"*" @operator
-".." @operator
-"-not" @operator
+[
+  "foreach"
+  "for"
+  "while"
+  "do"
+  "until"
+] @keyword.control.repeat
 
+[
+  "break"
+  "continue"
+  "return"
+] @keyword.control.return
 
-";" @delimiter
+"in" @keyword.operator
+
+"function" @keyword.function
+
+[
+  "param"
+  "dynamicparam"
+  "begin"
+  "process"
+  "end"
+  "filter"
+  "workflow"
+  "throw"
+  "exit"
+  "trap"
+  "try"
+  "catch"
+  "finally"
+  "data"
+  "inlinescript"
+  "parallel"
+  "sequence"
+  "class"
+  "enum"
+] @keyword
+
+[
+  "-as"
+  "-ccontains"
+  "-ceq"
+  "-cge"
+  "-cgt"
+  "-cle"
+  "-clike"
+  "-clt"
+  "-cmatch"
+  "-cne"
+  "-cnotcontains"
+  "-cnotlike"
+  "-cnotmatch"
+  "-contains"
+  "-creplace"
+  "-csplit"
+  "-eq"
+  "-ge"
+  "-gt"
+  "-icontains"
+  "-ieq"
+  "-ige"
+  "-igt"
+  "-ile"
+  "-ilike"
+  "-ilt"
+  "-imatch"
+  "-in"
+  "-ine"
+  "-inotcontains"
+  "-inotlike"
+  "-inotmatch"
+  "-ireplace"
+  "-is"
+  "-isnot"
+  "-isplit"
+  "-join"
+  "-le"
+  "-like"
+  "-lt"
+  "-match"
+  "-ne"
+  "-not"
+  "-notcontains"
+  "-notin"
+  "-notlike"
+  "-notmatch"
+  "-replace"
+  "-shl"
+  "-shr"
+  "-split"
+  "-and"
+  "-or"
+  "-xor"
+  "-band"
+  "-bor"
+  "-bxor"
+  "+"
+  "-"
+  "*"
+  "/"
+  "%"
+  "++"
+  "--"
+  "!"
+  "\\"
+  ".."
+  "|"
+] @operator
+
+(assignement_operator) @operator
+
+[
+  "("
+  ")"
+  "{"
+  "}"
+  "["
+  "]"
+] @punctuation.bracket
+
+[
+  ";"
+  ","
+  "::"
+] @punctuation.delimiter
 
 (string_literal) @string
 
-(integer_literal) @number
-(real_literal) @number
+(integer_literal) @constant.numeric
+(real_literal) @constant.numeric
+
+; class/enum as command_name (fallback; also captured via anonymous "class"/"enum" @keyword).
+(command
+  command_name: (command_name) @keyword
+  (#match? @keyword "^(?i:class|enum)$"))
 
 (command
-  command_name: (command_name) @function)
+  command_name: (command_name) @function
+  (#not-match? @function "^(?i:class|enum)$"))
 
-(function_statement
-  (function_name) @function)
+(function_name) @function
 
 (invokation_expression
   (member_name) @function)
 
 (member_access
-  (member_name) @property)
+  (member_name) @variable.other.member)
 
 (command_invokation_operator) @operator
 
@@ -122,7 +163,15 @@
 
 (comment) @comment
 
-(array_expression) @array
+(array_expression) @punctuation.bracket
 
 (assignment_expression
-  value: (pipeline) @assignvalue)
+  value: (pipeline) @variable)
+
+(format_operator) @operator
+
+(command_parameter) @variable.parameter
+
+(command_elements) @variable.builtin
+
+(generic_token) @variable

@@ -4663,20 +4663,17 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "TOKEN",
+          "type": "ALIAS",
           "content": {
-            "type": "ALIAS",
+            "type": "PREC",
+            "value": 1,
             "content": {
-              "type": "PREC",
-              "value": 1,
-              "content": {
-                "type": "PATTERN",
-                "value": "[cC][lL][aA][sS][sS]"
-              }
-            },
-            "named": false,
-            "value": "class"
-          }
+              "type": "PATTERN",
+              "value": "[cC][lL][aA][sS][sS]"
+            }
+          },
+          "named": false,
+          "value": "class"
         },
         {
           "type": "SYMBOL",
@@ -4765,20 +4762,17 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "TOKEN",
+          "type": "ALIAS",
           "content": {
-            "type": "ALIAS",
+            "type": "PREC",
+            "value": 1,
             "content": {
-              "type": "PREC",
-              "value": 1,
-              "content": {
-                "type": "PATTERN",
-                "value": "[eE][nN][uU][mM]"
-              }
-            },
-            "named": false,
-            "value": "enum"
-          }
+              "type": "PATTERN",
+              "value": "[eE][nN][uU][mM]"
+            }
+          },
+          "named": false,
+          "value": "enum"
         },
         {
           "type": "SYMBOL",
