@@ -50,6 +50,7 @@
     "start": "tree-sitter playground",
     "lint": "eslint grammar.js",
     "parse": "tree-sitter parse",
+    "debug": "tree-sitter parse --debug pretty",
     "generate": "tree-sitter generate",
     "test": "tree-sitter test"
   }

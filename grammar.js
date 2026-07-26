@@ -10,7 +10,12 @@ const PREC = {
 export default grammar({
   name: 'powershell',
 
-  externals: ($) => [$._statement_terminator],
+  externals: ($) => [
+    $._statement_terminator,
+    $._concat,
+    $._concat2,
+    $._is_not_command_parameter,
+  ],
 
   extras: ($) => [
     $.comment,
@@ -306,12 +311,9 @@ export default grammar({
 
     // Commands
     generic_token: ($) =>
-      token(/[^\(\)\$\"\'\-\{\}@\|\[`\&\s][^\&\s\(\)\}\|;,]*/),
+      repeat1(choice(token(/[^\&\$\"\'\s\|\(\)\{\}@]+/), /`./)),
 
     _command_token: ($) => token(/[^\(\)\{\}\s;\&]+/),
-
-    // Parameters
-    command_parameter: ($) => token(choice(/-+[a-zA-Z_?\-`]+/, '--')),
 
     _verbatim_command_argument_chars: ($) =>
       repeat1(choice(/"[^"]*"/, /&[^&]*/, /[^\|\r\n]+/)),
@@ -708,11 +710,7 @@ export default grammar({
         '"',
       ),
 
-    _string_literal_immediate: ($) =>
-      seq(
-        /[^']+/,
-        '\'',
-      ),
+    _string_literal_immediate: ($) => seq(/[^']+/, '\''),
 
     command_name: ($) =>
       seq(
@@ -762,32 +760,42 @@ export default grammar({
     command_elements: ($) => prec.right(repeat1($._command_element)),
 
     _command_element: ($) =>
-      prec.right(
-        choice(
-          $.command_parameter,
-          seq($._command_argument, optional($.argument_list)),
-          $.redirection,
-          $.stop_parsing,
-        ),
-      ),
+      prec.right(choice($._command_argument, $.redirection, $.stop_parsing)),
 
     // Stop parsing is a token that end the parsing of command line
     stop_parsing: ($) => /--%[^\r\n]*/,
 
     // Generic token is hard to manage
     // So a definition is that a generic token must have to begin by one or more space char
-    command_argument_sep: ($) => prec.right(choice(repeat1(' '), ':')),
+    _command_argument_space_sep: ($) => repeat1(' '),
+    command_argument_sep: ($) =>
+      choice($._command_argument_space_sep, $._concat2),
 
     // Adapt the grammar to have same behavior
 
+    _expendable_command_argument: ($) => choice($.generic_token, $.variable),
+
     _command_argument: ($) =>
+      seq(
+        $.command_argument_sep,
+        choice($.command_parameter, $.command_argument_value),
+      ),
+
+    command_parameter: ($) => /-[a-zA-Z_][a-zA-Z0-9-_\+\/\*$@\[\]]*:?/,
+
+    command_argument_value: ($) =>
       prec.right(
         PREC.PARAM,
-        choice(
-          seq($.command_argument_sep, optional($.generic_token)),
-          seq($.command_argument_sep, $.array_literal_expression),
-          $.parenthesized_expression,
-          $.script_block_expression,
+        seq(
+          $._is_not_command_parameter,
+          choice(
+            seq(
+              $._expendable_command_argument,
+              repeat(seq($._concat, $._expendable_command_argument)),
+            ),
+            $.parenthesized_expression,
+            $.script_block_expression,
+          ),
         ),
       ),
 

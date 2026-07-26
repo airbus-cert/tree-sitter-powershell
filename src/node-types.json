@@ -605,7 +605,45 @@
   {
     "type": "command_argument_sep",
     "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "command_argument_space_sep",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "command_argument_space_sep",
+    "named": true,
     "fields": {}
+  },
+  {
+    "type": "command_argument_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expendable_command_argument",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "script_block_expression",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "command_elements",
@@ -616,35 +654,19 @@
       "required": true,
       "types": [
         {
-          "type": "argument_list",
-          "named": true
-        },
-        {
-          "type": "array_literal_expression",
-          "named": true
-        },
-        {
           "type": "command_argument_sep",
           "named": true
         },
         {
-          "type": "command_parameter",
+          "type": "command_argument_space_sep",
           "named": true
         },
         {
-          "type": "generic_token",
-          "named": true
-        },
-        {
-          "type": "parenthesized_expression",
+          "type": "command_argument_value",
           "named": true
         },
         {
           "type": "redirection",
-          "named": true
-        },
-        {
-          "type": "script_block_expression",
           "named": true
         },
         {
@@ -1135,6 +1157,25 @@
     }
   },
   {
+    "type": "expendable_command_argument",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "generic_token",
+          "named": true
+        },
+        {
+          "type": "variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "expression_with_unary_operator",
     "named": true,
     "fields": {},
@@ -1416,6 +1457,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "generic_token",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "generic_type_arguments",
@@ -2485,19 +2531,19 @@
           "named": true
         },
         {
-          "type": "array_literal_expression",
-          "named": true
-        },
-        {
           "type": "command_argument_sep",
           "named": true
         },
         {
-          "type": "element_access",
+          "type": "command_argument_space_sep",
           "named": true
         },
         {
-          "type": "generic_token",
+          "type": "command_argument_value",
+          "named": true
+        },
+        {
+          "type": "element_access",
           "named": true
         },
         {
@@ -3900,6 +3946,10 @@
     "named": false
   },
   {
+    "type": "argument_name",
+    "named": false
+  },
+  {
     "type": "begin",
     "named": false
   },
@@ -3914,10 +3964,6 @@
   {
     "type": "catch",
     "named": false
-  },
-  {
-    "type": "command_parameter",
-    "named": true
   },
   {
     "type": "comment",
@@ -3979,10 +4025,6 @@
   {
     "type": "function",
     "named": false
-  },
-  {
-    "type": "generic_token",
-    "named": true
   },
   {
     "type": "hexadecimal_integer_literal",
