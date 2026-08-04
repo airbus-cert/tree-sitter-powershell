@@ -1065,15 +1065,18 @@ export default grammar({
       ),
 
     invokation_expression: ($) =>
-      choice(
-        seq(
-          $._primary_expression,
-          token.immediate('.'),
-          $.member_name,
-          $.argument_list,
+      prec.right(
+        PREC.PARAM + 1,
+        choice(
+          seq(
+            $._primary_expression,
+            token.immediate('.'),
+            $.member_name,
+            $.argument_list,
+          ),
+          seq($._primary_expression, '::', $.member_name, $.argument_list),
+          $.invokation_foreach_expression,
         ),
-        seq($._primary_expression, '::', $.member_name, $.argument_list),
-        $.invokation_foreach_expression,
       ),
 
     // adding this rule to handle .foreach synthax
@@ -1096,7 +1099,7 @@ export default grammar({
         seq($.argument_expression, repeat(seq(',', $.argument_expression))),
       ),
 
-    argument_expression: ($) => $.logical_argument_expression,
+    argument_expression: ($) => choice($.logical_argument_expression, $.command),
 
     logical_argument_expression: ($) =>
       prec.left(

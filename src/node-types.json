@@ -46,6 +46,10 @@
       "required": true,
       "types": [
         {
+          "type": "command",
+          "named": true
+        },
+        {
           "type": "logical_argument_expression",
           "named": true
         }
