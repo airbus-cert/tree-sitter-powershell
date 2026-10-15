@@ -1,0 +1,421 @@
+===
+Native: bare -- ends option parsing
+===
+
+git log -- foo.txt
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (generic_token)
+            (command_parameter)
+            (command_argument_sep)
+            (generic_token)))))))
+
+===
+Native: -- followed by more options
+===
+
+cargo test -p core -- --nocapture --test-threads=1
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (generic_token)
+            (command_parameter)
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (command_parameter)))))))
+
+===
+Native: -- at the end of the command
+===
+
+git log --
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (generic_token)
+            (command_parameter)))))))
+
+===
+Native: -- before a pipe and a semicolon
+===
+
+git diff -- | head; echo done
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (generic_token)
+            (command_parameter)
+            (command_argument_sep)))
+        (command
+          (command_name))))
+    (empty_statement)
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (generic_token)))))))
+
+===
+Native: lone - means stdin
+===
+
+tar -xf -
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (command_parameter)
+            (command_parameter)))))))
+
+===
+Native: lone - before a pipe
+===
+
+cat - | wc -l
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_parameter)
+            (command_argument_sep)))
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (command_parameter)))))))
+
+===
+Native: --option=value
+===
+
+git log --format=%H
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)
+            (command_parameter)))))))
+
+===
+Native: --option=value with a quoted value
+===
+
+git log --pretty=format:"%h %s" --since='2 weeks ago'
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (command_parameter)))))))
+
+===
+Native: short flag with an attached number
+===
+
+grep -n -A5 needle file.txt
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)
+            (generic_token)))))))
+
+===
+Native: -1 is still a number
+===
+
+git log -1 --oneline
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (expression_with_unary_operator
+                  (unary_expression
+                    (integer_literal
+                      (decimal_integer_literal))))))
+            (command_argument_sep)
+            (command_parameter)))))))
+
+===
+Native: --$x is still a decrement
+===
+
+--$i
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (logical_expression
+          (bitwise_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (expression_with_unary_operator
+                            (pre_decrement_expression
+                              (unary_expression
+                                (variable)))))))))))))))))
+
+===
+Native: comma list of words
+===
+
+Select-Object Id, State, Command
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (generic_token)
+            (generic_token)
+            (generic_token)))))))
+
+===
+Native: comma list without spaces
+===
+
+Get-Process a,b
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (generic_token)
+            (generic_token)))))))
+
+===
+Native: comma list as a parameter value
+===
+
+Add-Type -AssemblyName System.Windows.Forms,System.Drawing
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (generic_token)
+            (generic_token)))))))
+
+===
+Native: quoted comma list still an array
+===
+
+Start-Process python -ArgumentList '-m','app.gui' -PassThru
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (string_literal
+                  (verbatim_string_characters)))
+              (unary_expression
+                (string_literal
+                  (verbatim_string_characters))))
+            (command_argument_sep)
+            (command_parameter)))))))
+
+===
+Background operator at the end of a line
+===
+
+npm run dev &
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)))))
+    (background_operator)))
+
+===
+Background operator after a redirection
+===
+
+npm run dev 2>&1 &
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)
+            (redirection
+              (merging_redirection_operator))
+            (command_argument_sep)))))
+    (background_operator)))
+
+===
+Background operator between commands
+===
+
+Write-Output a & Write-Output b
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)))))
+    (background_operator)
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (generic_token)))))))

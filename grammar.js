@@ -10,7 +10,7 @@ const PREC = {
 export default grammar({
   name: 'powershell',
 
-  externals: ($) => [$._statement_terminator],
+  externals: ($) => [$._statement_terminator, $._bare_dashes],
 
   extras: ($) => [
     $.comment,
@@ -311,7 +311,19 @@ export default grammar({
     _command_token: ($) => token(/[^\(\)\{\}\s;\&]+/),
 
     // Parameters
-    command_parameter: ($) => token(choice(/-+[a-zA-Z_?\-`]+/, '--')),
+    command_parameter: ($) =>
+      choice(
+        token(
+          choice(
+            // `-Name`, `-Name1`, `--long-flag`, `-A5`
+            /-+[a-zA-Z_?\-`][a-zA-Z0-9_?\-`]*/,
+            // `--format=%H`, `--pretty=format:"%B"`: a native option with an attached value
+            /--?[a-zA-Z_][a-zA-Z0-9_\-]*=([^\s"'`;|&(){}]|"[^"\r\n]*"|'[^'\r\n]*')*/,
+          ),
+        ),
+        // A bare `--` or `-` argument (see scanner.c).
+        $._bare_dashes,
+      ),
 
     _verbatim_command_argument_chars: ($) =>
       repeat1(choice(/"[^"]*"/, /&[^&]*/, /[^\|\r\n]+/)),
@@ -388,11 +400,15 @@ export default grammar({
           $.parallel_statement,
           $.sequence_statement,
           seq($.pipeline, $._statement_terminator),
+          // `npm run dev &` (PowerShell 7): runs the pipeline as a background job
+          seq($.pipeline, $.background_operator),
           $.empty_statement,
         ),
       ),
 
     empty_statement: ($) => prec(PREC.EMPTY, ';'),
+
+    background_operator: ($) => '&',
 
     if_statement: ($) =>
       prec.left(
@@ -784,7 +800,16 @@ export default grammar({
       prec.right(
         PREC.PARAM,
         choice(
-          seq($.command_argument_sep, optional($.generic_token)),
+          seq(
+            $.command_argument_sep,
+            optional(
+              seq(
+                $.generic_token,
+                // `Select-Object Id, Name`: an unquoted comma list is one array argument
+                repeat(seq(',', choice($.generic_token, $.unary_expression))),
+              ),
+            ),
+          ),
           seq($.command_argument_sep, $.array_literal_expression),
           $.parenthesized_expression,
           $.script_block_expression,

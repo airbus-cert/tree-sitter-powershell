@@ -5,7 +5,8 @@
 #include <wctype.h>
 
 enum TOKEN_TYPE {
-    STATEMENT_TERMINATOR
+    STATEMENT_TERMINATOR,
+    BARE_DASHES
 };
 
 /* --- API --- */
@@ -45,10 +46,47 @@ static bool scan_statement_terminator(void *payload, TSLexer *lexer, const bool 
     return false;
 }
 
+// A bare `-` or `--` argument: `--` ends option parsing for a native command
+// (`git log -- path`, `cargo test -- --nocapture`) and `-` names stdin
+// (`tar -xf -`). `--` is also the decrement operator and `-` the unary minus,
+// so the lexer cannot tell them apart by length or precedence: the token is
+// recognised only when the dashes are followed by whitespace or the end of the
+// command.
+static bool scan_bare_dashes(void *payload, TSLexer *lexer, const bool *valid_symbols)
+{
+    if (!valid_symbols[BARE_DASHES]) return false;
+
+    while (lexer->lookahead == ' ' || lexer->lookahead == '\t') skip(lexer);
+    if (lexer->lookahead != '-') return false;
+    lexer->advance(lexer, false);
+    if (lexer->lookahead == '-') lexer->advance(lexer, false);
+    lexer->mark_end(lexer);
+
+    switch (lexer->lookahead) {
+        case 0:
+        case ' ':
+        case '\t':
+        case '\r':
+        case '\n':
+        case ';':
+        case '|':
+        case '&':
+        case ')':
+        case '}':
+            lexer->result_symbol = BARE_DASHES;
+            return true;
+        default:
+            return false;
+    }
+}
+
 /* --- API Implementation --- */
 
 bool tree_sitter_powershell_external_scanner_scan(void *payload, TSLexer *lexer, const bool *valid_symbols)
 {
+    // The statement terminator consumes nothing, so it must be tried last: when
+    // both are valid, a `--` has to win over the empty terminator.
+    if (scan_bare_dashes(payload, lexer, valid_symbols)) return true;
     return scan_statement_terminator(payload, lexer, valid_symbols);
 }
 
