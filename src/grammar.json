@@ -1882,20 +1882,29 @@
       }
     },
     "command_parameter": {
-      "type": "TOKEN",
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "PATTERN",
-            "value": "-+[a-zA-Z_?\\-`]+"
-          },
-          {
-            "type": "STRING",
-            "value": "--"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "-+[a-zA-Z_?\\-`][a-zA-Z0-9_?\\-`]*"
+              },
+              {
+                "type": "PATTERN",
+                "value": "--?[a-zA-Z_][a-zA-Z0-9_\\-]*=([^\\s\"'`;|&(){}]|\"[^\"\\r\\n]*\"|'[^'\\r\\n]*')*"
+              }
+            ]
           }
-        ]
-      }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_bare_dashes"
+        }
+      ]
     },
     "_verbatim_command_argument_chars": {
       "type": "REPEAT1",
@@ -2320,6 +2329,19 @@
             ]
           },
           {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "pipeline"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "background_operator"
+              }
+            ]
+          },
+          {
             "type": "SYMBOL",
             "name": "empty_statement"
           }
@@ -2333,6 +2355,10 @@
         "type": "STRING",
         "value": ";"
       }
+    },
+    "background_operator": {
+      "type": "STRING",
+      "value": "&"
     },
     "if_statement": {
       "type": "PREC_LEFT",
@@ -4346,8 +4372,38 @@
                 "type": "CHOICE",
                 "members": [
                   {
-                    "type": "SYMBOL",
-                    "name": "generic_token"
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "generic_token"
+                      },
+                      {
+                        "type": "REPEAT",
+                        "content": {
+                          "type": "SEQ",
+                          "members": [
+                            {
+                              "type": "STRING",
+                              "value": ","
+                            },
+                            {
+                              "type": "CHOICE",
+                              "members": [
+                                {
+                                  "type": "SYMBOL",
+                                  "name": "generic_token"
+                                },
+                                {
+                                  "type": "SYMBOL",
+                                  "name": "unary_expression"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    ]
                   },
                   {
                     "type": "BLANK"
@@ -6526,6 +6582,10 @@
     {
       "type": "SYMBOL",
       "name": "_statement_terminator"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_bare_dashes"
     }
   ],
   "inline": [],
