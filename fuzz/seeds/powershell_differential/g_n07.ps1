@@ -1,0 +1,1 @@
+Write-Host $x.Method(echo nested)

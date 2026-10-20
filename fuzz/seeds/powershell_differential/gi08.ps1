@@ -1,0 +1,1 @@
+echo $x.Method(echo nested); echo recovered

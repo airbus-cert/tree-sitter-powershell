@@ -1,0 +1,1 @@
+data Result { "a=b" }
