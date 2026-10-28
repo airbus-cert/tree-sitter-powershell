@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 
 project(tree-sitter-powershell
-        VERSION "0.25.0"
+        VERSION "0.26.6"
         DESCRIPTION ""
         HOMEPAGE_URL "https://github.com/airbus-cert/tree-sitter-powershell"
         LANGUAGES C)
