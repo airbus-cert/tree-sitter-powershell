@@ -1,0 +1,1 @@
+cargo publish -q --dry-run --verbose

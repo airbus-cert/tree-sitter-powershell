@@ -1,0 +1,31 @@
+[package]
+name = "tree-sitter-powershell-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2021"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+libc = "0.2"
+parking_lot = "0.12"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+tree-sitter = "=0.26.8"
+tree-sitter-powershell = { path = ".." }
+
+[[bin]]
+name = "powershell_differential"
+path = "fuzz_targets/powershell_differential.rs"
+test = false
+doc = false
+bench = false
+
+[workspace]
+members = ["."]
+
+[profile.release]
+debug = 1

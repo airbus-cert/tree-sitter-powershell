@@ -1,0 +1,1 @@
+Write-Output $1foo

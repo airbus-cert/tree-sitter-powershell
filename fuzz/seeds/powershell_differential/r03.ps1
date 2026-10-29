@@ -1,0 +1,1 @@
+cargo publish --features=foo (
