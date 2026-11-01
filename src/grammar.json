@@ -6093,11 +6093,11 @@
                       "value": 1,
                       "content": {
                         "type": "PATTERN",
-                        "value": "[--][aA][nN][dD]"
+                        "value": "[--][bB][aA][nN][dD]"
                       }
                     },
                     "named": false,
-                    "value": "-and"
+                    "value": "-band"
                   },
                   {
                     "type": "ALIAS",
@@ -6106,11 +6106,11 @@
                       "value": 1,
                       "content": {
                         "type": "PATTERN",
-                        "value": "[--][oO][rR]"
+                        "value": "[--][bB][oO][rR]"
                       }
                     },
                     "named": false,
-                    "value": "-or"
+                    "value": "-bor"
                   },
                   {
                     "type": "ALIAS",
@@ -6119,11 +6119,11 @@
                       "value": 1,
                       "content": {
                         "type": "PATTERN",
-                        "value": "[--][xX][oO][rR]"
+                        "value": "[--][bB][xX][oO][rR]"
                       }
                     },
                     "named": false,
-                    "value": "-xor"
+                    "value": "-bxor"
                   }
                 ]
               },
