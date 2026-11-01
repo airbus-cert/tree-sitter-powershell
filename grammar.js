@@ -1146,9 +1146,9 @@ export default grammar({
           seq(
             $.bitwise_argument_expression,
             choice(
-              reservedWord('-and'),
-              reservedWord('-or'),
-              reservedWord('-xor'),
+              reservedWord('-band'),
+              reservedWord('-bor'),
+              reservedWord('-bxor'),
             ),
             $.comparison_argument_expression,
           ),
