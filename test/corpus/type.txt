@@ -267,3 +267,42 @@ Type-attributed variable
                                     (type_identifier))))
                               (unary_expression
                                 (variable)))))))))))))))))
+
+===
+Nested type expression
+===
+
+[Microsoft.SqlServer.Management.Common.SqlConnectionInfo+AuthenticationMethod]::SqlPassword
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (logical_expression
+          (bitwise_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (member_access
+                            (type_literal
+                              (type_spec
+                                (type_name
+                                  (type_name
+                                    (type_name
+                                      (type_name
+                                        (type_name
+                                          (type_name
+                                            (type_identifier))
+                                          (type_identifier))
+                                        (type_identifier))
+                                      (type_identifier))
+                                    (type_identifier))
+                                  (type_identifier))))
+                            (member_name
+                              (simple_name))))))))))))))))

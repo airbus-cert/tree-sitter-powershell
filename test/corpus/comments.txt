@@ -48,7 +48,6 @@ Get-ChildItem .
             (command_argument_sep)
             (generic_token)))))))
 
-
 ===
 Single line block comment
 ===
@@ -334,3 +333,16 @@ $a
                       (array_literal_expression
                         (unary_expression
                           (variable))))))))))))))
+
+===
+Comment-only file
+===
+
+# Copyright header only
+<# nothing else #>
+
+---
+
+(program
+  (comment)
+  (comment))

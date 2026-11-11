@@ -29,7 +29,7 @@ export default grammar({
   ],
 
   rules: {
-    program: ($) => seq(optional($.param_block), $.statement_list),
+    program: ($) => seq(optional($.param_block), optional($.statement_list)),
 
     // Comments
     comment: ($) =>
@@ -52,18 +52,18 @@ export default grammar({
       token(
         seq(
           /[0-9]+/,
-          optional(choice('l', 'd')),
-          optional(choice('kb', 'mb', 'gb', 'tb', 'pb')),
+          optional(/[lLdD]/),
+          optional(/[kKmMgGtTpP][bB]/),
         ),
       ),
 
     hexadecimal_integer_literal: ($) =>
       token(
         seq(
-          '0x',
+          /0[xX]/,
           /[0-9a-fA-F]+/,
-          optional('l'),
-          optional(choice('kb', 'mb', 'gb', 'tb', 'pb')),
+          optional(/[lL]/),
+          optional(/[kKmMgGtTpP][bB]/),
         ),
       ),
 
@@ -73,18 +73,18 @@ export default grammar({
         choice(
           seq(
             /[0-9]+\.[0-9]+/,
-            optional(token(seq('e', optional(choice('+', '-')), /[0-9]+/))),
-            optional(choice('kb', 'mb', 'gb', 'tb', 'pb')),
+            optional(token(seq(/[eE]/, optional(choice('+', '-')), /[0-9]+/))),
+            optional(/[kKmMgGtTpP][bB]/),
           ),
           seq(
             /\.[0-9]+/,
-            optional(token(seq('e', optional(choice('+', '-')), /[0-9]+/))),
-            optional(choice('kb', 'mb', 'gb', 'tb', 'pb')),
+            optional(token(seq(/[eE]/, optional(choice('+', '-')), /[0-9]+/))),
+            optional(/[kKmMgGtTpP][bB]/),
           ),
           seq(
             /[0-9]+/,
-            token(seq('e', optional(choice('+', '-')), /[0-9]+/)),
-            optional(choice('kb', 'mb', 'gb', 'tb', 'pb')),
+            token(seq(/[eE]/, optional(choice('+', '-')), /[0-9]+/)),
+            optional(/[kKmMgGtTpP][bB]/),
           ),
         ),
       ),
@@ -152,7 +152,12 @@ export default grammar({
     type_identifier: ($) => /[a-zA-Z0-9_]+/,
 
     type_name: ($) =>
-      choice($.type_identifier, seq($.type_name, '.', $.type_identifier)),
+      choice(
+        $.type_identifier,
+        seq($.type_name, '.', $.type_identifier),
+        // a nested type: `[Outer+Inner]`
+        seq($.type_name, '+', $.type_identifier),
+      ),
 
     array_type_name: ($) => seq($.type_name, '['),
     generic_type_name: ($) => seq($.type_name, '['),
@@ -203,12 +208,14 @@ export default grammar({
         reservedWord('-ceq'),
         reservedWord('-cge'),
         reservedWord('-cgt'),
+        reservedWord('-cin'),
         reservedWord('-cle'),
         reservedWord('-clike'),
         reservedWord('-clt'),
         reservedWord('-cmatch'),
         reservedWord('-cne'),
         reservedWord('-cnotcontains'),
+        reservedWord('-cnotin'),
         reservedWord('-cnotlike'),
         reservedWord('-cnotmatch'),
         reservedWord('-contains'),
@@ -221,6 +228,7 @@ export default grammar({
         reservedWord('-ieq'),
         reservedWord('-ige'),
         reservedWord('-igt'),
+        reservedWord('-iin'),
         reservedWord('-ile'),
         reservedWord('-ilike'),
         reservedWord('-ilt'),
@@ -228,6 +236,7 @@ export default grammar({
         reservedWord('-in'),
         reservedWord('-ine'),
         reservedWord('-inotcontains'),
+        reservedWord('-inotin'),
         reservedWord('-inotlike'),
         reservedWord('-inotmatch'),
         reservedWord('-ireplace'),
@@ -306,9 +315,32 @@ export default grammar({
 
     // Commands
     generic_token: ($) =>
-      token(/[^\(\)\$\"\'\-\{\}@\|\[`\&\s][^\&\s\(\)\}\|;,]*/),
+      choice(
+        token(/[^\(\)\$\"\'\-\{\}@\|\[`\&\s][^\&\s\(\)\}\|;,]*/),
+        // `Import-Module $PSScriptRoot\bin\Pester.psd1`: text glued to a
+        // variable makes the whole word one argument, variables expanded
+        seq($.variable, $._generic_token_tail),
+      ),
 
-    _command_token: ($) => token(/[^\(\)\{\}\s;\&]+/),
+    _generic_token_tail: ($) =>
+      seq(
+        // a leading `.` would be member access, so the tail starts with a path
+        // separator or a wildcard
+        token.immediate(/[\\/*][^\s\$&(){}|;,"'`>]*/),
+        repeat(
+          choice(
+            alias(
+              token.immediate(/\$([a-zA-Z0-9_]+:)?[a-zA-Z0-9_]+/),
+              $.variable,
+            ),
+            token.immediate(/[^\s\$&(){}|;,"'`>]+/),
+          ),
+        ),
+      ),
+
+    // A leading quote starts a string, so `"In Progress" { ... }` is a string
+    // switch condition rather than the word `"In`
+    _command_token: ($) => token(/[^\(\)\{\}\s;\&"'][^\(\)\{\}\s;\&]*/),
 
     // Parameters
     command_parameter: ($) =>
@@ -335,7 +367,8 @@ export default grammar({
       choice(
         field('script_block_body', $.script_block_body),
         seq(
-          seq($.param_block, $._statement_terminator, repeat(';')),
+          // `function f { param($x) $x }`: the body may follow on the same line
+          seq($.param_block, optional($._statement_terminator), repeat(';')),
           field('script_block_body', optional($.script_block_body)),
         ),
       ),
@@ -480,7 +513,8 @@ export default grammar({
       seq(
         $.switch_clause_condition,
         $.statement_block,
-        $._statement_terminator,
+        // `switch ($x) { 1 { 'one' } 2 { 'two' } }`: clauses may share a line
+        optional($._statement_terminator),
         repeat(';'),
       ),
 
@@ -598,7 +632,10 @@ export default grammar({
 
     label: ($) => token(seq(':', /[a-zA-Z_][a-zA-Z0-9_]*/)),
 
-    label_expression: ($) => choice($.label, $.unary_expression),
+    // `continue outer`: the label is written without its colon (the spec's
+    // label-expression)
+    label_expression: ($) =>
+      choice($.label, $.simple_name, $.unary_expression),
 
     trap_statement: ($) =>
       seq(reservedWord('trap'), optional($.type_literal), $.statement_block),
@@ -754,6 +791,12 @@ export default grammar({
           new RegExp(caseInsensitive('for-')),
           new RegExp(caseInsensitive('while-')),
           new RegExp(caseInsensitive('parallel-')),
+          new RegExp(caseInsensitive('do-')),
+          new RegExp(caseInsensitive('foreach-')),
+          new RegExp(caseInsensitive('data-')),
+          new RegExp(caseInsensitive('sequence-')),
+          new RegExp(caseInsensitive('inlinescript-')),
+          new RegExp(caseInsensitive('param-')),
         ),
         repeat(
           choice(
@@ -766,7 +809,7 @@ export default grammar({
         ),
       ),
 
-    path_command_name_token: ($) => /[0-9a-zA-Z_?\-\.\\]+/,
+    path_command_name_token: ($) => /[0-9a-zA-Z_?\-\.\\/]+/,
 
     // Use to parse command path
     path_command_name: ($) =>
@@ -810,9 +853,22 @@ export default grammar({
               ),
             ),
           ),
-          seq($.command_argument_sep, $.array_literal_expression),
+          seq(
+            $.command_argument_sep,
+            alias($._command_array_literal, $.array_literal_expression),
+          ),
           $.parenthesized_expression,
           $.script_block_expression,
+        ),
+      ),
+
+    // `-Database $name, master`: once a command argument starts as an
+    // expression, later elements of its comma list may still be bare words
+    _command_array_literal: ($) =>
+      prec.left(
+        seq(
+          $.unary_expression,
+          repeat(seq(',', choice($.unary_expression, $.generic_token))),
         ),
       ),
 
@@ -857,6 +913,8 @@ export default grammar({
         '(',
         optional($.class_method_parameter_list),
         ')',
+        // constructor chaining: `MyException([string]$m) : base($m) { }`
+        optional(seq(':', reservedWord('base'), $.argument_list)),
         '{',
         optional($.script_block),
         '}',
@@ -866,7 +924,9 @@ export default grammar({
       seq(
         token(reservedWord('class')),
         $.simple_name,
-        optional(seq(':', $.simple_name, repeat(seq(',', $.simple_name)))),
+        optional(
+          seq(':', $._class_base_type, repeat(seq(',', $._class_base_type))),
+        ),
         '{',
         repeat(
           choice(
@@ -879,6 +939,17 @@ export default grammar({
           ),
         ),
         '}',
+      ),
+
+    // `class A : B` keeps B a simple_name; a qualified base such as
+    // `System.Exception` is a type_name
+    _class_base_type: ($) =>
+      choice($.simple_name, alias($._qualified_class_base_type, $.type_name)),
+
+    _qualified_class_base_type: ($) =>
+      seq(
+        alias($.simple_name, $.type_identifier),
+        repeat1(seq('.', alias($.simple_name, $.type_identifier))),
       ),
 
     // Enums
@@ -1043,7 +1114,7 @@ export default grammar({
       seq('@(', field('statements', optional($.statement_list)), ')'),
 
     script_block_expression: ($) =>
-      seq('{', optional($.param_block), $.script_block, '}'),
+      seq('{', optional($.script_block), '}'),
 
     hash_literal_expression: ($) =>
       seq('@{', optional($.hash_literal_body), '}'),
@@ -1089,15 +1160,23 @@ export default grammar({
         seq($._primary_expression, '[', $._expression, ']'),
       ),
 
+    // The precedence makes `foo $a.B().C` a method call inside the argument,
+    // not the argument `$a.B` followed by an argument_list
     invokation_expression: ($) =>
       choice(
-        seq(
-          $._primary_expression,
-          token.immediate('.'),
-          $.member_name,
-          $.argument_list,
+        prec(
+          1,
+          seq(
+            $._primary_expression,
+            token.immediate('.'),
+            $.member_name,
+            $.argument_list,
+          ),
         ),
-        seq($._primary_expression, '::', $.member_name, $.argument_list),
+        prec(
+          1,
+          seq($._primary_expression, '::', $.member_name, $.argument_list),
+        ),
         $.invokation_foreach_expression,
       ),
 
@@ -1106,7 +1185,8 @@ export default grammar({
       seq(
         $._primary_expression,
         token.immediate(reservedWord('.foreach')),
-        $.script_block_expression,
+        // `.ForEach{ ... }` or the method form `.ForEach({ ... })`
+        choice($.script_block_expression, $.argument_list),
       ),
 
     argument_list: ($) =>
@@ -1146,9 +1226,9 @@ export default grammar({
           seq(
             $.bitwise_argument_expression,
             choice(
-              reservedWord('-and'),
-              reservedWord('-or'),
-              reservedWord('-xor'),
+              reservedWord('-band'),
+              reservedWord('-bor'),
+              reservedWord('-bxor'),
             ),
             $.comparison_argument_expression,
           ),

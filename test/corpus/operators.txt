@@ -94,7 +94,6 @@ $a -ge $a
                         (unary_expression
                           (variable))))))))))))))
 
-
 ===
 Simple binary operator 4
 ===
@@ -126,7 +125,6 @@ $a -gt $a
                       (array_literal_expression
                         (unary_expression
                           (variable))))))))))))))
-
 
 ===
 Simple binary operator 5
@@ -160,7 +158,6 @@ $a -lt $a
                         (unary_expression
                           (variable))))))))))))))
 
-
 ===
 Simple binary operator 6
 ===
@@ -192,7 +189,6 @@ $a -le $a
                       (array_literal_expression
                         (unary_expression
                           (variable))))))))))))))
-
 
 ===
 Simple binary operator 7
@@ -226,7 +222,6 @@ $a -like $a
                         (unary_expression
                           (variable))))))))))))))
 
-
 ===
 Simple binary operator 8
 ===
@@ -258,7 +253,6 @@ $a -notlike $a
                       (array_literal_expression
                         (unary_expression
                           (variable))))))))))))))
-
 
 ===
 Simple binary operator 9
@@ -292,7 +286,6 @@ $a -match $a
                         (unary_expression
                           (variable))))))))))))))
 
-
 ===
 Simple binary operator 10
 ===
@@ -324,7 +317,6 @@ $a -notmatch $a
                       (array_literal_expression
                         (unary_expression
                           (variable))))))))))))))
-
 
 ===
 Simple binary operator 11
@@ -358,7 +350,6 @@ $a -replace $a
                         (unary_expression
                           (variable))))))))))))))
 
-
 ===
 Simple binary operator 12
 ===
@@ -390,7 +381,6 @@ $a -contains $a
                       (array_literal_expression
                         (unary_expression
                           (variable))))))))))))))
-
 
 ===
 Simple binary operator 13
@@ -424,7 +414,6 @@ $a -notcontains $a
                         (unary_expression
                           (variable))))))))))))))
 
-
 ===
 Simple binary operator 14
 ===
@@ -456,7 +445,6 @@ $a -in $a
                       (array_literal_expression
                         (unary_expression
                           (variable))))))))))))))
-
 
 ===
 Simple binary operator 15
@@ -490,7 +478,6 @@ $a -notin $a
                         (unary_expression
                           (variable))))))))))))))
 
-
 ===
 Simple binary operator 16
 ===
@@ -522,7 +509,6 @@ $a -split $a
                       (array_literal_expression
                         (unary_expression
                           (variable))))))))))))))
-
 
 ===
 Simple binary operator 17
@@ -556,7 +542,6 @@ $a -join $a
                         (unary_expression
                           (variable))))))))))))))
 
-
 ===
 Simple binary operator 18
 ===
@@ -588,7 +573,6 @@ $a -is $a
                       (array_literal_expression
                         (unary_expression
                           (variable))))))))))))))
-
 
 ===
 Simple binary operator 19
@@ -622,7 +606,6 @@ $a -isnot $a
                         (unary_expression
                           (variable))))))))))))))
 
-
 ===
 Simple binary operator 20
 ===
@@ -633,6 +616,104 @@ $a -as $a
 
 (program
   (statement_list
+    (pipeline
+      (pipeline_chain
+        (logical_expression
+          (bitwise_expression
+            (comparison_expression
+              (comparison_expression
+                (additive_expression
+                  (multiplicative_expression
+                    (format_expression
+                      (range_expression
+                        (array_literal_expression
+                          (unary_expression
+                            (variable))))))))
+              (comparison_operator)
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (variable))))))))))))))
+
+===
+Case-sensitive and case-insensitive in operators
+===
+
+$a -cin $b
+$a -cnotin $b
+$a -iin $b
+$a -inotin $b
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (logical_expression
+          (bitwise_expression
+            (comparison_expression
+              (comparison_expression
+                (additive_expression
+                  (multiplicative_expression
+                    (format_expression
+                      (range_expression
+                        (array_literal_expression
+                          (unary_expression
+                            (variable))))))))
+              (comparison_operator)
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (variable))))))))))))
+    (pipeline
+      (pipeline_chain
+        (logical_expression
+          (bitwise_expression
+            (comparison_expression
+              (comparison_expression
+                (additive_expression
+                  (multiplicative_expression
+                    (format_expression
+                      (range_expression
+                        (array_literal_expression
+                          (unary_expression
+                            (variable))))))))
+              (comparison_operator)
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (variable))))))))))))
+    (pipeline
+      (pipeline_chain
+        (logical_expression
+          (bitwise_expression
+            (comparison_expression
+              (comparison_expression
+                (additive_expression
+                  (multiplicative_expression
+                    (format_expression
+                      (range_expression
+                        (array_literal_expression
+                          (unary_expression
+                            (variable))))))))
+              (comparison_operator)
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (variable))))))))))))
     (pipeline
       (pipeline_chain
         (logical_expression

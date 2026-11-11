@@ -217,7 +217,6 @@ $(Get-ChildItem . | Measure-Object)
                                   (command
                                     (command_name)))))))))))))))))))
 
-
 ===
 Access object attribute from var
 ===
@@ -243,7 +242,6 @@ $test.count
                             (variable)
                             (member_name
                               (simple_name))))))))))))))))
-
 
 ===
 Access object attribute from subexpression
@@ -282,7 +280,6 @@ $(Get-ChildItem . | Measure-Object).count
                             (member_name
                               (simple_name))))))))))))))))
 
-
 ===
 Access object attribute from subexpression
 ===
@@ -318,20 +315,20 @@ Get-ChildItem (Join-Path $PSScriptRoot *.ps1) | ForEach-Object { . $_.FullName}
           (command_name)
           (command_elements
             (command_argument_sep)
-                (array_literal_expression
-                  (unary_expression
-                    (script_block_expression
-                      (script_block
-                        (script_block_body
-                          (statement_list
-                            (pipeline
-                              (pipeline_chain
-                                (command
-                                  (command_invokation_operator)
-                                  (command_name_expr
-                                    (path_command_name
-                                      (variable)
-                                      (path_command_name_token))))))))))))))))))
+            (array_literal_expression
+              (unary_expression
+                (script_block_expression
+                  (script_block
+                    (script_block_body
+                      (statement_list
+                        (pipeline
+                          (pipeline_chain
+                            (command
+                              (command_invokation_operator)
+                              (command_name_expr
+                                (path_command_name
+                                  (variable)
+                                  (path_command_name_token))))))))))))))))))
 
 ===
 Format expression
@@ -363,8 +360,6 @@ Format expression
                         (unary_expression
                           (string_literal
                             (expandable_string_literal)))))))))))))))
-
-
 
 ===
 Call object expression with multi type as parameters
@@ -445,7 +440,6 @@ Call object expression with multi type as parameters
                                                                                     (type_spec
                                                                                       (type_name
                                                                                         (type_identifier)))))))))))))))))))))))))))))))))))))))))))))
-
 
 ===
 Priority with composed expression
@@ -610,7 +604,6 @@ $upgrade += [char]($title[3] -bxor $update[$i])
                                                                               (unary_expression
                                                                                 (variable)))))))))))))))))))))))))))))))))))))))))
 
-
 ===
 Reverse array
 ===
@@ -675,3 +668,347 @@ Invoke from Path
             (path_command_name
               (variable)
               (path_command_name_token))))))))
+
+===
+Empty script block
+===
+
+$handler = {}
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (assignment_expression
+        (left_assignment_expression
+          (logical_expression
+            (bitwise_expression
+              (comparison_expression
+                (additive_expression
+                  (multiplicative_expression
+                    (format_expression
+                      (range_expression
+                        (array_literal_expression
+                          (unary_expression
+                            (variable)))))))))))
+        (assignement_operator)
+        (pipeline
+          (pipeline_chain
+            (logical_expression
+              (bitwise_expression
+                (comparison_expression
+                  (additive_expression
+                    (multiplicative_expression
+                      (format_expression
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (script_block_expression))))))))))))))))
+
+===
+Empty script block as a command argument
+===
+
+Mock Write-Host { }
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (script_block_expression)))))))))
+
+===
+Invoke from Path with forward slashes
+===
+
+. $PSScriptRoot/Get-Planet.ps1
+& $root/tools/run.ps1 -Verbose
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_invokation_operator)
+          (command_name_expr
+            (path_command_name
+              (variable)
+              (path_command_name_token))))))
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_invokation_operator)
+          (command_name_expr
+            (path_command_name
+              (variable)
+              (path_command_name_token)))
+          (command_elements
+            (command_argument_sep)
+            (command_parameter)))))))
+
+===
+ForEach method with an argument list
+===
+
+$names = $items.ForEach({ $_.Name })
+$items.foreach{ $_ }
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (assignment_expression
+        (left_assignment_expression
+          (logical_expression
+            (bitwise_expression
+              (comparison_expression
+                (additive_expression
+                  (multiplicative_expression
+                    (format_expression
+                      (range_expression
+                        (array_literal_expression
+                          (unary_expression
+                            (variable)))))))))))
+        (assignement_operator)
+        (pipeline
+          (pipeline_chain
+            (logical_expression
+              (bitwise_expression
+                (comparison_expression
+                  (additive_expression
+                    (multiplicative_expression
+                      (format_expression
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (invokation_expression
+                                (invokation_foreach_expression
+                                  (variable)
+                                  (argument_list
+                                    (argument_expression_list
+                                      (argument_expression
+                                        (logical_argument_expression
+                                          (bitwise_argument_expression
+                                            (comparison_argument_expression
+                                              (additive_argument_expression
+                                                (multiplicative_argument_expression
+                                                  (format_argument_expression
+                                                    (range_argument_expression
+                                                      (unary_expression
+                                                        (script_block_expression
+                                                          (script_block
+                                                            (script_block_body
+                                                              (statement_list
+                                                                (pipeline
+                                                                  (pipeline_chain
+                                                                    (logical_expression
+                                                                      (bitwise_expression
+                                                                        (comparison_expression
+                                                                          (additive_expression
+                                                                            (multiplicative_expression
+                                                                              (format_expression
+                                                                                (range_expression
+                                                                                  (array_literal_expression
+                                                                                    (unary_expression
+                                                                                      (member_access
+                                                                                        (variable)
+                                                                                        (member_name
+                                                                                          (simple_name))))))))))))))))))))))))))))))))))))))))))))
+    (pipeline
+      (pipeline_chain
+        (logical_expression
+          (bitwise_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (invokation_expression
+                            (invokation_foreach_expression
+                              (variable)
+                              (script_block_expression
+                                (script_block
+                                  (script_block_body
+                                    (statement_list
+                                      (pipeline
+                                        (pipeline_chain
+                                          (logical_expression
+                                            (bitwise_expression
+                                              (comparison_expression
+                                                (additive_expression
+                                                  (multiplicative_expression
+                                                    (format_expression
+                                                      (range_expression
+                                                        (array_literal_expression
+                                                          (unary_expression
+                                                            (variable)))))))))))))))))))))))))))))))
+
+===
+Bitwise and logical operators in method arguments
+===
+
+$repserver.Script(1 -bor 2 -band 3)
+$a.M($x -and $y)
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (logical_expression
+          (bitwise_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (invokation_expression
+                            (variable)
+                            (member_name
+                              (simple_name))
+                            (argument_list
+                              (argument_expression_list
+                                (argument_expression
+                                  (logical_argument_expression
+                                    (bitwise_argument_expression
+                                      (bitwise_argument_expression
+                                        (bitwise_argument_expression
+                                          (comparison_argument_expression
+                                            (additive_argument_expression
+                                              (multiplicative_argument_expression
+                                                (format_argument_expression
+                                                  (range_argument_expression
+                                                    (unary_expression
+                                                      (integer_literal
+                                                        (decimal_integer_literal)))))))))
+                                        (comparison_argument_expression
+                                          (additive_argument_expression
+                                            (multiplicative_argument_expression
+                                              (format_argument_expression
+                                                (range_argument_expression
+                                                  (unary_expression
+                                                    (integer_literal
+                                                      (decimal_integer_literal)))))))))
+                                      (comparison_argument_expression
+                                        (additive_argument_expression
+                                          (multiplicative_argument_expression
+                                            (format_argument_expression
+                                              (range_argument_expression
+                                                (unary_expression
+                                                  (integer_literal
+                                                    (decimal_integer_literal)))))))))))))))))))))))))
+    (pipeline
+      (pipeline_chain
+        (logical_expression
+          (bitwise_expression
+            (comparison_expression
+              (additive_expression
+                (multiplicative_expression
+                  (format_expression
+                    (range_expression
+                      (array_literal_expression
+                        (unary_expression
+                          (invokation_expression
+                            (variable)
+                            (member_name
+                              (simple_name))
+                            (argument_list
+                              (argument_expression_list
+                                (argument_expression
+                                  (logical_argument_expression
+                                    (logical_argument_expression
+                                      (bitwise_argument_expression
+                                        (comparison_argument_expression
+                                          (additive_argument_expression
+                                            (multiplicative_argument_expression
+                                              (format_argument_expression
+                                                (range_argument_expression
+                                                  (unary_expression
+                                                    (variable)))))))))
+                                    (bitwise_argument_expression
+                                      (comparison_argument_expression
+                                        (additive_argument_expression
+                                          (multiplicative_argument_expression
+                                            (format_argument_expression
+                                              (range_argument_expression
+                                                (unary_expression
+                                                  (variable))))))))))))))))))))))))))
+
+===
+Line continuation before a blank line
+===
+
+function Get-ShortType ($type) {
+    $type `
+        -replace "^System\." `
+        -replace "^Object\[\]$", "collection" `
+
+}
+
+---
+
+(program
+  (statement_list
+    (function_statement
+      (function_name)
+      (function_parameter_declaration
+        (parameter_list
+          (script_parameter
+            (variable))))
+      (script_block
+        (script_block_body
+          (statement_list
+            (pipeline
+              (pipeline_chain
+                (logical_expression
+                  (bitwise_expression
+                    (comparison_expression
+                      (comparison_expression
+                        (comparison_expression
+                          (additive_expression
+                            (multiplicative_expression
+                              (format_expression
+                                (range_expression
+                                  (array_literal_expression
+                                    (unary_expression
+                                      (variable))))))))
+                        (comparison_operator)
+                        (additive_expression
+                          (multiplicative_expression
+                            (format_expression
+                              (range_expression
+                                (array_literal_expression
+                                  (unary_expression
+                                    (string_literal
+                                      (expandable_string_literal)))))))))
+                      (comparison_operator)
+                      (additive_expression
+                        (multiplicative_expression
+                          (format_expression
+                            (range_expression
+                              (array_literal_expression
+                                (unary_expression
+                                  (string_literal
+                                    (expandable_string_literal)))
+                                (unary_expression
+                                  (string_literal
+                                    (expandable_string_literal)))))))))))))))))))

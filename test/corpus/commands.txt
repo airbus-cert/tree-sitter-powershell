@@ -141,7 +141,6 @@ New-DynamicParam -Name Plugins -type string[] -ValidateSet $(((gci .\plugins\*.p
               (unary_expression
                 (variable)))))))))
 
-
 ===
 Quoted CmdLet
 ===
@@ -220,7 +219,6 @@ net.exe
         (command
           (command_name))))))
 
-
 ===
 Unix-like native command
 ===
@@ -276,7 +274,6 @@ net use e: \\usrsvr002\smithmark Ue345Ii /user:pdc01\msmith2 /savecred /p:yes
             (generic_token)
             (command_argument_sep)
             (generic_token)))))))
-
 
 ===
 Foreach statement without token separator
@@ -478,7 +475,6 @@ download toto
             (command_argument_sep)
             (generic_token)))))))
 
-
 ===
 Cmdlet with parenthesized_expression as parameter without any white space
 ===
@@ -526,3 +522,342 @@ Exit-test toto
           command_elements: (command_elements
             (command_argument_sep)
             (generic_token)))))))
+
+===
+Variable-led path argument
+===
+
+Import-Module $PSScriptRoot\bin\Pester.psd1 -Force
+Import-Module $PSScriptRoot/bin/Pester.psd1
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (generic_token
+              (variable))
+            (command_argument_sep)
+            (command_parameter)))))
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (generic_token
+              (variable))))))))
+
+===
+Variable-led path argument with an inner variable
+===
+
+secedit /export /cfg $temp\secpol-$Token.cfg
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)
+            (generic_token)
+            (command_argument_sep)
+            (generic_token
+              (variable)
+              (variable))))))))
+
+===
+Variable-led wildcard argument
+===
+
+Should -BeLike $env:COMPUTERNAME*
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (generic_token
+              (variable))))))))
+
+===
+Comma list of variable-led paths
+===
+
+Get-ChildItem $env:windir\a.dll, $env:windir\b.dll
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (generic_token
+              (variable))
+            (generic_token
+              (variable))))))))
+
+===
+Member access and spaced slash are not paths
+===
+
+Write-Output $a.Name $a /2
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (member_access
+                  (variable)
+                  (member_name
+                    (simple_name)))))
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (variable)))
+            (command_argument_sep)
+            (generic_token)))))))
+
+===
+Method call chain as a command argument
+===
+
+Add-Member -Value $object.GetType().Name
+Should -Be $x.ToString().Replace("V", "")
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (member_access
+                  (invokation_expression
+                    (variable)
+                    (member_name
+                      (simple_name))
+                    (argument_list))
+                  (member_name
+                    (simple_name)))))))))
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (invokation_expression
+                  (invokation_expression
+                    (variable)
+                    (member_name
+                      (simple_name))
+                    (argument_list))
+                  (member_name
+                    (simple_name))
+                  (argument_list
+                    (argument_expression_list
+                      (argument_expression
+                        (logical_argument_expression
+                          (bitwise_argument_expression
+                            (comparison_argument_expression
+                              (additive_argument_expression
+                                (multiplicative_argument_expression
+                                  (format_argument_expression
+                                    (range_argument_expression
+                                      (unary_expression
+                                        (string_literal
+                                          (expandable_string_literal)))))))))))
+                      (argument_expression
+                        (logical_argument_expression
+                          (bitwise_argument_expression
+                            (comparison_argument_expression
+                              (additive_argument_expression
+                                (multiplicative_argument_expression
+                                  (format_argument_expression
+                                    (range_argument_expression
+                                      (unary_expression
+                                        (string_literal
+                                          (expandable_string_literal))))))))))))))))))))))
+
+===
+Comma list starting with an expression
+===
+
+Get-DbaDbUser -Database $dbname, msdb
+Select-Object @{ n = "a"; e = { $_ } }, Timestamp, *
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (command_parameter)
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (variable))
+              (generic_token))))))
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (hash_literal_expression
+                  (hash_literal_body
+                    (hash_entry
+                      (key_expression
+                        (simple_name))
+                      (pipeline
+                        (pipeline_chain
+                          (logical_expression
+                            (bitwise_expression
+                              (comparison_expression
+                                (additive_expression
+                                  (multiplicative_expression
+                                    (format_expression
+                                      (range_expression
+                                        (array_literal_expression
+                                          (unary_expression
+                                            (string_literal
+                                              (expandable_string_literal))))))))))))))
+                    (hash_entry
+                      (key_expression
+                        (simple_name))
+                      (pipeline
+                        (pipeline_chain
+                          (logical_expression
+                            (bitwise_expression
+                              (comparison_expression
+                                (additive_expression
+                                  (multiplicative_expression
+                                    (format_expression
+                                      (range_expression
+                                        (array_literal_expression
+                                          (unary_expression
+                                            (script_block_expression
+                                              (script_block
+                                                (script_block_body
+                                                  (statement_list
+                                                    (pipeline
+                                                      (pipeline_chain
+                                                        (logical_expression
+                                                          (bitwise_expression
+                                                            (comparison_expression
+                                                              (additive_expression
+                                                                (multiplicative_expression
+                                                                  (format_expression
+                                                                    (range_expression
+                                                                      (array_literal_expression
+                                                                        (unary_expression
+                                                                          (variable)))))))))))))))))))))))))))))))
+              (generic_token)
+              (generic_token))))))))
+
+===
+Cmdlet that start with a keyword 3
+===
+
+Do-Something
+ForEach-Object { $_ }
+Data-Thing
+Sequence-Thing
+InlineScript-Thing
+Param-Thing
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name))))
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name)
+          (command_elements
+            (command_argument_sep)
+            (array_literal_expression
+              (unary_expression
+                (script_block_expression
+                  (script_block
+                    (script_block_body
+                      (statement_list
+                        (pipeline
+                          (pipeline_chain
+                            (logical_expression
+                              (bitwise_expression
+                                (comparison_expression
+                                  (additive_expression
+                                    (multiplicative_expression
+                                      (format_expression
+                                        (range_expression
+                                          (array_literal_expression
+                                            (unary_expression
+                                              (variable))))))))))))))))))))))
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name))))
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name))))
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name))))
+    (pipeline
+      (pipeline_chain
+        (command
+          (command_name))))))
