@@ -489,7 +489,6 @@ function 1+1{
             (script_parameter
               (variable))))))))
 
-
 ===
 Function name as keyword
 ===
@@ -502,3 +501,136 @@ function while {}
   (statement_list
     (function_statement
       (function_name))))
+
+===
+Param block and body on one line
+===
+
+function Get-Thing { [CmdletBinding()] param ([string] $Name) "real" }
+
+---
+
+(program
+  (statement_list
+    (function_statement
+      (function_name)
+      (script_block
+        (param_block
+          (attribute_list
+            (attribute
+              (attribute_name
+                (type_spec
+                  (type_name
+                    (type_identifier))))))
+          (parameter_list
+            (script_parameter
+              (attribute_list
+                (attribute
+                  (type_literal
+                    (type_spec
+                      (type_name
+                        (type_identifier))))))
+              (variable))))
+        (script_block_body
+          (statement_list
+            (pipeline
+              (pipeline_chain
+                (logical_expression
+                  (bitwise_expression
+                    (comparison_expression
+                      (additive_expression
+                        (multiplicative_expression
+                          (format_expression
+                            (range_expression
+                              (array_literal_expression
+                                (unary_expression
+                                  (string_literal
+                                    (expandable_string_literal)))))))))))))))))))
+
+===
+Script block with a param block on one line
+===
+
+$sb = { param($x) $x }
+$empty = { param($x) }
+
+---
+
+(program
+  (statement_list
+    (pipeline
+      (assignment_expression
+        (left_assignment_expression
+          (logical_expression
+            (bitwise_expression
+              (comparison_expression
+                (additive_expression
+                  (multiplicative_expression
+                    (format_expression
+                      (range_expression
+                        (array_literal_expression
+                          (unary_expression
+                            (variable)))))))))))
+        (assignement_operator)
+        (pipeline
+          (pipeline_chain
+            (logical_expression
+              (bitwise_expression
+                (comparison_expression
+                  (additive_expression
+                    (multiplicative_expression
+                      (format_expression
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (script_block_expression
+                                (script_block
+                                  (param_block
+                                    (parameter_list
+                                      (script_parameter
+                                        (variable))))
+                                  (script_block_body
+                                    (statement_list
+                                      (pipeline
+                                        (pipeline_chain
+                                          (logical_expression
+                                            (bitwise_expression
+                                              (comparison_expression
+                                                (additive_expression
+                                                  (multiplicative_expression
+                                                    (format_expression
+                                                      (range_expression
+                                                        (array_literal_expression
+                                                          (unary_expression
+                                                            (variable)))))))))))))))))))))))))))))
+    (pipeline
+      (assignment_expression
+        (left_assignment_expression
+          (logical_expression
+            (bitwise_expression
+              (comparison_expression
+                (additive_expression
+                  (multiplicative_expression
+                    (format_expression
+                      (range_expression
+                        (array_literal_expression
+                          (unary_expression
+                            (variable)))))))))))
+        (assignement_operator)
+        (pipeline
+          (pipeline_chain
+            (logical_expression
+              (bitwise_expression
+                (comparison_expression
+                  (additive_expression
+                    (multiplicative_expression
+                      (format_expression
+                        (range_expression
+                          (array_literal_expression
+                            (unary_expression
+                              (script_block_expression
+                                (script_block
+                                  (param_block
+                                    (parameter_list
+                                      (script_parameter
+                                        (variable)))))))))))))))))))))

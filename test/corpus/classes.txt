@@ -33,7 +33,6 @@ class MyClass
               (type_identifier))))
         (variable)))))
 
-
 ===
 Class : string property with attributes
 ===
@@ -143,7 +142,6 @@ class MyClass
                               (variable)
                               (variable))))))))))))))))
 
-
 ===
 Class : mix method and properties declaration
 ===
@@ -236,3 +234,73 @@ class MyClass
                               (variable)))))))))))))
       (class_method_definition
         (simple_name)))))
+
+===
+Class : base class and interface
+===
+
+class MyClass : MyBaseClass, IDisposable {}
+
+---
+
+(program
+  (statement_list
+    (class_statement
+      (simple_name)
+      (simple_name)
+      (simple_name))))
+
+===
+Class : qualified base class
+===
+
+class TransientFleetException : System.Exception {}
+
+---
+
+(program
+  (statement_list
+    (class_statement
+      (simple_name)
+      (type_name
+        (type_identifier)
+        (type_identifier)))))
+
+===
+Class : constructor calling the base constructor
+===
+
+class E : System.Exception {
+    E([string]$message) : base($message) { }
+}
+
+---
+
+(program
+  (statement_list
+    (class_statement
+      (simple_name)
+      (type_name
+        (type_identifier)
+        (type_identifier))
+      (class_method_definition
+        (simple_name)
+        (class_method_parameter_list
+          (class_method_parameter
+            (type_literal
+              (type_spec
+                (type_name
+                  (type_identifier))))
+            (variable)))
+        (argument_list
+          (argument_expression_list
+            (argument_expression
+              (logical_argument_expression
+                (bitwise_argument_expression
+                  (comparison_argument_expression
+                    (additive_argument_expression
+                      (multiplicative_argument_expression
+                        (format_argument_expression
+                          (range_argument_expression
+                            (unary_expression
+                              (variable))))))))))))))))

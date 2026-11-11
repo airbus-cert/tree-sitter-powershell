@@ -25,6 +25,21 @@ bool tree_sitter_powershell_external_scanner_scan(void *payload, TSLexer *lexer,
 
 static void skip(TSLexer *lexer) { lexer->advance(lexer, true); }
 
+// Whether the lexer is at the keyword `else` or `elseif` (any case).
+static bool at_else_keyword(TSLexer *lexer)
+{
+    for (const char *c = "else"; *c; c++) {
+        if (towlower(lexer->lookahead) != *c) return false;
+        skip(lexer);
+    }
+    if (towlower(lexer->lookahead) == 'i') {
+        skip(lexer);
+        if (towlower(lexer->lookahead) != 'f') return false;
+        skip(lexer);
+    }
+    return !(iswalnum(lexer->lookahead) || lexer->lookahead == '_' || lexer->lookahead == '-');
+}
+
 static bool scan_statement_terminator(void *payload, TSLexer *lexer, const bool *valid_symbols)
 {
     if (valid_symbols[STATEMENT_TERMINATOR]) {
@@ -37,7 +52,20 @@ static bool scan_statement_terminator(void *payload, TSLexer *lexer, const bool 
             if (lexer->lookahead == '}') return true;
             if (lexer->lookahead == ';') return true;
             if (lexer->lookahead == ')') return true;
-            if (lexer->lookahead == '\n') return true;
+            if (lexer->lookahead == '\n') {
+                // An `else` on a following line still belongs to the if
+                // statement: `@{ a = if ($x) { 1 }<newline> else { 2 } }`
+                while (iswspace(lexer->lookahead)) skip(lexer);
+                return !at_else_keyword(lexer);
+            }
+            if (lexer->lookahead == '`') {
+                // A line continuation is whitespace; what follows it decides
+                skip(lexer);
+                if (lexer->lookahead == '\r') skip(lexer);
+                if (lexer->lookahead != '\n') return false;
+                skip(lexer);
+                continue;
+            }
             if (!iswspace(lexer->lookahead)) return false;
             skip(lexer);
         }

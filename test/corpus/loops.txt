@@ -699,3 +699,75 @@ for ($i = 0
                             (array_literal_expression
                               (unary_expression
                                 (variable)))))))))))))))))
+
+===
+Labeled loop with break and continue
+===
+
+:outer foreach ($a in $list) {
+    foreach ($b in $a) {
+        if ($b) { continue outer }
+        break outer
+    }
+    break
+}
+
+---
+
+(program
+  (statement_list
+    (label)
+    (foreach_statement
+      (variable)
+      (pipeline
+        (pipeline_chain
+          (logical_expression
+            (bitwise_expression
+              (comparison_expression
+                (additive_expression
+                  (multiplicative_expression
+                    (format_expression
+                      (range_expression
+                        (array_literal_expression
+                          (unary_expression
+                            (variable))))))))))))
+      (statement_block
+        (statement_list
+          (foreach_statement
+            (variable)
+            (pipeline
+              (pipeline_chain
+                (logical_expression
+                  (bitwise_expression
+                    (comparison_expression
+                      (additive_expression
+                        (multiplicative_expression
+                          (format_expression
+                            (range_expression
+                              (array_literal_expression
+                                (unary_expression
+                                  (variable))))))))))))
+            (statement_block
+              (statement_list
+                (if_statement
+                  (pipeline
+                    (pipeline_chain
+                      (logical_expression
+                        (bitwise_expression
+                          (comparison_expression
+                            (additive_expression
+                              (multiplicative_expression
+                                (format_expression
+                                  (range_expression
+                                    (array_literal_expression
+                                      (unary_expression
+                                        (variable))))))))))))
+                  (statement_block
+                    (statement_list
+                      (flow_control_statement
+                        (label_expression
+                          (simple_name))))))
+                (flow_control_statement
+                  (label_expression
+                    (simple_name))))))
+          (flow_control_statement))))))
